@@ -1,17 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import logo from './logo.svg';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Learning from './pages/Learning';
 import Course from './pages/Course';
+import Sidebar from './components/Sidebar';
 import './App.css';
 
 function App() {
   return (
     <Router>
       <div className="App">
+      <Sidebar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
