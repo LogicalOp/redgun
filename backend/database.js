@@ -2,15 +2,14 @@ const database = {
     knex: null,
 };
 
-
 const prepareDatabase = async () => {
     database.knex = require('knex')({
         client: 'pg',
         connection: {
             user: 'postgres',
             host: 'localhost',
-            database: 'postgres',
-            password: 'postgres',
+            database: 'innovation',
+            password: 'I<3SAPHANA',
             port: 5432,
         }
     });
