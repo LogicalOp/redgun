@@ -26,7 +26,7 @@ const loginUser = (username, password) => {
             throw new Error('Invalid username or password');
         }
 
-        const token = jwt.sign({ id: user[0].id }, 'innovation', { expiresIn: '1h' });
+        const token = jwt.sign({ id: user[0].id }, 'innovation', { expiresIn: '7d' });
         return { token };
     });
 };
