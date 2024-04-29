@@ -8,7 +8,7 @@ export const isAuthenticated = async () => {
     }
 
     try {
-        const response = await fetch('https://your-backend-url.com/auth-check', {
+        const response = await fetch('http://localhost:3001.com/check-token', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
