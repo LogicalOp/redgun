@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardHeader, Button, Icon } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
@@ -14,6 +13,8 @@ const HomeCard = ({ data }) => {
             }
             style={{
                 width: "325px",
+                height: "175px",
+                paddingTop: '10px',
             }}
         >
             <h3>{data.content}</h3>

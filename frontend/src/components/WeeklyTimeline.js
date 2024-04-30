@@ -9,15 +9,12 @@ const data = {
 const WeeklyTimeline = () => {
     return (
       <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-        <Timeline style={{ width: '20%', height: '50%', paddingLeft: '200px'}}>
+        <Timeline style={{ width: '15%', height: '50%', paddingLeft: '100px'}}>
           <TimelineItem titleText="Title 1" subtitleText="Subtitle 1" icon="add">
             Content 1
           </TimelineItem>
           <TimelineItem titleText="Title 2" subtitleText="Subtitle 2" icon="employee">
             Content 2
-          </TimelineItem>
-          <TimelineItem titleText="Title 3" subtitleText="Subtitle 3" icon="chain-link">
-            Content 3
           </TimelineItem>
         </Timeline>
       </div>
