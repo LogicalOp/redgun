@@ -6,12 +6,14 @@ import Register from './pages/Register';
 import Learning from './pages/Learning';
 import Course from './pages/Course';
 import Sidebar from './components/Sidebar';
+import Shellbar from './components/Shellbar';
 import './App.css';
 
 function App() {
   return (
     <Router>
       <div className="App">
+      <Shellbar />
       <Sidebar />
       <Routes>
         <Route path="/" element={<Home />} />
