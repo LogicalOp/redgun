@@ -14,7 +14,7 @@ import './App.css';
 
 // test data
 const user = {
-  name: 'John Doe',
+  name: 'Annie',
   role: 'Software Engineer',
   email: 'john.doe@test.com',
   phone: '+353 87 123 4567',
