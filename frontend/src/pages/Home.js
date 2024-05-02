@@ -1,6 +1,7 @@
 import React from 'react';
 import Timeline from '../components/WeeklyTimeline';
 import HomeCard from '../components/Cards/HomeCard';
+import Feed from '../components/Feed';
 
 const Home = () => {
     const data = {
@@ -16,6 +17,7 @@ const Home = () => {
                 <HomeCard data={data} />
                 <HomeCard data={data} />
             </div>
+            <Feed />
             <Timeline />
         </div>
     );

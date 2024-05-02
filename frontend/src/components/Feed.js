@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Timeline, TimelineItem, Input, Button, Avatar } from '@ui5/webcomponents-react';
+import { Card, Input, Avatar, Button } from "@ui5/webcomponents-react";
 
 const Feed = () => {
     const [posts, setPosts] = useState([]);
@@ -31,24 +31,37 @@ const Feed = () => {
     };
 
     return (
-        <div>
-            <Timeline style={{ maxHeight: '300px', overflow: 'auto' }}>
+        <>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                maxHeight: '60vh', // Adjust this value as needed
+                width: '50%',
+                overflowY: 'auto' 
+            }}>
                 {posts.map((post, index) => (
-                <TimelineItem
-                    key={index}
-                    titleText={post.author}
-                    subtitleText={post.timestamp}
-                    icon={<Avatar image="https://example.com/avatar.jpg" />} // Replace with the actual avatar
-                    style={{ width: '50%', margin: '10px auto' }}
-                >
-                    {post.text}
-                </TimelineItem>
+                    <Card
+                        key={index}
+                        style={{ width: '50%', margin: '10px auto', alignItems: 'center' }}
+                    >
+                        <div>
+                            <h4>{post.author}</h4>
+                            <p>{post.timestamp}</p>
+                            <img src="https://example.com/avatar.jpg" alt="avatar" /> {/* Replace with the actual avatar */}
+                            <p>{post.text}</p>
+                        </div>
+                    </Card>
                 ))}
-            </Timeline>
-
+            </div>
+        </div>
+         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Input value={postValue} onInput={(e) => setPostValue(e.target.value)} />
             <Button onClick={handlePost}>Post</Button>
         </div>
+        </>
     );
 };
 
