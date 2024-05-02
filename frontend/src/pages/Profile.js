@@ -1,8 +1,8 @@
 import React from 'react';
-import ProfileCard from '../components/Cards/ProfileCard';
-import MentoringCard from '../components/Cards/MentoringCard';
-import LearningCard from '../components/Cards/LearningCard';
-import RatingCard from '../components/Cards/RatingCard';
+import ProfileCard from '../components/Cards/Profile/ProfileCard';
+import MentoringCard from '../components/Cards/Profile/MentoringCard';
+import LearningCard from '../components/Cards/Profile/LearningCard';
+import RatingCard from '../components/Cards/Profile/RatingCard';
 
 const Profile = () => {
     const user = {

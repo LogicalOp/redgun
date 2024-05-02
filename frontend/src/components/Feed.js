@@ -32,7 +32,6 @@ const Feed = () => {
 
     return (
         <div>
-
             <Timeline style={{ maxHeight: '300px', overflow: 'auto' }}>
                 {posts.map((post, index) => (
                 <TimelineItem

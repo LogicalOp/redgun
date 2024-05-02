@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "@ui5/webcomponents": "^1.24.0",
+    "@ui5/webcomponents-fiori": "^1.24.0",
+    "@ui5/webcomponents-react": "^1.28.1",
+    "@ui5/webcomponents-react-charts": "^1.28.1",
     "concurrently": "^8.2.2"
   },
   "scripts": {
