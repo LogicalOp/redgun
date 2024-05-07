@@ -1,7 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import LoginForm from '../components/Forms/LoginForm';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate(location.state?.from || '/');
+        }
+    }, [isLoggedIn, navigate, location.state]);
+
     const loginUser = async () => {
         const response = await fetch('http://localhost:3001/users/login', {
             method: 'POST',
@@ -37,21 +48,11 @@ const Login = () => {
         console.log(data);
     };
 
-    if (isLoggedIn) {
-        return (
-            <div>
-                <h1>You are logged in</h1>
-                <button onClick={checkToken}>Check Token</button>
-            </div>
-        );
-    } else {
-        return (
-            <div>
-                <h1>Login</h1>
-                <button onClick={loginUser}>Test Login</button>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <LoginForm />
+        </div>
+    );
 }
 
 export default Login;

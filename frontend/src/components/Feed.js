@@ -50,7 +50,6 @@ const Feed = () => {
                         <div>
                             <h4>{post.author}</h4>
                             <p>{post.timestamp}</p>
-                            <img src="https://example.com/avatar.jpg" alt="avatar" /> {/* Replace with the actual avatar */}
                             <p>{post.text}</p>
                         </div>
                     </Card>
