@@ -1,10 +1,11 @@
 import React from 'react';
+import RegistrationWizard from '../components/RegistrationWizard';
 
 const Register = () => {
 
     return (
         <div>
-            <h1>Register</h1>
+            <RegistrationWizard />
         </div>
     );
 };
