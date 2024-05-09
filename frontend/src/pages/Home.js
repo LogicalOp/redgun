@@ -12,13 +12,14 @@ const Home = () => {
 
     return (
         <div>
-            <div style={{ display: 'flex', gap: '20px', paddingLeft: '150px' }}>
+            <div style={{ display: 'flex', gap: '10vw', paddingLeft: '12vw' }}>
                 <HomeCard data={data} />
                 <HomeCard data={data} />
                 <HomeCard data={data} />
             </div>
-            <Feed />
             <Timeline />
+            
+            <Feed />
         </div>
     );
 };

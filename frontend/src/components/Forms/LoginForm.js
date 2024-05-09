@@ -1,26 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Input, Button, Icon, MessageStrip, CheckBox} from '@ui5/webcomponents-react';
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const LoginForm = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        if (email.trim() === '') {
-            setErrorMessage('Email field is required');
-            return;
+    const navigate = useNavigate();
+
+    const handleLogin = async (username, password) => {
+        const response = await fetch('http://localhost:3001/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // handle successful login
+            console.log("Login successful");
+            navigate('/');
+        } else {
+            setErrorMessage(data.message);
         }
-    
-        if (password.trim() === '') {
-            setErrorMessage('Password field is required');
-            return;
-        }
-    
-        console.log(`Email: ${email}, Password: ${password}`);
-        setErrorMessage(''); 
-    };
+    }
     
     return (
         <div>
@@ -31,7 +39,7 @@ const LoginForm = () => {
             )}
             <Input
                 icon={<Icon name="employee" />}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
                 showClearIcon
                 type="Email"
                 valueState="None"
@@ -45,7 +53,7 @@ const LoginForm = () => {
                 valueState="None"
             />
             <br />
-            <Button design="Positive" icon="" onClick={handleLogin}> Login </Button>
+            <Button design="Positive" icon="" onClick={() => handleLogin(username, password)}> Login </Button>
 
             <CheckBox onChange={function _a(){}} text="Keep me signed in" valueState="None" wrappingType="Normal" />
         </div>

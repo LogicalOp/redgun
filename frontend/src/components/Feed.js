@@ -38,14 +38,14 @@ const Feed = () => {
                 flexDirection: 'column', 
                 alignItems: 'center', 
                 justifyContent: 'center',
-                maxHeight: '60vh', // Adjust this value as needed
+                maxHeight: '50vh', // Adjust this value as needed
                 width: '50%',
                 overflowY: 'auto' 
             }}>
                 {posts.map((post, index) => (
                     <Card
                         key={index}
-                        style={{ width: '50%', margin: '10px auto', alignItems: 'center' }}
+                        style={{ width: '75%', margin: '10px auto', alignItems: 'center' }}
                     >
                         <div>
                             <h4>{post.author}</h4>

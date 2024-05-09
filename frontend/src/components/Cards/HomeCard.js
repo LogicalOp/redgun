@@ -12,7 +12,7 @@ const HomeCard = ({ data }) => {
                 />
             }
             style={{
-                width: "325px",
+                width: "375px",
                 height: "175px",
                 paddingTop: '10px',
             }}
