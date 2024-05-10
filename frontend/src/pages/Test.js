@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import Results from '../components/Results';
+import LearningList from '../components/LearningList';
 
 const Test = () => {
 
     return (
         <div>
-            <Results />
+            <LearningList />
         </div>
     );
 }

@@ -1,13 +1,19 @@
-import React from 'react';
-import { List, StandardListItem } from '@ui5/webcomponents-react';
-
+import React, { useState } from 'react';
+import { List, StandardListItem, Input } from '@ui5/webcomponents-react';
 
 const LearningList = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const teams = ['Cybersecurity', 'VPR', 'HANA Development', 'UI & UX'];
+
+    const filteredTeams = teams.filter(team =>
+        team.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
             <List
                 growing="Scroll"
-                headerText="List"
+                headerText="Teams"
                 mode="MultiSelect"
                 onItemClick={function _a(){}}
                 onItemClose={function _a(){}}
@@ -16,20 +22,22 @@ const LearningList = () => {
                 onLoadMore={function _a(){}}
                 onSelectionChange={function _a(){}}
                 separators="Inner"
-                style={{ width: '90vw', paddingLeft: '150px'}}
+                style={{ width: '30vw', paddingRight: '100px' }}
             >
-                <StandardListItem additionalText="3">
-                    List Item 1
-                </StandardListItem>
-                <StandardListItem additionalText="2">
-                    List Item 2
-                </StandardListItem>
-                <StandardListItem additionalText="1">
-                    List Item 3
-                </StandardListItem>
+                {filteredTeams.map((team, index) => (
+                    <StandardListItem key={index}>
+                        {team}
+                    </StandardListItem>
+                ))}
             </List>
+
+            <Input
+                placeholder="Search teams..."
+                onChange={event => setSearchTerm(event.target.value)}
+                style={{ width: '30vw', marginBottom: '1rem', paddingRight: '100px'}}
+            />
         </div>
     );
-}
+};
 
 export default LearningList;

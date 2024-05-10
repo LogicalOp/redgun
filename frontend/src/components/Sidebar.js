@@ -6,6 +6,10 @@ import "@ui5/webcomponents-icons/dist/AllIcons.js";
 const routes = {
   "Home": { path: "/", icon: "home" },
   "Learning": { path: "/learning", icon: "course-book" },
+  "Profile": { path: "/profile", icon: "person-placeholder" },
+  "User": { path: "/user", icon: "employee" },
+  "Login": { path: "/login", icon: "log" },
+  "Register": { path: "/register", icon: "add" },
   // Add more routes as needed
 };
 
