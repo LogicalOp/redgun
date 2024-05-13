@@ -13,6 +13,12 @@ const createUser = (user) => {
     }).returning('*');
 };
 
+const getUser = (id) => {
+    return database.knex('users').where({
+        id
+    }).select('*');
+};
+
 const authenticateUser = (username, password) => {
     return database.knex('users').where({
         username,
@@ -34,5 +40,6 @@ const loginUser = (username, password) => {
 module.exports = {
     listUsers,
     createUser,
-    loginUser
+    loginUser,
+    getUser
 };
