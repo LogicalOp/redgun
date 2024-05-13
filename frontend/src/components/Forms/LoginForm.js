@@ -31,31 +31,33 @@ const LoginForm = () => {
     }
     
     return (
-        <div>
-            {errorMessage && (
-                <MessageStrip design="Negative" icon="message-error" onClose={() => setErrorMessage('')}>
-                {errorMessage}
-            </MessageStrip>
-            )}
-            <Input
-                icon={<Icon name="employee" />}
-                onChange={(e) => setUsername(e.target.value)}
-                showClearIcon
-                type="Email"
-                valueState="None"
-            />
-            <br />
-            <Input
-                icon={<Icon name="employee" />}
-                onChange={(e) => setPassword(e.target.value)}
-                showClearIcon
-                type="Password"
-                valueState="None"
-            />
-            <br />
-            <Button design="Positive" icon="" onClick={() => handleLogin(username, password)}> Login </Button>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <div>
+                {errorMessage && (
+                    <MessageStrip design="Negative" icon="message-error" onClose={() => setErrorMessage('')}>
+                        {errorMessage}
+                    </MessageStrip>
+                )}
+                <Input
+                    icon={<Icon name="employee" />}
+                    onChange={(e) => setUsername(e.target.value)}
+                    showClearIcon
+                    type="Email"
+                    valueState="None"
+                />
+                <br />
+                <Input
+                    icon={<Icon name="employee" />}
+                    onChange={(e) => setPassword(e.target.value)}
+                    showClearIcon
+                    type="Password"
+                    valueState="None"
+                />
+                <br />
+                <Button design="Positive" icon="" onClick={() => handleLogin(username, password)}> Login </Button>
 
-            <CheckBox onChange={function _a(){}} text="Keep me signed in" valueState="None" wrappingType="Normal" />
+                <CheckBox onChange={function _a(){}} text="Keep me signed in" valueState="None" wrappingType="Normal" />
+            </div>
         </div>
     );
 };

@@ -51,7 +51,7 @@ const RegistrationWizard = () => {
     };
 
     return (
-      <div style={{ width: '90vw', paddingLeft: '150px' }}>
+      <div style={{ width: '90vw', paddingLeft: '7.5vw' }}>
         <Wizard onStepChange={handleStepChange}>
           <WizardStep titleText="Step 1: User Information" selected={selected === '1'} data-step={'1'}>
             {!showPasswordStep && (
