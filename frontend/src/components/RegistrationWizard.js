@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Wizard, WizardStep, Button, MessageStrip, MessageStripDesign, CheckBox, Input, Title, Label, WrappingType, ButtonDesign } from '@ui5/webcomponents-react';
+import { Wizard, WizardStep, Button,  Input, Title, ButtonDesign } from '@ui5/webcomponents-react';
 
 const RegistrationWizard = () => {
   const navigate = useNavigate();

@@ -1,67 +1,121 @@
-import React, { useState } from 'react';
-import { Card, Input, Avatar, Button } from "@ui5/webcomponents-react";
+import React, { useState } from "react";
+import { Card, Avatar, Button, TextArea } from "@ui5/webcomponents-react";
 
 const Feed = () => {
-    const [posts, setPosts] = useState([]);
-    const [postValue, setPostValue] = useState('');
+  const [posts, setPosts] = useState([]);
+  const [postValue, setPostValue] = useState("");
 
-    const handlePost = () => {
-        if (postValue.trim() === '') {
-            // Don't allow empty posts
-            return;
-        }
-    
-        const now = new Date();
-        const timestamp = now.toLocaleString('en-US', {
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true,
-            day: 'numeric',
-            month: 'numeric',
-            year: '2-digit'
-        });
-    
-        const newPost = {
-            text: postValue,
-            author: 'John Doe', // Replace with the actual author
-            timestamp: timestamp,
-        };
-        setPosts([newPost, ...posts]);
-        setPostValue('');
+  const handlePost = () => {
+    if (postValue.trim() === "") {
+      // Don't allow empty posts
+      return;
+    }
+
+    if (postValue.length > 200) {
+      // Don't allow posts longer than 200 characters
+      alert("Post is too long!");
+      return;
+    }
+
+    const now = new Date();
+    const timestamp = now.toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+      day: "numeric",
+      month: "numeric",
+      year: "2-digit",
+    });
+
+    const newPost = {
+      text: postValue,
+      author: "John Doe", // Replace with the actual author
+      timestamp: timestamp,
     };
+    setPosts([...posts, newPost]); // Add newPost at the end of the posts array
+    setPostValue("");
+  };
 
-    return (
-        <>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                maxHeight: '50vh', // Adjust this value as needed
-                width: '50%',
-                overflowY: 'auto' 
-            }}>
-                {posts.map((post, index) => (
-                    <Card
-                        key={index}
-                        style={{ width: '75%', margin: '10px auto', alignItems: 'center' }}
-                    >
-                        <div>
-                            <h4>{post.author}</h4>
-                            <p>{post.timestamp}</p>
-                            <p>{post.text}</p>
-                        </div>
-                    </Card>
-                ))}
-            </div>
+  return (
+    <>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            maxHeight: "43vh", // Adjust this value as needed
+            width: "70vw",
+            overflowY: "auto",
+            marginLeft: "20%",
+            paddingRight: "1vw",
+            paddingBottom: "12vh",
+            paddingTop: "2vh",
+            paddingLeft: "1vw",
+          }}
+        >
+          {posts.map((post, index) => (
+            <Card
+              key={index}
+              style={{ wordWrap: "break-word", position: "relative" }}
+            >
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Avatar image="https://robohash.org/JohnDoe" />
+                <span style={{ marginLeft: "2vw" }}>{post.author}</span>
+              </div>
+              <p>{post.text}</p>
+              <p
+                style={{
+                  position: "absolute",
+                  bottom: "0",
+                  right: "0",
+                  color: "grey",
+                  marginRight: "1vw",
+                  marginBottom: "1vh",
+                }}
+              >
+                {post.timestamp}
+              </p>
+            </Card>
+          ))}
         </div>
-         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Input value={postValue} onInput={(e) => setPostValue(e.target.value)} />
-            <Button onClick={handlePost}>Post</Button>
+      </div>
+      <br />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "fixed",
+          bottom: "1vh",
+          width: "100%",
+          backgroundColor: "#fff", // Add a background color to cover content behind
+          paddingTop: "1vh",
+          paddingBottom: "1vh",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            width: "70vw",
+            height: "10vh",
+            marginLeft: "20%",
+          }}
+        >
+          <TextArea
+            value={postValue}
+            onInput={(e) => setPostValue(e.target.value)}
+            style={{ width: "100%", height: "100%" }}
+          />
+          <span style={{ position: "absolute", bottom: "5px", right: "10px" }}>
+            {postValue.length}/200
+          </span>
         </div>
-        </>
-    );
+        <Button onClick={handlePost}>Post</Button>
+      </div>
+    </>
+  );
 };
 
 export default Feed;

@@ -10,8 +10,8 @@ const Results = () => {
             onToggle={function _a(){}}
             style={{ width: '55vw', paddingLeft: '150px' }}
         >
-            <div style={{ display: 'flex', gap: '50px', paddingLeft: '50px' }}>
-                <Card style={{ width: "250px", height: "325px"}}>
+            <div style={{ display: 'flex', gap: '2.5vw', paddingLeft: '2.5vw' }}>
+                <Card style={{ width: "12vw", height: "31vh"}}>
                     <CardHeader 
                         avatar={<Icon name="person-placeholder" />}
                         titleText="Title"
@@ -26,7 +26,7 @@ const Results = () => {
                         Not Started
                     </Badge>
                 </Card>
-                <Card style={{ width: "250px", height: "325px"}}>
+                <Card style={{ width: "12vw", height: "31vh"}}>
                     <CardHeader 
                         avatar={<Icon name="person-placeholder" />}
                         titleText="Title"
@@ -41,7 +41,7 @@ const Results = () => {
                         Complete
                     </Badge>
                 </Card>
-                <Card style={{ width: "250px", height: "325px"}}>
+                <Card style={{ width: "12vw", height: "31vh"}}>
                     <CardHeader 
                         avatar={<Icon name="person-placeholder" />}
                         titleText="Title"

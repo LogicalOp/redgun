@@ -11,8 +11,8 @@ const LearningCard = ({ data }) => {
                 />
             }
             style={{
-                width: "200px",
-                height: "325px",
+                width: "15vw",
+                height: "31vh",
                 paddingTop: '10px',
             }}
         >

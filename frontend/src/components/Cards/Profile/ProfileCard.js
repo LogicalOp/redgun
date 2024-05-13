@@ -12,8 +12,8 @@ const ProfileCard = ({ user, manager }) => {
                 />
             }
             style={{
-                width: "410px",
-                height: "325px",
+                width: "20vw",
+                height: "31vh",
                 paddingTop: '10px',
             }}
         >

@@ -1,6 +1,6 @@
-import { SideNavigation, SideNavigationItem, Button } from "@ui5/webcomponents-react";
+import { SideNavigation, SideNavigationItem } from "@ui5/webcomponents-react";
 import { useLocation, useNavigate } from 'react-router-dom';
-import React, { useState } from "react";
+import React from "react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const routes = {

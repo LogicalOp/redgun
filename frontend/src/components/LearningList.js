@@ -22,7 +22,7 @@ const LearningList = () => {
                 onLoadMore={function _a(){}}
                 onSelectionChange={function _a(){}}
                 separators="Inner"
-                style={{ width: '30vw', paddingRight: '100px' }}
+                style={{ width: '30vw', paddingRight: '5vw' }}
             >
                 {filteredTeams.map((team, index) => (
                     <StandardListItem key={index}>
@@ -34,7 +34,7 @@ const LearningList = () => {
             <Input
                 placeholder="Search teams..."
                 onChange={event => setSearchTerm(event.target.value)}
-                style={{ width: '30vw', marginBottom: '1rem', paddingRight: '100px'}}
+                style={{ width: '30vw', marginBottom: '1rem', paddingRight: '5vw'}}
             />
         </div>
     );

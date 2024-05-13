@@ -12,14 +12,14 @@ const HomeCard = ({ data }) => {
                 />
             }
             style={{
-                width: "375px",
-                height: "175px",
+                width: "22.5vw",
+                height: "17.5vh",
                 paddingTop: '10px',
             }}
         >
             <h3>{data.content}</h3>
-            <div style={{ textAlign: 'right', paddingRight: '20px', paddingBottom: '5px' }}>
-                <Button design="Positive" size="Small" style={{ marginRight: '10px' }} icon="thumb-up">Like</Button>
+            <div style={{ textAlign: 'right', paddingRight: '1vw', paddingBottom: '5vh' }}>
+                <Button design="Positive" size="Small" style={{ marginRight: '2vw' }} icon="thumb-up">Like</Button>
                 <Button design="Emphasized" size="Small" icon="share">Share</Button>
             </div>
         </Card>

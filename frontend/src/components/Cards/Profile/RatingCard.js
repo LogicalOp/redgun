@@ -10,13 +10,13 @@ const RatingCard = ({ data }) => {
                 />
             }
             style={{
-                width: "82%",
-                height: "200px",
+                width: "89vw",
+                height: "20vh",
                 paddingTop: '10px',
                 paddingLeft: '20px',
             }}
         >
-            <List style={{ maxHeight: '150px', overflowY: 'auto' }}>
+            <List growing="Scroll" style={{ maxHeight: '150px', overflowY: 'auto' }}>
                 {data.map((mentee, index) => (
                     <StandardListItem key={index}>
                         <div style={{ display: 'flex', alignItems: 'center' }}>

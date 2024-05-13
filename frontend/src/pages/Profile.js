@@ -25,6 +25,10 @@ const Profile = () => {
         { name: 'John Doe', info: ['Helpful', 'Responsive', 'Knowledgeable'], rating: 4 },
         { name: 'Jane Doe', info: ['Informative', 'Friendly', 'Professional'], rating: 5 },
         { info: ['Fast Replies', 'Efficient', 'Patient'], rating: 3 }, // Anon mentee
+        { info: ['Fast Replies', 'Efficient', 'Patient'], rating: 3 }, // Anon mentee
+        { info: ['Fast Replies', 'Efficient', 'Patient'], rating: 3 }, // Anon mentee
+        { info: ['Fast Replies', 'Efficient', 'Patient'], rating: 3 }, // Anon mentee
+        { info: ['Fast Replies', 'Efficient', 'Patient'], rating: 3 }, // Anon mentee
     ];
     
     const learningData = {
