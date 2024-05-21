@@ -10,8 +10,12 @@ const createCourse = (course) => {
         id: course.id,
         name: course.name,
         description: course.description,
+        length: course.length,
         difficulty: course.difficulty,
-        time: course.time
+        points: course.points,
+        user_id: course.user_id,
+        progrress: course.progress,
+        completion_status: course.completion_status,
     }).returning('*');
 };
 
@@ -27,8 +31,12 @@ const updateCourse = (id, course) => {
     }).update({
         name: course.name,
         description: course.description,
+        length: course.length,
         difficulty: course.difficulty,
-        time: course.time
+        points: course.points,
+        user_id: course.user_id,
+        progrress: course.progress,
+        completion_status: course.completion_status,
     }).returning('*');
 };
 

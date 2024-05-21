@@ -7,15 +7,22 @@ const listUsers = () => {
 
 const createUser = (user) => {
     return database.knex('users').insert({
-        id: user.id,
+        inumber: user.inumber,
         username: user.username,
-        password: user.password
+        password: user.password,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        mobile: user.mobile,
+        phone: user.phone,
+        team_id: user.team_id,
+        manager_id: user.manager_id,
+        level: user.level,
     }).returning('*');
 };
 
-const getUser = (id) => {
+const getUser = (inumber) => {
     return database.knex('users').where({
-        id
+        inumber
     }).select('*');
 };
 
@@ -26,8 +33,8 @@ const authenticateUser = (username, password) => {
     }).select('*');
 };
 
-const loginUser = (username, password) => {
-    return authenticateUser(username, password).then((user) => {
+const loginUser = (inumber, password) => {
+    return authenticateUser(inumber, password).then((user) => {
         if (user.length === 0) {
             throw new Error('Invalid username or password');
         }
