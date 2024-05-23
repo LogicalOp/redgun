@@ -4,9 +4,9 @@ const listUserJourneys = () => {
     return database.knex.select('*').from('user_journeys');
 };
 
-const getUserJourney = (id) => {
+const getUserJourney = (user_id) => {
     return database.knex('user_journeys').where({
-        id
+        user_id
     }).select('*');
 };
 

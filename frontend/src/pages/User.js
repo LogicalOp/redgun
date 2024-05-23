@@ -9,6 +9,8 @@ const User = () => {
     const { id } = useParams();
     const [user, setUser] = useState({});
 
+    
+
     useEffect(() => {
         // Replace fetch call with a function that returns test data
         const getUser = () => {
