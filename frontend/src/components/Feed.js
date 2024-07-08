@@ -45,12 +45,12 @@ const Feed = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            maxHeight: "43vh", // Adjust this value as needed
+            maxHeight: "37vh", // Adjust this value as needed
             width: "70vw",
             overflowY: "auto",
             marginLeft: "20%",
             paddingRight: "1vw",
-            paddingBottom: "12vh",
+            marginBottom: "12vh",
             paddingTop: "2vh",
             paddingLeft: "1vw",
           }}
@@ -64,11 +64,11 @@ const Feed = () => {
                 <Avatar image="https://robohash.org/JohnDoe" />
                 <span style={{ marginLeft: "2vw" }}>{post.author}</span>
               </div>
-              <p>{post.text}</p>
+              <p style={{ wordWrap: "break-word" }}>{post.text}</p>
               <p
                 style={{
                   position: "absolute",
-                  bottom: "0",
+                  bottom: "0",   
                   right: "0",
                   color: "grey",
                   marginRight: "1vw",
@@ -89,6 +89,7 @@ const Feed = () => {
           alignItems: "center",
           position: "fixed",
           bottom: "1vh",
+          marginLeft: '10%',
           width: "100%",
           backgroundColor: "#fff", // Add a background color to cover content behind
           paddingTop: "1vh",
@@ -99,8 +100,7 @@ const Feed = () => {
           style={{
             position: "relative",
             width: "70vw",
-            height: "10vh",
-            marginLeft: "20%",
+            height: "10vh"
           }}
         >
           <TextArea

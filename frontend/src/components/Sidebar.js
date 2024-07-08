@@ -9,7 +9,7 @@ const routes = {
   "Profile": { path: "/profile", icon: "person-placeholder" },
   "User": { path: "/user", icon: "employee" },
   "Login": { path: "/login", icon: "log" },
-  "Register": { path: "/register", icon: "add" },
+  // ? "Register": { path: "/register", icon: "add" },
   // Add more routes as needed
 };
 

@@ -5,7 +5,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Learning from './pages/Learning';
 import Course from './pages/Course';
-import Test from './pages/Test';
 import User from './pages/User';
 import Profile from './pages/Profile';
 import Sidebar from './components/Sidebar';
@@ -25,7 +24,6 @@ function App() {
         <Route path="/learning" element={<Learning />} />
         <Route path="/course" element={<Course />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/test" element={<Test />} />
         <Route path="/user/:id" element={<User />} />
       </Routes>
       </div>

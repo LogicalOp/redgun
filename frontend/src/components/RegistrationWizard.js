@@ -8,6 +8,9 @@ const RegistrationWizard = () => {
   const [disabled, setDisabled] = useState({ '2': true });
   const [hidden, setHidden] = useState({ finalizeBtn: true });
   const [showPasswordStep, setShowPasswordStep] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+  const [passwordInfo, setPasswordInfo] = useState({});
+
 
   const goToStep2 = () => {
     setDisabled((prev) => {
@@ -18,10 +21,16 @@ const RegistrationWizard = () => {
     setShowPasswordStep(true);
   };
 
-    const finalizeRegistration = () => {
-      alert('Registration is now completed!');
-      navigate('/');
+  const finalizeRegistration = () => {
+    const registrationData = {
+      userInfo,
+      passwordInfo,
+      // Add other step data here
     };
+
+    console.log("Final registration data:", registrationData); // Logging the data
+    navigate('/');
+  };
 
     const handleStep1Completed = (e) => {
       if (e.target.value) {

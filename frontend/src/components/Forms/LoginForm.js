@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Input, Button, Icon, MessageStrip, CheckBox} from '@ui5/webcomponents-react';
+import { Input, Button, MessageStrip, Card, CardHeader} from '@ui5/webcomponents-react';
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const LoginForm = () => {
@@ -10,7 +10,31 @@ const LoginForm = () => {
 
     const navigate = useNavigate();
 
-    const handleLogin = async (username, password) => {
+    const validateInput = () => {
+        if (!username || !password) {
+            setErrorMessage('Username and password are required.');
+            return false;
+        }
+    
+        // Email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(username)) {
+            setErrorMessage('Please enter a valid email address.');
+            return false;
+        }
+    
+        // Password length validation
+        if (password.length < 8) {
+            setErrorMessage('Password must be at least 8 characters long.');
+            return false;
+        }
+    
+        return true;
+    };
+
+    const handleLogin = async () => {
+        if (!validateInput()) return; // Stop the login process if validation fails
+
         const response = await fetch('http://localhost:3001/users/login', {
             method: 'POST',
             headers: {
@@ -31,33 +55,32 @@ const LoginForm = () => {
     }
     
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+            <Card header={<CardHeader titleText="Login"/>}
+                style={{ height: '30vh', width: '25vw', padding: '16px' }}>
                 {errorMessage && (
-                    <MessageStrip design="Negative" icon="message-error" onClose={() => setErrorMessage('')}>
+                    <MessageStrip design="Negative" onClose={() => setErrorMessage('')}>
                         {errorMessage}
                     </MessageStrip>
                 )}
                 <Input
-                    icon={<Icon name="employee" />}
+                    placeholder="Username"
+                    icon="employee"
                     onChange={(e) => setUsername(e.target.value)}
-                    showClearIcon
-                    type="Email"
-                    valueState="None"
+                    value={username}
+                    style={{ marginTop: '6vh', marginBottom: '2vh' }}
                 />
                 <br />
                 <Input
-                    icon={<Icon name="employee" />}
-                    onChange={(e) => setPassword(e.target.value)}
-                    showClearIcon
+                    placeholder="Password"
                     type="Password"
-                    valueState="None"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    style={{ marginBottom: '2vh' }}
                 />
                 <br />
-                <Button design="Positive" icon="" onClick={() => handleLogin(username, password)}> Login </Button>
-
-                <CheckBox onChange={function _a(){}} text="Keep me signed in" valueState="None" wrappingType="Normal" />
-            </div>
+                <Button design="Positive" onClick={handleLogin}>Login</Button>
+            </Card>
         </div>
     );
 };
