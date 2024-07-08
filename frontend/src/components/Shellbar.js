@@ -1,4 +1,4 @@
-import { ShellBarItem, StandardListItem, CustomListItem, GroupHeaderListItem, Input, Button, ShellBar, Icon, Avatar } from '@ui5/webcomponents-react';
+import { Input, ShellBar, Icon, Avatar } from '@ui5/webcomponents-react';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 
@@ -23,7 +23,7 @@ const Shellbar = () => {
         primaryTitle="{tbd}"
         profile={
           <Avatar>
-            <img src="https://sap.github.io/ui5-webcomponents-react/assets/Person-B7wHqdJw.png" />
+            <img src="https://sap.github.io/ui5-webcomponents-react/assets/Person-B7wHqdJw.png" alt="avatar" />
           </Avatar>
         }
         searchField={

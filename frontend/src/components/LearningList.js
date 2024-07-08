@@ -3,7 +3,7 @@ import { List, StandardListItem, Input } from '@ui5/webcomponents-react';
 
 const LearningList = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const teams = ['Cybersecurity', 'VPR', 'HANA Development', 'UI & UX'];
+    const teams = ['Data Management', 'Analytics AI, BW Datasphere', 'HANA Development', 'BPI Solutions and Services', 'Financials', 'HXM', 'MFG & Execution', 'Procurement & Planning', 'L2C Retail CX', 'Commerce Delivery', 'Innovation Lab', 'Cloud Integration & Security', 'Technology & Performance', 'HANA Technology', 'Mobile Services & UX', 'IT Planning & SW Logistics', 'ALM & DevOps', 'Hybrid Operations', 'Platform & Extensions', 'Applications Extensions'];
 
     const filteredTeams = teams.filter(team =>
         team.toLowerCase().includes(searchTerm.toLowerCase())

@@ -8,6 +8,7 @@ import Course from './pages/Course';
 import User from './pages/User';
 import Profile from './pages/Profile';
 import Sidebar from './components/Sidebar';
+import CustomCode from './pages/CustomCode';
 import Shellbar from './components/Shellbar';
 import './App.css';
 
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/customcode" element={<CustomCode />} />
         <Route path="/register" element={<Register />} />
         <Route path="/learning" element={<Learning />} />
         <Route path="/course" element={<Course />} />
