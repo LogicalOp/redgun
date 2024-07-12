@@ -1,44 +1,66 @@
 const database = require('../database');
 const jwt = require('jsonwebtoken');
 
-const listUsers = async () => {
+/**
+ * Retrieves a list of users from the database.
+ *
+ * @returns {Promise<Array<Object>>} A promise that resolves to an array of user objects.
+ * @throws {Error} If there is an error retrieving the users from the database.
+ */
+const listUsers = () => {
     try {
-        return await database.knex.select('*').from('users');
+        return database.knex.select('*').from('users');
     } catch (error) {
         console.error(`Error listing users: ${error.message}`);
         throw error;
     }
 };
 
-const createUser = async (user) => {
+/**
+ * Retrieves a user from the database based on the provided inumber.
+ *
+ * @param {string} inumber - The inumber of the user to retrieve.
+ * @returns {Promise<Array<Object>>} A promise that resolves to an array of user objects.
+ * @throws {Error} If there is an error retrieving the user.
+ */
+const getUser = (inumber) => {
     try {
-        return await database.knex('users').insert({
-            inumber: user.inumber,
-            username: user.username,
-            password: user.password,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            mobile: user.mobile,
-            phone: user.phone,
-            team_id: user.team_id,
-            manager_id: user.manager_id,
-            level: user.level,
-        }).returning('*');
+        return database.knex.select('*').from('users').where('inumber', inumber);
+    } catch (error) {
+        console.error(`Error getting user: ${error.message}`);
+        throw error;
+    }
+};
+
+/**
+ * Creates a new user in the database.
+ *
+ * @param {Object} user - The user object to be inserted into the database.
+ * @returns {Promise} A promise that resolves to the result of the database insert operation.
+ * @throws {Error} If there is an error creating the user.
+ */
+const createUser = (user) => {
+    try {
+        return database.knex('users').insert(user);
     } catch (error) {
         console.error(`Error creating user: ${error.message}`);
         throw error;
     }
 };
 
-const getUser = async (inumber) => {
+/**
+ * Updates a user in the database.
+ *
+ * @param {string} inumber - The iNumber of the user to update.
+ * @param {object} user - The updated user object.
+ * @returns {Promise<number>} - A promise that resolves to the number of rows affected by the update.
+ * @throws {Error} - If there is an error updating the user.
+ */
+const updateUser = (inumber, user) => {
     try {
-        const user = await database.knex('users').where({ inumber }).select('*');
-        if(user.length == 0) {
-            throw new Error('User not found');
-        }
-        return user;
+        return database.knex('users').where('inumber', inumber).update(user);
     } catch (error) {
-        console.error(`Error getting user: ${error.message}`);
+        console.error(`Error updating user: ${error.message}`);
         throw error;
     }
 };
@@ -73,7 +95,7 @@ const loginUser = (inumber, password) => {
 
 module.exports = {
     listUsers,
-    createUser,
-    loginUser,
-    getUser
+    getUser,
+    updateUser,
+    createUser
 };
