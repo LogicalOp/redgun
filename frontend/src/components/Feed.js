@@ -18,7 +18,7 @@ const Feed = () => {
     }
 
     const now = new Date();
-    const timestamp = now.toLocaleString("en-US", {
+    const timestamp = now.toLocaleString("en-UK", {
       hour: "numeric",
       minute: "numeric",
       hour12: true,
