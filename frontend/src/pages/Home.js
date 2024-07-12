@@ -11,7 +11,7 @@ const Home = () => {
     };
 
     return (
-        <div>
+        <div >
             <div style={{ display: 'flex', gap: '6vw', paddingLeft: '11vw', marginBottom: '3rem' }}>
                 <HomeCard data={data} />
                 <HomeCard data={data} />

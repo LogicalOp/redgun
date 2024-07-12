@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Input, Button, MessageStrip, Card, CardHeader} from '@ui5/webcomponents-react';
+import { Input, Button, MessageStrip, Card, CardHeader, CheckBox } from '@ui5/webcomponents-react';
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
@@ -57,7 +58,7 @@ const LoginForm = () => {
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
             <Card header={<CardHeader titleText="Login"/>}
-                style={{ height: '30vh', width: '25vw', padding: '16px' }}>
+                style={{ height: '35vh', width: '25vw', padding: '16px' }}>
                 {errorMessage && (
                     <MessageStrip design="Negative" onClose={() => setErrorMessage('')}>
                         {errorMessage}
@@ -79,6 +80,15 @@ const LoginForm = () => {
                     style={{ marginBottom: '2vh' }}
                 />
                 <br />
+                <CheckBox
+                    onChange={function _a(){}}
+                    text="Remember Me"
+                    valueState="None"
+                />
+                <br/>
+                <Link to="/forgot-password" style={{ marginBottom: '2vh', display: 'block' }}>
+                    Forgot Password?
+                </Link>
                 <Button design="Positive" onClick={handleLogin}>Login</Button>
             </Card>
         </div>

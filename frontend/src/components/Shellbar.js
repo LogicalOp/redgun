@@ -20,7 +20,7 @@ const Shellbar = () => {
         onProductSwitchClick={function _a() {}}
         onProfileClick={() => navigate('/profile')}
         onSearchButtonClick={function _a() {}}
-        primaryTitle="{tbd}"
+        primaryTitle="CHAT"
         profile={
           <Avatar>
             <img src="https://sap.github.io/ui5-webcomponents-react/assets/Person-B7wHqdJw.png" alt="avatar" />
