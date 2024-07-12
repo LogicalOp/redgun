@@ -1,9 +1,16 @@
 import { Input, ShellBar, Icon, Avatar } from '@ui5/webcomponents-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import React from 'react';
 
 const Shellbar = () => {
     const navigate = useNavigate();
+    var currentPath = useLocation().pathname;
+
+    if(currentPath === "/") {
+      currentPath = "Home";
+    }else{
+      currentPath = currentPath.charAt(1).toUpperCase() + currentPath.slice(2);
+    }
 
     return (
       <ShellBar
@@ -20,7 +27,7 @@ const Shellbar = () => {
         onProductSwitchClick={function _a() {}}
         onProfileClick={() => navigate('/profile')}
         onSearchButtonClick={function _a() {}}
-        primaryTitle="CHAT"
+        primaryTitle={currentPath}
         profile={
           <Avatar>
             <img src="https://sap.github.io/ui5-webcomponents-react/assets/Person-B7wHqdJw.png" alt="avatar" />
