@@ -5,6 +5,7 @@ const feed = require('./routes/feed');
 const customCode = require('./routes/customCode');
 const tokenRoutes = require('./routes/tokens');
 const userJourneyRoutes = require('./routes/userJourney');
+const learningJourneyRoutes = require('./routes/learningJourneys');
 
 const router = express.Router();
 
@@ -16,7 +17,8 @@ router.use('/users', userRoutes);
 router.use('/teams', teams);
 router.use('/feed', feed);
 router.use('/customcode', customCode);
-router.use('/journeys', userJourneyRoutes);
+router.use('/user_journeys', userJourneyRoutes);
+router.use('/learning_journeys', learningJourneyRoutes);
 router.use('/', tokenRoutes);
 
 module.exports = router;

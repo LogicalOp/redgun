@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { listCustomCode, getCustomCode, getCustomCodeByDate, getCustomCodeByINumber, createCustomCode, deleteCustomCode } = require('../../controllers/customCodeController');
+
 /**
  *  GET Methods for Custom Code feature
  * 
@@ -8,15 +10,35 @@ const router = express.Router();
  */
 router.get('/', async(req, res) => {
     try {
-        res.status(200).json({ message: 'Custom code GET method' });
+        const customCode = await listCustomCode();
+        res.status(200).json({ customCode: customCode });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error });
     }
 });
 
 router.get('/:id', async(req, res) => {
     try {
-        res.status(200).json({ message: 'Custom code GET method with ID' });
+        const customCode = await getCustomCode(req.params.id);
+        res.status(200).json({ customCode: customCode });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/date/:date', async(req, res) => {
+    try {
+        const customCode = await getCustomCodeByDate(req.params.date);
+        res.status(200).json({ customCode: customCode });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/user/:inumber', async(req, res) => {
+    try {
+        const customCode = await getCustomCodeByINumber(req.params.inumber);
+        res.status(200).json({ customCode: customCode });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -29,7 +51,8 @@ router.get('/:id', async(req, res) => {
  */
 router.post('/', async(req, res) => {
     try {
-        res.status(200).json({ message: 'Add custom code to backend' });
+        const customCode = await createCustomCode(req.body);
+        res.status(200).json({ customCode: customCode });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -53,9 +76,10 @@ router.put('/:id', async(req, res) => {
  * 
  * 
  */
-router.post('/:id', async(req, res) => {
+router.delete('/:id', async(req, res) => {
     try {
-        res.status(200).json({ message: 'Delete code sample by ID'});
+        const customCode = await deleteCustomCode(req.params.id);
+        res.status(200).json({ customCode: customCode });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

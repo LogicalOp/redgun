@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { listTeams, getTeam } = require('../../controllers/teamsController');
+const { listTeams, getTeam, deleteTeam } = require('../../controllers/teamsController');
 
 /**
  * GET Methods for Teams
@@ -31,7 +31,7 @@ router.get('/:id', async(req, res) => {
  * 
  * 
  */
-router.post('/register', async(req, res) => {
+router.post('/', async(req, res) => {
     try {
         res.status(200).json({ message: 'Add team to backend' });
     } catch (error) {
@@ -59,7 +59,8 @@ router.put('/:id', async(req, res) => {
  */
 router.delete('/:id', async(req, res) => {
     try {
-        res.status(200).json({ message: 'Delete team by ID' });
+        const teams = await deleteTeam(req.params.id);
+        res.status(200).json({ teams: teams });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

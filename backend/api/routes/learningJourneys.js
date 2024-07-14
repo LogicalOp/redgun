@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { listLearningJourneys, getLearningJourneys, deleteLearningJourney } = require('../../controllers/learningJourneysController');
+
 /**
  * GET Methods for Learning Journeys
  * 
@@ -8,7 +10,8 @@ const router = express.Router();
  */
 router.get('/', async(req, res) => {
     try {
-        res.status(200).json({ message: 'Learning Journeys GET method' });
+        const learningJourneys = await listLearningJourneys();
+        res.status(200).json({ learningJourneys });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -16,7 +19,8 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
     try {
-        res.status(200).json({ message: 'Get learning journey by ID' });
+        const learningJourney = await getLearningJourneys(req.params.id);
+        res.status(200).json({ learningJourney });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -55,7 +59,8 @@ router.put('/:id', async(req, res) => {
  */
 router.delete('/:id', async(req, res) => {
     try {
-        res.status(200).json({ message: 'Delete learning journey by ID' });
+        const deleted = await deleteLearningJourney(req.params.id);
+        res.status(200).json({ message: 'Learning journey deleted' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
