@@ -1,14 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader } from '@ui5/webcomponents-react';
-import CustomCodeForum from '../components/Cards/CustomCodeForum';
+import Issue from '../components/Issue';
 
-const CustomCode = () => {
+const ObjectPage = () => {
     return (
         <div>
-         < CustomCodeForum/>
+         < Issue/>
         </div>
     );
 };
 
-export default CustomCode;
+export default ObjectPage;
