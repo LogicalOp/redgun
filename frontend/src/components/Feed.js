@@ -21,12 +21,6 @@ const Feed = () => {
       return;
     }
 
-    if (postValue.length > 200) {
-      // Don't allow posts longer than 200 characters
-      alert("Post is too long!");
-      return;
-    }
-
     const now = new Date();
     const timestamp = now.toLocaleString("en-UK", {
       hour: "numeric",
