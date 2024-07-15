@@ -1,18 +1,15 @@
-import React from 'react';
-import Feed from '../components/Feed';
+import React from "react";
+import Feed from "../components/Feed";
+import { Grid } from "@ui5/webcomponents-react";
 
 const Home = () => {
-    const data = {
-        name: 'John Doe',
-        team: 'HANA',
-        content: 'Lorem Ipsum'
-    };
-
-    return (
-        <>            
-            <Feed />
-        </>
-    );
+  return (
+    <Grid style={{ width: "100%", display: "flex" }}>
+      <div>
+        <Feed />
+      </div>
+    </Grid>
+  );
 };
 
 export default Home;
