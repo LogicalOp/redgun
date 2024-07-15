@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProfileCard from '../components/Cards/Profile/ProfileCard';
-import MentoringCard from '../components/Cards/Profile/MentoringCard';
 import LearningCard from '../components/Cards/Profile/LearningCard';
-import RatingCard from '../components/Cards/Profile/RatingCard';
 
 const User = () => {
     const { id } = useParams();
@@ -47,9 +45,9 @@ const User = () => {
             {user && user.manager ? (
                 <>
                     <ProfileCard user={user} manager={user.manager} />
-                    <MentoringCard data={user.mentoringData} />
+                    
                     <LearningCard data={user.learningData} />
-                    <RatingCard data={user.menteeData} />
+                    
                 </>
             ) : (
                 <div>Loading...</div>
