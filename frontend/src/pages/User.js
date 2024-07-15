@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ProfileCard from '../components/Cards/Profile/ProfileCard';
+import ProfileCardUser from '../components/Cards/Profile/ProfileCardUser';
 import LearningCard from '../components/Cards/Profile/LearningCard';
 
 const User = () => {
@@ -44,7 +44,7 @@ const User = () => {
         <div>
             {user && user.manager ? (
                 <>
-                    <ProfileCard user={user} manager={user.manager} />
+                    <ProfileCardUser data={user}  />
                     
                     <LearningCard data={user.learningData} />
                     

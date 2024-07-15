@@ -30,7 +30,7 @@ class DonutChart extends React.Component {
     render() {
         return (
 
-            <div style={{width:"25%",display:"flex"}}>
+            <div style={{display:"flex"}}>
                 <Card header={<CardHeader titleText="Learnings" />}>
               
                 

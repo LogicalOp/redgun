@@ -1,6 +1,7 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@ui5/webcomponents-react";
-import ProfileCard from "../components/Cards/Profile/ProfileCard";
+import ProfileCardUser from "../components/Cards/Profile/ProfileCardUser";
+import ProfileCardManager from "../components/Cards/Profile/ProfileCardManager";
 import LearningCard from "../components/Cards/Profile/LearningCard";
 import DonutChart from "../components/Charts/DonutChart";
 
@@ -8,18 +9,19 @@ const Profile = () => {
   const [test, setTest] = useState({});
 
   useEffect(() => {
-    const userId = localStorage.getItem('inumber');
+    const userId = localStorage.getItem("inumber");
 
-    if(userId) {
-        fetch(`http://localhost:3001/users/${userId}`)
+    if (userId) {
+      fetch(`http://localhost:3001/users/${userId}`)
         .then((response) => response.json())
-        .then(data => {
-            console.log(data);
-        }).catch(error => {
-            console.error(`Error fetching user: ${error.message}`);
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(`Error fetching user: ${error.message}`);
         });
     }
-}, []);
+  }, []);
 
   const user = {
     name: "John Doe",
@@ -43,15 +45,26 @@ const Profile = () => {
   };
 
   return (
-    <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "10rem" }}>
-      <div data-layout-span="XL4 L4 M6 S12">
-        <ProfileCard user={user} manager={null} />
-        <ProfileCard user={null} manager={manager} />
+    <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          paddingLeft: "10rem",
+          width: "80%",
+        }}
+        data-layout-span="XL6 L6 M6 S12"
+      >
+        <div style={{ width: "100%", marginBottom: "2rem" }}>
+          <ProfileCardUser data={user} />
+        </div>
+        <ProfileCardManager data={manager} />
       </div>
-      <div data-layout-span="XL4 L4 M6 S12">
-        <LearningCard data={learningData} />
-      </div>
-      <div data-layout-span="XL4 L4 M12 S12">
+      <div style={{ width: "70%" }} data-layout-span="XL6 L6 M6 S12">
+        <div style={{ width: "100%", marginBottom: "2rem" }}>
+          <LearningCard data={learningData} style={{ width: "100%" }} />
+        </div>
         <DonutChart />
       </div>
     </Grid>

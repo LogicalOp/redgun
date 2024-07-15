@@ -10,13 +10,8 @@ const LearningCard = ({ data }) => {
                     titleText="My Learning Journeys"
                 />
             }
-            style={{
-                width: "15vw",
-                height: "31vh",
-                paddingTop: '10px',
-            }}
         >
-            <div style={{ padding: '0 20px' }}>
+            <div >
                 {data && data.courses && data.courses.map((course, index) => (
                     <p key={index}>{course}</p>
                 ))}

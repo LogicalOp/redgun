@@ -1,14 +1,25 @@
 import React from "react";
 import Feed from "../components/Feed";
-import { Grid } from "@ui5/webcomponents-react";
+import { FlexBox, Grid } from "@ui5/webcomponents-react";
+import LearningCard from "../components/Cards/Profile/LearningCard";
 
 const Home = () => {
+  const learningData = {
+    courses: ["ABAP Cloud Developer", "CAP for NodeJS"],
+    progress: 50,
+  };
+
   return (
-    <Grid style={{ width: "100%", display: "flex" }}>
-      <div>
-        <Feed />
-      </div>
-    </Grid>
+    <FlexBox style={{ width: "100%", direction: "row" }}>
+      <Grid defaultSpan="XL6 L6 M6 S12" position="Center">
+        <div>
+          <Feed />
+        </div>
+        <div style={{ paddingLeft:"10rem", paddingTop:"3rem", width: "80%", height:"100%" }}>
+          <LearningCard data={learningData} />
+        </div>
+      </Grid>
+    </FlexBox>
   );
 };
 
