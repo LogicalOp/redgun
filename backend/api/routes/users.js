@@ -49,6 +49,15 @@ router.get('/firstname/:firstname', async(req, res) => {
  * 
  * 
  */
+router.post('/login', async(req, res) => {
+    try {
+        const user = await loginUser(req.body.inumber, req.body.password);
+        res.status(200).json({ token: user.token });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.post('/register', async(req, res) => {
     try {
         const user = await createUser(req.body);

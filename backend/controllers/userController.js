@@ -107,7 +107,7 @@ const updateUser = (inumber, user) => {
 const authenticateUser =  async (inumber, password) => {
     try {
         return database.knex('users').where({
-            username,
+            inumber,
             password
         }).select('*');
     } catch (error) {
@@ -124,16 +124,21 @@ const authenticateUser =  async (inumber, password) => {
  * @returns {Promise<{ token: string }>} - A promise that resolves to an object containing the generated token.
  * @throws {Error} - If the username or password is invalid.
  */
-const loginUser = (inumber, password) => {
+const loginUser = async (inumber, password) => {
     try {
-        return authenticateUser(inumber, password).then((user) => {
-            if (user.length === 0) {
-                throw new Error('Invalid username or password');
-            }
-    
-            const token = jwt.sign({ id: user[0].id }, 'innovation', { expiresIn: '7d' });
-            return { token };
-        });
+        // Ensure inumber and password are not undefined
+        if (!inumber || !password) {
+            throw new Error('inumber or password is undefined');
+        }
+
+        const user = await authenticateUser(inumber, password);
+
+        if (user.length === 0) {
+            throw new Error('Invalid username or password');
+        }
+
+        const token = jwt.sign({ id: user[0].id }, 'innovation', { expiresIn: '7d' });
+        return { token };
     } catch (error) {
         console.error(`Error logging in user: ${error.message}`);
         throw error;

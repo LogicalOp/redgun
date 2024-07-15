@@ -6,21 +6,14 @@ import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
-    const [username, setUsername] = useState('');
+    const [inumber, setINumber] = useState('');
     const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
 
     const validateInput = () => {
-        if (!username || !password) {
+        if (!inumber || !password) {
             setErrorMessage('Username and password are required.');
-            return false;
-        }
-    
-        // Email format validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(username)) {
-            setErrorMessage('Please enter a valid email address.');
             return false;
         }
     
@@ -41,7 +34,7 @@ const LoginForm = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ inumber, password })
         });
 
         const data = await response.json();
@@ -65,10 +58,10 @@ const LoginForm = () => {
                     </MessageStrip>
                 )}
                 <Input
-                    placeholder="Username"
+                    placeholder="INumber"
                     icon="employee"
-                    onChange={(e) => setUsername(e.target.value)}
-                    value={username}
+                    onChange={(e) => setINumber(e.target.value)}
+                    value={inumber}
                     style={{ marginTop: '6vh', marginBottom: '2vh' }}
                 />
                 <br />
