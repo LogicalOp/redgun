@@ -20,12 +20,6 @@ const LearningCard = ({ data }) => {
                 {data && data.courses && data.courses.map((course, index) => (
                     <p key={index}>{course}</p>
                 ))}
-                <br /><br />
-                <Title level="H5">Progress</Title>
-                <ProgressIndicator
-                    value={data && data.progress}
-                    valueState="Success"
-                />
             </div>
         </Card>
     );
