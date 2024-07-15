@@ -1,25 +1,44 @@
 const express = require('express');
-
 const router = express.Router();
 
-const { listUsers, createUser, loginUser, getUser } = require('../../controllers/userController');
+const { listUsers, getUser, createUser, updateUser, loginUser, getUsersByLastName, getUsersByFirstName } = require('../../controllers/userController');
 
 /**
  * GET Methods for Users
+ * 
+ * 
  */
-router.get('/', async (req, res) => {
-    try { 
+router.get('/', async(req, res) => {
+    try {
         const users = await listUsers();
-        res.status(200).json({ users });
+        res.status(200).json({users: users});
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', async(req, res) => {
     try {
         const user = await getUser(req.params.id);
-        res.status(200).json({ user });
+        res.status(200).json({ user: user });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/lastname/:lastname', async(req, res) => {
+    try {
+        const users = await getUsersByLastName(req.params.lastname);
+        res.status(200).json({ users: users });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/firstname/:firstname', async(req, res) => {
+    try {
+        const users = await getUsersByFirstName(req.params.firstname);
+        res.status(200).json({ users: users });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -27,26 +46,51 @@ router.get('/:id', async (req, res) => {
 
 /**
  * POST Methods for Users
+ * 
+ * 
  */
-router.post('/register', async (req, res) => {
+router.post('/login', async(req, res) => {
     try {
-        const user = await createUser(req.body);
-        if (!user || user.length === 0) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-        res.status(201).json({ user });
+        const user = await loginUser(req.body.inumber, req.body.password);
+        res.status(200).json({ token: user.token });
     } catch (error) {
-        console.error(`Error in POST /users/register: ${error.message}`);
         res.status(500).json({ error: error.message });
     }
 });
 
-router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    const token = await loginUser(username, password);
-    
-    res.json({ token: token });
+router.post('/register', async(req, res) => {
+    try {
+        const user = await createUser(req.body);
+        res.status(200).json({ user: user });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
+/**
+ * PUT Method for Users
+ * 
+ * 
+ */
+router.put('/:id', async(req, res) => {
+    try {
+        res.status(200).json({ message: 'Update user by ID' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+/**
+ * DELETE Method for Users
+ * 
+ * 
+ */
+router.delete('/:id', async(req, res) => {
+    try {
+        res.status(200).json({ message: 'Delete user by ID' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 module.exports = router;
