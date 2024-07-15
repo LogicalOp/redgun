@@ -1,10 +1,26 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import { Grid } from "@ui5/webcomponents-react";
 import ProfileCard from "../components/Cards/Profile/ProfileCard";
 import LearningCard from "../components/Cards/Profile/LearningCard";
 import DonutChart from "../components/Charts/DonutChart";
 
 const Profile = () => {
+  const [test, setTest] = useState({});
+
+  useEffect(() => {
+    const userId = localStorage.getItem('inumber');
+
+    if(userId) {
+        fetch(`http://localhost:3001/users/${userId}`)
+        .then((response) => response.json())
+        .then(data => {
+            console.log(data);
+        }).catch(error => {
+            console.error(`Error fetching user: ${error.message}`);
+        });
+    }
+}, []);
+
   const user = {
     name: "John Doe",
     role: "ABAP Developer",
