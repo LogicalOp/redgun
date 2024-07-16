@@ -3,17 +3,25 @@ import { List, StandardListItem, Input } from '@ui5/webcomponents-react';
 
 const LearningList = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const teams = ['Data Management', 'Analytics AI, BW Datasphere', 'HANA Development', 'BPI Solutions and Services', 'Financials', 'HXM', 'MFG & Execution', 'Procurement & Planning', 'L2C Retail CX', 'Commerce Delivery', 'Innovation Lab', 'Cloud Integration & Security', 'Technology & Performance', 'HANA Technology', 'Mobile Services & UX', 'IT Planning & SW Logistics', 'ALM & DevOps', 'Hybrid Operations', 'Platform & Extensions', 'Applications Extensions'];
+    const teams = [
+        'Administrator', 'Architect', 'Business User', 'CEE', 'Consultant', 
+        'Data Analyst', 'Developer', 'IT Lead', 'Marketing', 'Presales', 
+        'Project Manager', 'Sales', 'Support Consultant'
+    ];
 
     const filteredTeams = teams.filter(team =>
         team.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginTop: '2.5%' }}>
+            <Input
+                placeholder="Search Roles..."
+                onChange={event => setSearchTerm(event.target.value)}
+                style={{ width: '30vw', marginBottom: '1rem' }}
+            />
             <List
                 growing="Scroll"
-                headerText="Teams"
                 mode="MultiSelect"
                 onItemClick={function _a(){}}
                 onItemClose={function _a(){}}
@@ -22,7 +30,7 @@ const LearningList = () => {
                 onLoadMore={function _a(){}}
                 onSelectionChange={function _a(){}}
                 separators="Inner"
-                style={{ width: '30vw', paddingRight: '5vw' }}
+                style={{ width: '30vw' }}
             >
                 {filteredTeams.map((team, index) => (
                     <StandardListItem key={index}>
@@ -30,12 +38,6 @@ const LearningList = () => {
                     </StandardListItem>
                 ))}
             </List>
-
-            <Input
-                placeholder="Search teams..."
-                onChange={event => setSearchTerm(event.target.value)}
-                style={{ width: '30vw', marginBottom: '1rem', paddingRight: '5vw'}}
-            />
         </div>
     );
 };
