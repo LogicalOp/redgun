@@ -11,6 +11,7 @@ import Sidebar from './components/Sidebar';
 import CustomCode from './pages/CustomCode';
 import Shellbar from './components/Shellbar';
 import ObjectPage from './pages/ObjectPage';
+import LearningJourneyDetail from './pages/LearningJourneyDetail';
 import './App.css';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/user/:id" element={<User />} />
           <Route path="/issue/:id" element={<ObjectPage />} />
+          <Route path="/journey/:id" element={<LearningJourneyDetail />} />
         </Routes>
       </div>
     </Router>
