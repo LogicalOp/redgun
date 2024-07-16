@@ -11,6 +11,8 @@ const LoginForm = () => {
 
     const navigate = useNavigate();
 
+    const url = process.env.REACT_APP_BACKEND_URL;
+
     const validateInput = () => {
         if (!inumber || !password) {
             setErrorMessage('Username and password are required.');
@@ -29,7 +31,7 @@ const LoginForm = () => {
     const handleLogin = async () => {
         if (!validateInput()) return; // Stop the login process if validation fails
 
-        const response = await fetch('http://localhost:3001/users/login', {
+        const response = await fetch(`${url}/users/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

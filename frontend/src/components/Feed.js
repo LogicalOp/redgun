@@ -7,20 +7,34 @@ import {
   Button,
   TextArea,
 } from "@ui5/webcomponents-react";
-
+import "react-perfect-scrollbar/dist/css/styles.css";
+import PerfectScrollbar from "react-perfect-scrollbar";
+ 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [postValue, setPostValue] = useState("");
-  const endOfPostsRef = useRef(null); // Step 1: Create a ref
-
+ 
   const [scrollToBottom, setScrollToBottom] = useState(false);
-
+ 
+  const endOfPostsRef = useRef(null);
+  const scrollbarRef = useRef(null); // Step 1: Add a ref for the PerfectScrollbar container
+ 
+  useEffect(() => {
+    if (scrollbarRef.current) {
+      const scrollContainer = scrollbarRef.current._container; // Access the PerfectScrollbar container DOM node
+      if (scrollContainer) {
+        const scrollHeight = scrollContainer.scrollHeight; // Get the total scroll height
+        scrollContainer.scrollTop = scrollHeight; // Scroll to the bottom
+      }
+    }
+  }, [posts.length]); // Depend on posts.length to trigger scroll
+ 
   const handlePost = () => {
     if (postValue.trim() === "") {
       // Don't allow empty posts
       return;
     }
-
+ 
     const now = new Date();
     const timestamp = now.toLocaleString("en-UK", {
       hour: "numeric",
@@ -30,32 +44,27 @@ const Feed = () => {
       month: "numeric",
       year: "2-digit",
     });
-
+ 
     const newPost = {
       text: postValue,
       author: "John Doe", // Replace with the actual author
       timestamp: timestamp,
     };
-
+ 
     setPosts([...posts, newPost]); // Add newPost at the end of the posts array
     setPostValue("");
     setScrollToBottom(true); // Trigger scroll after post is added
   };
-
-  useEffect(() => {
-    if (scrollToBottom && endOfPostsRef.current) {
-      endOfPostsRef.current.scrollIntoView({ behavior: "smooth" });
-      setScrollToBottom(false); // Reset scroll trigger
-    }
-  }, [scrollToBottom]); // Depend on scrollToBottom to trigger scroll
-
+ 
+ 
   return (
     <Card
       header={<CardHeader titleText={"Feed"} />}
       style={{ marginLeft: "7vw", marginTop: "5vh" }}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <div
+        <PerfectScrollbar
+          ref={scrollbarRef} // Step 2: Attach the ref here
           style={{
             display: "flex",
             flexDirection: "column",
@@ -63,9 +72,8 @@ const Feed = () => {
             justifyContent: "start",
             height: "50vh",
             width: "40vw",
-            overflowY: "auto",
             padding: "1vw",
-            paddingBottom: "15vh",
+            paddingBottom: "15vh"
           }}
         >
           {posts.map((post, index) => (
@@ -107,7 +115,7 @@ const Feed = () => {
             </Card>
           ))}
           <div ref={endOfPostsRef} /> {/* Reference point for scrolling */}
-        </div>
+        </PerfectScrollbar>
       </div>
       <br />
       <div
@@ -147,7 +155,7 @@ const Feed = () => {
             {postValue.length}/200
           </span>
         </div>
-
+ 
         <Button onClick={handlePost} style={{ margin: "2rem" }}>
           Post
         </Button>
@@ -155,5 +163,5 @@ const Feed = () => {
     </Card>
   );
 };
-
+ 
 export default Feed;
