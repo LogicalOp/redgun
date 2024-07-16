@@ -5,11 +5,8 @@
     "@ui5/webcomponents-react": "^1.28.1",
     "@ui5/webcomponents-react-charts": "^1.28.1",
     "concurrently": "^8.2.2",
-<<<<<<< HEAD
-    "styled-components": "^6.1.11"
-=======
+    "styled-components": "^6.1.11",
     "react-perfect-scrollbar": "^1.5.8"
->>>>>>> 692f24d2a944f978186b3837fc391f2cf574df03
   },
   "scripts": {
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
