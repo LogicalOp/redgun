@@ -20,7 +20,7 @@ const Shellbar = () => {
           src={`${process.env.PUBLIC_URL}/SAPChat.jpg`}
         />
       }
-      notificationsCount="10"
+      //notificationsCount="0"
       onLogoClick={function _a() {}}
       onMenuItemClick={function _a() {}}
       onNotificationsClick={function _a() {}}
@@ -36,9 +36,7 @@ const Shellbar = () => {
           />
         </Avatar>
       }
-      searchField={
-        <Input icon={<Icon interactive name="search" />} showClearIcon />
-      }
+
       showNotifications
       showProductSwitch
     ></ShellBar>
