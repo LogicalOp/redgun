@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Title, Panel, Badge, Button } from "@ui5/webcomponents-react";
 import { useNavigate } from 'react-router-dom';
-
+import { Icon } from '@ui5/webcomponents-react';
 const CustomCodeForum = ({ data }) => {
     const navigate = useNavigate();
 
@@ -17,8 +17,8 @@ const CustomCodeForum = ({ data }) => {
             onToggle={function _a(){}}
             style={{ paddingLeft: '7rem' }}
         >
-            <div style={{ display: 'flex', gap: '2.5vw', paddingLeft: '2.5vw' }}>
-                <Card style={{ width: "75%", height: "31vh", paddingTop: "1rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div style={{ display: 'flex', gap: '2.5vw', paddingLeft: '2.5vw', paddingRight:'2.5vw' }}>
+                <Card style={{ }}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", padding: '2rem 0 0 2rem' }}>
                         <Title>Issue 55</Title>
                         <Badge style={{ marginBottom: '0.5rem' }} onClick={function _a() {}}>
@@ -28,7 +28,7 @@ const CustomCodeForum = ({ data }) => {
                             Neo Migration
                         </Badge>
                     </div>
-                    <div style={{ paddingLeft: '2rem', paddingRight: '2rem', flex: 1 }}>
+                    <div style={{ paddingLeft: '2rem', paddingRight: '2rem', display:'inline-block', position: 'inherit', overflow:'hidden',flexWrap:'wrap'}}>
                         <h2>
                             If "renderWhitespace" is set to true, there will be thirteen white spaces after this sentence.             
                             Lorem ipsum dolor st amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
@@ -39,7 +39,9 @@ const CustomCodeForum = ({ data }) => {
                     </div>
                 </Card>
             </div>
+        
         </Panel>
+        
     );
 };
 
