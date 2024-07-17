@@ -8,14 +8,14 @@ const ProfileCardManager = ({ data }) => {
         header={
           <CardHeader
             avatar={<Icon name="person-placeholder" />}
-            titleText={data.name}
+            titleText="Manager"
           />
         }
       >
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ padding: "0 20px" }}>
             <Title level="H5">Name</Title>
-            <p>{data.name}</p>
+            <p>{data.first_name + " " + data.last_name}</p>
             <Title level="H5">Phone</Title>
             <p>{data.phone}</p>
             <Title level="H5">Email</Title>

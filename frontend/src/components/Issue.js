@@ -14,7 +14,7 @@ const Issue = () => {
         </Title>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingLeft:'8rem' }}>
           <Badge style={{ marginBottom: '0.5rem' }} onClick={function _a() {}}>
-            Clean Core RCA
+          Success Factors
           </Badge>
           <Badge style={{ marginBottom: '1rem' }} onClick={function _a() {}}>
             Neo Migration
