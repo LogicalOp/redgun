@@ -5,6 +5,7 @@
     "@ui5/webcomponents-react": "^1.28.1",
     "@ui5/webcomponents-react-charts": "^1.28.1",
     "concurrently": "^8.2.2",
+    "styled-components": "^6.1.11",
     "react-perfect-scrollbar": "^1.5.8"
   },
   "scripts": {
