@@ -4,40 +4,13 @@ import ProfileCardUser from "../components/Cards/Profile/ProfileCardUser";
 import ProfileCardManager from "../components/Cards/Profile/ProfileCardManager";
 import LearningCard from "../components/Cards/Profile/LearningCard";
 import DonutChart from "../components/Charts/DonutChart";
+import { useGetUserInfo } from "../hooks/useGetUserInfo";
 
 const Profile = () => {
-  const [test, setTest] = useState({});
+  const userId = localStorage.getItem("inumber");
+  const { user, team, manager } = useGetUserInfo(userId);
 
-  useEffect(() => {
-    const userId = localStorage.getItem("inumber");
-
-    if (userId) {
-      fetch(`http://localhost:3001/users/${userId}`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(`Error fetching user: ${error.message}`);
-        });
-    }
-  }, []);
-
-  const user = {
-    name: "John Doe",
-    role: "ABAP Developer",
-    location: "Waterside 3",
-    department: "CoE",
-    mobile: "+353 87 123 4567",
-    phone: "+353 1 123 4567",
-    email: "john.doe@test.com",
-  };
-
-  const manager = {
-    name: "Jane Doe",
-    phone: "+353 87 765 4321",
-    email: "jane.doe@test.com",
-  };
+  console.log(user);
 
   const learningData = {
     courses: ["ABAP Cloud Developer", "CAP for NodeJS"],
