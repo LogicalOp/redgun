@@ -35,7 +35,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <SideNavigation style={{ position: 'fixed', left: 0, top: '50px', bottom: 0, width: '100px' }} collapsed={true}>
+      <SideNavigation style={{ position: 'relative', left: 0, top: '50px', bottom: 0, width: '100px' }} collapsed={true}>
         {Object.keys(routes).map((route) => (
           <SideNavigationItem
             key={route}

@@ -15,23 +15,36 @@ import LearningJourneyDetail from './pages/LearningJourneyDetail';
 import './App.css';
 
 function App() {
+  // Inline styles for layout
+  const layoutStyles = {
+    display: 'flex', // Use Flexbox for layout
+    flexDirection: 'column', // Stack elements vertically
+    height: '100vh', // Full height of the viewport
+  };
+
+  const contentStyles = {
+    display: 'flex', // Use Flexbox for the content area
+  };
+
+  // Adjusted styles for Sidebar to remove shadow
+  const sidebarStyle = {
+    boxShadow: 'none', // Remove shadow
+    // Add any other necessary styles for the sidebar here
+  };
+
   return (
     <Router>
-      <div className="App">
+      <div className="App" style={layoutStyles}>
         <Shellbar />
-        <Sidebar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/customcode" element={<CustomCode />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/learning" element={<Learning />} />
-          <Route path="/course" element={<Course />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/user/:id" element={<User />} />
-          <Route path="/issue/:id" element={<ObjectPage />} />
-          <Route path="/journey/:id" element={<LearningJourneyDetail />} />
-        </Routes>
+        <div style={contentStyles}>
+          <div style={sidebarStyle}><Sidebar /></div> {/* Apply the adjusted styles here */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/customcode" element={<CustomCode />} />
+            // The rest of your routes
+          </Routes>
+        </div>
       </div>
     </Router>
   );
