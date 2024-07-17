@@ -18,14 +18,16 @@ const Sidebar = () => {
   useEffect(() => {
     const sideNavs = document.querySelectorAll('ui5-side-navigation');
     sideNavs.forEach((nav) => {
-      const style = document.createElement('style');
-      style.textContent = `
-        :host {
-          --sapContent_Shadow0: none; /* Attempt to override shadow variable */
-          box-shadow: none !important; /* Direct attempt to remove shadow */
-        }
-      `;
-      nav.shadowRoot.appendChild(style);
+      if (nav.shadowRoot) { // Check if shadowRoot is not null
+        const style = document.createElement('style');
+        style.textContent = `
+          :host {
+            --sapContent_Shadow0: none; /* Attempt to override shadow variable */
+            box-shadow: none !important; /* Direct attempt to remove shadow */
+          }
+        `;
+        nav.shadowRoot.appendChild(style);
+      }
     });
   }, []);
   const navigate = useNavigate();

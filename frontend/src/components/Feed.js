@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import {
   Card,
   CardHeader,
-  List,
   Avatar,
   Button,
   TextArea,
@@ -10,11 +9,13 @@ import {
 } from "@ui5/webcomponents-react";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import "@ui5/webcomponents-fiori/dist/Assets.js";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [postValue, setPostValue] = useState("");
   const [titleValue, setTitleValue] = useState("");
+  const [heartToggles, setHeartToggles] = useState({});
 
   const scrollbarRef = useRef(null);
 
@@ -30,10 +31,30 @@ const Feed = () => {
     }
   };
 
+  useEffect(() => {
+    if (scrollbarRef.current) {
+      // Assuming PerfectScrollbar exposes a method to scroll to the bottom or you can directly manipulate its scroll position
+      const scrollContainer = scrollbarRef.current._container; // Access the underlying container of the PerfectScrollbar
+      if (scrollContainer) {
+        const scrollHeight = scrollContainer.scrollHeight;
+        const clientHeight = scrollContainer.clientHeight;
+        const scrollPosition = scrollHeight - clientHeight;
+        scrollContainer.scrollTop = scrollPosition; // Scroll to the bottom
+      }
+    }
+  }, [posts]);
+
   // Fetch posts on component mount
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  const toggleHeart = (postId) => {
+    setHeartToggles((currentToggles) => ({
+      ...currentToggles,
+      [postId]: !currentToggles[postId],
+    }));
+  };
 
   // Modified handlePost function
   const handlePost = async () => {
@@ -85,10 +106,9 @@ const Feed = () => {
             flexDirection: "column",
             alignItems: "start",
             justifyContent: "start",
-            height: "50vh",
+            height: "60vh",
             width: "40vw",
             padding: "1vw",
-            paddingBottom: "15vh",
           }}
         >
           {posts.map((post, index) => (
@@ -115,7 +135,7 @@ const Feed = () => {
                 maxWidth: "100%",
               }}
             >
-              <Title level="H5" alignItems="left">
+              <Title level="H5" style={{ textAlign: "left", marginLeft:"2rem" }}>
                 {post.title}
               </Title>
               <p
@@ -127,6 +147,10 @@ const Feed = () => {
               >
                 {post.message}
               </p>
+              <ui5-icon
+                name={heartToggles[post.message_id] ? "heart" : "heart-2"} // Assuming each post has a unique 'id'
+                onClick={() => toggleHeart(post.message_id)}
+              ></ui5-icon>
             </Card>
           ))}
         </PerfectScrollbar>
@@ -175,7 +199,7 @@ const Feed = () => {
             placeholder="Description"
             maxlength={200}
           />
-          <span style={{ position: "absolute", bottom: "5px", right: "10px" }}>
+          <span style={{ position: "absolute", bottom: "15px", right: "10px" }}>
             {postValue.length}/200
           </span>
         </div>
