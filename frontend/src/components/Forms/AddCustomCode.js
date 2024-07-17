@@ -1,19 +1,23 @@
-import React, { useState, useRef,forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Input, Button, MessageStrip, Card, CardHeader, CheckBox,  Form,
+import React, { useRef, useState, forwardRef, useImperativeHandle, } from 'react';
+import {  Form,
+    Input,
     Label,
     TextArea,
     FormGroup,
     FormItem,
     TimePicker,
+    Button,
+    Card,
+    CardHeader,
     Dialog,
-    Bar } from '@ui5/webcomponents-react';
-import { Icon } from '@ui5/webcomponents-react';
+    Bar,
+    Icon,
+    Popover} from '@ui5/webcomponents-react';
 
 
 const AddCustomCode = forwardRef((props, ref) => {
-    const popoverRef = useRef();
-
+  const popoverRef = useRef();
+  const [selectedColor, setSelectedColor] = useState(null);
 
   const onButtonClick = (e) => {
     if (popoverRef.current) {
@@ -21,28 +25,36 @@ const AddCustomCode = forwardRef((props, ref) => {
     }
   };
 
-  const onAddCode = (e) => {
-    console.log('Added Details:', e);
-    
+  const onColorSelect = (e) => {
+    console.log('Color select event:', e);
+    const selectedColorValue = e.detail.color;
+    console.log('Color selected:', selectedColorValue);
+    setSelectedColor(selectedColorValue);
   };
 
 
-   return(
-    <Card style={{ width: "100%" }}>
-            <Icon
-              name="add"
-             
-              style={{
-                position: "absolute",
-                right: "10px",
-                cursor: "pointer",
-                paddingRight:'2.5vw',
-                height : "5%",
-                width : "5%"
-              }}
-              onClick={onButtonClick}
-             
-            />
+
+  return (
+    <>
+    <Icon
+    name="add"
+   
+    style={{
+      position: "absolute",
+      right: "10px",
+      cursor: "pointer",
+      paddingRight:'2.5vw',
+      height : "5%",
+      width : "5%"
+    }}
+    onClick={onButtonClick}
+   
+  />
+      <Popover ref={popoverRef} onItemClick={onColorSelect} style={{width:'40%',height:'40%'}} placementType='Left'>
+      <Card style={{ width: "100%" }}
+      ref={popoverRef}
+      onItemClick={{}}>
+          
     <Form
       backgroundDesign="Transparent"
       columnsL={1}
@@ -54,8 +66,7 @@ const AddCustomCode = forwardRef((props, ref) => {
       labelSpanS={12}
       labelSpanXL={4}
       style={{ paddingLeft: '20px', paddingRight: '20px' }}
-      ref={popoverRef}
-      onItemClick={onAddCode}
+    
     >
       <FormGroup>
         <FormItem label={<Label>Title</Label>}>
@@ -81,8 +92,9 @@ const AddCustomCode = forwardRef((props, ref) => {
     </Form>
     
   </Card>
-
-);
+      </Popover>
+    </>
+  );
 });
 
 export default AddCustomCode;
