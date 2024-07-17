@@ -22,7 +22,7 @@ const CustomCodeForum = ({ data }) => {
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", padding: '2rem 0 0 2rem' }}>
                         <Title>Issue 55</Title>
                         <Badge style={{ marginBottom: '0.5rem' }} onClick={function _a() {}}>
-                            Clean Core RCA
+                            Success Factors
                         </Badge>
                         <Badge style={{ marginBottom: '1rem' }} onClick={function _a() {}}>
                             Neo Migration
