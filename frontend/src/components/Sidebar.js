@@ -1,6 +1,6 @@
 import { SideNavigation, SideNavigationItem } from "@ui5/webcomponents-react";
 import { useLocation, useNavigate } from 'react-router-dom';
-import React from "react";
+import React, {useEffect} from "react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const routes = {
@@ -15,6 +15,19 @@ const routes = {
 };
 
 const Sidebar = () => {
+  useEffect(() => {
+    const sideNavs = document.querySelectorAll('ui5-side-navigation');
+    sideNavs.forEach((nav) => {
+      const style = document.createElement('style');
+      style.textContent = `
+        :host {
+          --sapContent_Shadow0: none; /* Attempt to override shadow variable */
+          box-shadow: none !important; /* Direct attempt to remove shadow */
+        }
+      `;
+      nav.shadowRoot.appendChild(style);
+    });
+  }, []);
   const navigate = useNavigate();
   const currentPath = useLocation().pathname;
 
