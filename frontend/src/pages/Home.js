@@ -1,7 +1,7 @@
 import React from "react";
 import Feed from "../components/Feed";
 import { FlexBox, Grid } from "@ui5/webcomponents-react";
-import LearningCard from "../components/Cards/Profile/LearningCard";
+import HomeLearning from "../components/HomeLearning";
 
 const Home = () => {
   const learningData = {
@@ -16,7 +16,7 @@ const Home = () => {
           <Feed />
         </div>
         <div style={{ paddingLeft:"10rem", paddingTop:"3rem", width: "80%", height:"100%" }}>
-          <LearningCard data={learningData} />
+          <HomeLearning data={learningData} />
         </div>
       </Grid>
     </FlexBox>
