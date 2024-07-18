@@ -7,7 +7,10 @@ const database = require('../database');
  */
 const getFeed = () => {
     try {
-        return database.knex.select('*').from('feed');
+        return database.knex('feed')
+            .leftJoin('likes', 'feed.message_id', 'likes.message_id')
+            .leftJoin('users', 'feed.inumber', 'users.inumber')
+            .select('feed.*', 'likes.like_id', 'likes.isliked', 'users.first_name', 'users.last_name');
     } catch (error) {
         console.error(`Error listing feed: ${error.message}`);
         throw error;
