@@ -10,7 +10,8 @@ const getFeed = () => {
         return database.knex('feed')
             .leftJoin('likes', 'feed.message_id', 'likes.message_id')
             .leftJoin('users', 'feed.inumber', 'users.inumber')
-            .select('feed.*', 'likes.like_id', 'likes.isliked', 'users.first_name', 'users.last_name');
+            .select('feed.*', 'likes.like_id', 'likes.isliked', 'users.first_name', 'users.last_name')
+            .orderBy('feed.message_id', 'asc');
     } catch (error) {
         console.error(`Error listing feed: ${error.message}`);
         throw error;
@@ -42,7 +43,8 @@ const getMessage = (message_id) => {
  */
 const getFeedByUser = (inumber) => {
     try {
-        return database.knex.select('*').from('feed').where('inumber', inumber);
+        return database.knex.select('*').from('feed').where('inumber', inumber)
+            .orderBy('message_id', 'asc');
     } catch (error) {
         console.error(`Error getting message: ${error.message}`);
         throw error;
