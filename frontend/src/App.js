@@ -37,7 +37,7 @@ function App() {
       <div className="App" style={layoutStyles}>
         <Shellbar />
         <div style={{ display: 'flex', height: '100%' }}>
-          <Sidebar />
+          <Sidebar/>
           <div style={contentStyles}>
             <Routes>
               <Route path="/" element={<Home />} />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProfileCardUser from '../components/Cards/Profile/ProfileCardUser';
+import ProfileCardManager from '../components/Cards/Profile/ProfileCardManager';
 import LearningCard from '../components/Cards/Profile/LearningCard';
 
 const User = () => {
@@ -12,7 +13,8 @@ const User = () => {
         const getUser = () => {
             return {
                 id: 1,
-                name: 'Annie',
+                first_name: 'John',
+                last_name: 'Doe',
                 role: 'Software Engineer',
                 email: 'john.doe@test.com',
                 phone: '+353 87 123 4567',

@@ -99,7 +99,7 @@ const LearningJourneyDetail = () => {
                             </div>
                         </Card>
                         <Card>
-                            <CardHeader titleText="Your current experience in this topic" />
+                            <CardHeader titleText="Level of Experience" />
                             <div style={{ padding: '1rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
                                     <div style={{ flex: 1, backgroundColor: '#e0e0e0', borderRadius: '8px', overflow: 'hidden', border: '1px solid #0070d2' }}>

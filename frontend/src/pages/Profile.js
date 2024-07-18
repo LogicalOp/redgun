@@ -18,30 +18,33 @@ const Profile = () => {
   };
 
   return (
-    <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem" }}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          paddingLeft: "10rem",
-          width: "80%",
-        }}
-        data-layout-span="XL6 L6 M6 S12"
-      >
-        <div style={{ width: "100%", marginBottom: "2rem" }}>
-          <ProfileCardUser data={user} />
+    <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem", display: 'flex', justifyContent: 'center', alignItems: 'stretch' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', width: '100%', maxWidth: '1200px' }}>
+        {/* Left Section */}
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: '2rem', // Adds space between children
+          }}
+        >
+          <div style={{ width: "100%" }}>
+            <ProfileCardUser data={user} />
+          </div>
+          <ProfileCardManager data={manager} />
         </div>
-        <ProfileCardManager data={manager} />
-      </div>
-      <div style={{ width: "70%" }} data-layout-span="XL6 L6 M6 S12">
-        <div style={{ width: "100%", marginBottom: "2rem" }}>
-          <LearningCard data={learningData} style={{ width: "100%" }} />
+        {/* Right Section */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+          <div style={{ width: "100%" }}>
+            <LearningCard data={learningData} />
+          </div>
+          <DonutChart />
         </div>
-        <DonutChart />
       </div>
     </Grid>
   );
-};
+}
 
 export default Profile;

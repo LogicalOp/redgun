@@ -50,7 +50,7 @@ const AddCustomCode = forwardRef((props, ref) => {
     onClick={onButtonClick}
    
   />
-      <Popover ref={popoverRef} onItemClick={onColorSelect} style={{width:'40%',height:'40%'}} placementType='Left'>
+      <Popover ref={popoverRef} onItemClick={onColorSelect} style={{width:'40%',height:'48%'}} placementType='Left'>
       <Card style={{ width: "100%" }}
       ref={popoverRef}
       onItemClick={{}}>

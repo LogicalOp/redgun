@@ -39,3 +39,12 @@
 ui5-side-navigation {
   --ui5-side-navigation-shadow: none !important;
 }
+
+ui5-side-navigation-item {
+  --ui5-side-navigation-item-width: 100px; /* Adjust based on your needs */
+}
+
+ui5-icon {
+  width: 20px; /* Fixed icon size */
+  height: 20px; /* Fixed icon size */
+}

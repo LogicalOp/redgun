@@ -66,7 +66,7 @@ const Feed = () => {
       const newPost = {
         title: titleValue, // Replace with dynamic data if needed
         message: postValue, // Using postValue from the state
-        inumber: "I12345", // Replace with dynamic data if needed
+        inumber: localStorage.getItem('inumber'), // Replace with dynamic data if needed
       };
 
       const response = await fetch(
