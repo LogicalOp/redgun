@@ -16,19 +16,34 @@ const routes = {
 
 const Sidebar = () => {
   useEffect(() => {
-    const sideNavs = document.querySelectorAll('ui5-side-navigation');
-    sideNavs.forEach((nav) => {
-      if (nav.shadowRoot) { // Check if shadowRoot is not null
-        const style = document.createElement('style');
-        style.textContent = `
-          :host {
-            --sapContent_Shadow0: none; /* Attempt to override shadow variable */
-            box-shadow: none !important; /* Direct attempt to remove shadow */
-          }
-        `;
-        nav.shadowRoot.appendChild(style);
-      }
+    const applyCustomStyles = () => {
+      const sideNavs = document.querySelectorAll('ui5-side-navigation');
+      sideNavs.forEach((nav) => {
+        if (nav.shadowRoot) {
+          const style = document.createElement('style');
+          style.textContent = `
+            :host {
+              --sapContent_Shadow0: none;
+              box-shadow: none !important;
+            }
+          `;
+          nav.shadowRoot.appendChild(style);
+        }
+      });
+    };
+  
+    // Apply styles initially
+    applyCustomStyles();
+  
+    // Set up a mutation observer to reapply the styles when necessary
+    const observer = new MutationObserver(applyCustomStyles);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
     });
+  
+    // Clean up the observer to prevent memory leaks
+    return () => observer.disconnect();
   }, []);
   const navigate = useNavigate();
   const currentPath = useLocation().pathname;
