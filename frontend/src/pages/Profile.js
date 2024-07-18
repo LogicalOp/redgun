@@ -19,7 +19,7 @@ const Profile = () => {
 
   return (
     <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem", display: 'flex', justifyContent: 'center', alignItems: 'stretch' }}>
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', width: '100%', maxWidth: '1200px' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '10rem'}}>
         {/* Left Section */}
         <div
           style={{
