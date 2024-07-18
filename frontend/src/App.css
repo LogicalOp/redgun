@@ -36,3 +36,6 @@
     transform: rotate(360deg);
   }
 }
+ui5-side-navigation {
+  --ui5-side-navigation-shadow: none !important;
+}
