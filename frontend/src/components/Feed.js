@@ -66,7 +66,7 @@ const Feed = () => {
       const newPost = {
         title: titleValue, // Replace with dynamic data if needed
         message: postValue, // Using postValue from the state
-        inumber: localStorage.getItem('inumber'), // Replace with dynamic data if needed
+        inumber: localStorage.getItem("inumber"), // Replace with dynamic data if needed
       };
 
       const response = await fetch(
@@ -96,7 +96,7 @@ const Feed = () => {
   return (
     <Card
       header={<CardHeader titleText={"Feed"} />}
-      style={{ marginLeft: "7vw", marginTop: "5vh" }}
+      style={{ marginLeft: "2vw" }}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>
         <PerfectScrollbar
@@ -114,20 +114,6 @@ const Feed = () => {
           {posts.map((post, index) => (
             <Card
               key={index}
-              header={
-                <CardHeader
-                  titleText={post.inumber}
-                  subtitleText={post.date}
-                  avatar={
-                    <Avatar
-                      /*initials={`${post.author.split(" ")[0][0]}${
-                        post.author.split(" ")[post.author.split(" ").length - 1][0]
-                      }`}*/
-                      initials="DG"
-                    />
-                  }
-                />
-              }
               style={{
                 wordWrap: "normal",
                 position: "relative",
@@ -135,7 +121,28 @@ const Feed = () => {
                 maxWidth: "100%",
               }}
             >
-              <Title level="H5" style={{ textAlign: "left", marginLeft:"2rem" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <CardHeader
+                  titleText={post.inumber}
+                  subtitleText={post.date}
+                  avatar={<Avatar initials="DG" />}
+                />
+                <ui5-icon
+                  name={post.isliked ? "heart" : "heart-2"}
+                  onClick={() => toggleHeart(post.message_id)}
+                  style={{ cursor: "pointer", padding: "0.5rem" }} // Add padding for easier clicking and cursor pointer for visual feedback
+                ></ui5-icon>
+              </div>
+              <Title
+                level="H5"
+                style={{ textAlign: "left", marginLeft: "2rem" }}
+              >
                 {post.title}
               </Title>
               <p
@@ -147,10 +154,6 @@ const Feed = () => {
               >
                 {post.message}
               </p>
-              <ui5-icon
-                name={heartToggles[post.message_id] ? "heart" : "heart-2"} // Assuming each post has a unique 'id'
-                onClick={() => toggleHeart(post.message_id)}
-              ></ui5-icon>
             </Card>
           ))}
         </PerfectScrollbar>

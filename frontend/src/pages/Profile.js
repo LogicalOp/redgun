@@ -5,6 +5,7 @@ import ProfileCardManager from "../components/Cards/Profile/ProfileCardManager";
 import LearningCard from "../components/Cards/Profile/LearningCard";
 import DonutChart from "../components/Charts/DonutChart";
 import { useGetUserInfo } from "../hooks/useGetUserInfo";
+import ExpCard from "../components/Cards/ExpCard.js";
 
 const Profile = () => {
   const userId = localStorage.getItem("inumber");
@@ -18,33 +19,37 @@ const Profile = () => {
   };
 
   return (
-    <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem", display: 'flex', justifyContent: 'center', alignItems: 'stretch' }}>
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '10rem'}}>
-        {/* Left Section */}
+    <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem" }}>
+      <div style={{ display: "flex", flexDirection: "row", gap: "2rem" }}>
         <div
           style={{
             flex: 1,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: '2rem', // Adds space between children
+            gap: "2rem",
+            width: "25vw",
           }}
         >
-          <div style={{ width: "100%" }}>
-            <ProfileCardUser data={user} />
-          </div>
+          <ProfileCardUser data={user} />
           <ProfileCardManager data={manager} />
         </div>
-        {/* Right Section */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
-          <div style={{ width: "100%" }}>
-            <LearningCard data={learningData} />
-          </div>
+
+        <div
+          style={{
+            width: "40vw",
+            display: "flex",
+            flexDirection: "column",
+            gap: "2rem",
+          }}
+        >
+          <LearningCard data={learningData} />
           <DonutChart />
+          <ExpCard />
         </div>
       </div>
     </Grid>
   );
-}
+};
 
 export default Profile;

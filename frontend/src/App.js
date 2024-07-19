@@ -29,15 +29,27 @@ function App() {
   const contentStyles = {
     display: 'flex', // Use Flexbox for the content area
     marginLeft: 0, // Shift content to the right to make space for the sidebar
-    height: `calc(100vh - ${shellbarHeight})`, // Adjust height to account for shellbar
+    height: `calc(100vh - ${shellbarHeight})`,
+    width:"90%" // Adjust height to account for shellbar
   };
+
+  
+  const sidebarStyles = {
+    display: 'flex',
+    flexGrow: 0, // Prevent sidebar from growing
+    flexShrink: 0, // Prevent sidebar from shrinking
+    flexBasis: sidebarWidth, // Set sidebar width
+  };
+
+
+  
 
   return (
     <Router>
       <div className="App" style={layoutStyles}>
         <Shellbar />
         <div style={{ display: 'flex', height: '100%' }}>
-          <Sidebar/>
+          <Sidebar style={sidebarStyles}/>
           <div style={contentStyles}>
             <Routes>
               <Route path="/" element={<Home />} />

@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <FlexBox style={{ width: "100%", direction: "row" }}>
       <Grid defaultSpan="XL6 L6 M6 S12" position="Center">
-        <div>
+        <div style={{paddingTop:"3rem"}}>
           <Feed />
         </div>
         <div style={{ paddingLeft:"10rem", paddingTop:"3rem", width: "80%", height:"100%" }}>
