@@ -12,6 +12,7 @@ import CustomCode from './pages/CustomCode';
 import Shellbar from './components/Shellbar';
 import ObjectPage from './pages/ObjectPage';
 import LearningJourneyDetail from './pages/LearningJourneyDetail';
+import 'react-multi-carousel/lib/styles.css';
 import './App.css';
 
 function App() {
