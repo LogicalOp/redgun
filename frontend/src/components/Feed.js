@@ -17,6 +17,21 @@ const Feed = () => {
   const [titleValue, setTitleValue] = useState("");
   const [heartToggles, setHeartToggles] = useState({});
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.toLocaleDateString("default", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    const time = date.toLocaleTimeString("default", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    return `${day}, ${time}`;
+  };
+
   const scrollbarRef = useRef(null);
 
   // Function to fetch posts
@@ -130,7 +145,7 @@ const Feed = () => {
               >
                 <CardHeader
                   titleText={post.inumber}
-                  subtitleText={post.date}
+                  subtitleText={formatDate(post.date)} // Use formatDate here
                   avatar={<Avatar initials="DG" />}
                 />
                 <ui5-icon

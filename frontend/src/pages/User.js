@@ -1,61 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import ProfileCardUser from '../components/Cards/Profile/ProfileCardUser';
-import ProfileCardManager from '../components/Cards/Profile/ProfileCardManager';
-import LearningCard from '../components/Cards/Profile/LearningCard';
+import React, { useState, useEffect } from "react";
+import { Grid } from "@ui5/webcomponents-react";
+import ProfileCardUser from "../components/Cards/Profile/ProfileCardUser";
+import ProfileCardManager from "../components/Cards/Profile/ProfileCardManager";
+import LearningCard from "../components/Cards/Profile/LearningCard";
+import DonutChart from "../components/Charts/DonutChart";
+import { useGetUserInfo } from "../hooks/useGetUserInfo";
+import ExpCard from "../components/Cards/ExpCard.js";
 
 const User = () => {
-    const { id } = useParams();
-    const [user, setUser] = useState({});
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('inumber');
+    const { user, team, manager } = useGetUserInfo(userId);
 
-    useEffect(() => {
-        // Replace fetch call with a function that returns test data
-        const getUser = () => {
-            return {
-                id: 1,
-                first_name: 'John',
-                last_name: 'Doe',
-                role: 'Software Engineer',
-                email: 'john.doe@test.com',
-                phone: '+353 87 123 4567',
-                manager: {
-                    name: 'Jane Doe',
-                    phone: '+353 87 765 4321',
-                    email: 'jane.doe@test.com'
-                },
-                mentoringData: {
-                    people: ["Jane Doe", "John Smith", "Jane Smith"],
-                    totalHelped: 10,
-                },
-                learningData: {
-                    courses: ['ABAP Cloud Developer', 'CAP for NodeJS'], 
-                    progress: 50
-                },
-                menteeData: [
-                    { name: 'John Smith', info: ['Helpful', 'Responsive', 'Knowledgeable'], rating: 4 },
-                    { name: 'Jane Smith', info: ['Informative', 'Friendly', 'Professional'], rating: 5 },
-                    { info: ['Fast Replies', 'Efficient', 'Patient'], rating: 3 }, // Anon mentee
-                ],
-            };
-        }
+  console.log(user);
 
-        setUser(getUser());
-    }, [id]);
-    
-    return (
-        <div>
-            {user && user.manager ? (
-                <>
-                    <ProfileCardUser data={user}  />
-                    
-                    <LearningCard data={user.learningData} />
-                    
-                </>
-            ) : (
-                <div>Loading...</div>
-            )}
+  const learningData = {
+    courses: ["ABAP Cloud Developer", "CAP for NodeJS"],
+    progress: 50,
+  };
+
+  return (
+    <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem" }}>
+      <div style={{ display: "flex", flexDirection: "row", gap: "2rem" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "2rem",
+            width: "45vw",
+          }}
+        >
+          {/* New div wrapper for user and manager cards */}
+          <div style={{ display: "flex", width: "100%" }}>
+            <div style={{marginRight : "2rem", width: "100%"}}>
+            <ProfileCardUser data={user} style={{ flex: 1 }} />
+            </div>
+            <ProfileCardManager data={manager} style={{ flex: 1 }} />
+          </div>
+          <ExpCard />
         </div>
-    );
+
+        <div
+          style={{
+            width: "45vw",
+            display: "flex",
+            flexDirection: "column",
+            gap: "2rem",
+          }}
+        >
+          <LearningCard data={learningData} />
+          <DonutChart />
+        </div>
+      </div>
+    </Grid>
+  );
 };
 
 export default User;

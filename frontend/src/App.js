@@ -61,7 +61,7 @@ function App() {
               <Route path="/learning" element={<Learning />} />
               <Route path="/course" element={<Course />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/user/:id" element={<User />} />
+              <Route path="/user" element={<User />} />
               <Route path="/issue/:id" element={<ObjectPage />} />
               <Route path="/journey/:id" element={<LearningJourneyDetail />} />
               <Route path="/messages" element={<Messages />}/>

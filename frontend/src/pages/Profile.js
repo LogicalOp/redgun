@@ -23,21 +23,26 @@ const Profile = () => {
       <div style={{ display: "flex", flexDirection: "row", gap: "2rem" }}>
         <div
           style={{
-            flex: 1,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             gap: "2rem",
-            width: "25vw",
+            width: "45vw",
           }}
         >
-          <ProfileCardUser data={user} />
-          <ProfileCardManager data={manager} />
+          {/* New div wrapper for user and manager cards */}
+          <div style={{ display: "flex", width: "100%" }}>
+            <div style={{marginRight : "2rem", width: "100%"}}>
+            <ProfileCardUser data={user} style={{ flex: 1 }} />
+            </div>
+            <ProfileCardManager data={manager} style={{ flex: 1 }} />
+          </div>
+          <ExpCard />
         </div>
 
         <div
           style={{
-            width: "40vw",
+            width: "45vw",
             display: "flex",
             flexDirection: "column",
             gap: "2rem",
@@ -45,7 +50,6 @@ const Profile = () => {
         >
           <LearningCard data={learningData} />
           <DonutChart />
-          <ExpCard />
         </div>
       </div>
     </Grid>
