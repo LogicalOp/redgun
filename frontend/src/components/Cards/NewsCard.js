@@ -39,34 +39,42 @@ const NewsCard = () => {
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item"
       >
-        <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
-          <img
-            src="https://picsum.photos/2000/3000?random=1"
-            alt="News 1"
-            style={{ width: "100%", height: "10rem", objectFit: "cover" }}
-          />
-        </Card>
-        <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
-          <img
-            src="https://picsum.photos/2000/3000?random=2"
-            alt="News 2"
-            style={{ width: "100%", height: "10rem", objectFit: "cover" }}
-          />
-        </Card>
-        <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
-          <img
-            src="https://picsum.photos/2000/3000?random=3"
-            alt="News 3"
-            style={{ width: "100%", height: "10rem", objectFit: "cover" }}
-          />
-        </Card>
-        <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
-          <img
-            src="https://picsum.photos/2000/3000?random=4"
-            alt="News 4"
-            style={{ width: "100%", height: "10rem", objectFit: "cover" }}
-          />
-        </Card>
+        <div style={{ margin: "0 10px" }}>
+          <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
+            <img
+              src="https://picsum.photos/2000/3000?random=1"
+              alt="News 1"
+              style={{ width: "100%", height: "20rem", objectFit: "cover" }}
+            />
+          </Card>
+        </div>
+        <div style={{ margin: "0 10px" }}>
+          <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
+            <img
+              src="https://picsum.photos/2000/3000?random=2"
+              alt="News 2"
+              style={{ width: "100%", height: "20rem", objectFit: "cover" }}
+            />
+          </Card>
+        </div>
+        <div style={{ margin: "0 10px" }}>
+          <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
+            <img
+              src="https://picsum.photos/2000/3000?random=3"
+              alt="News 3"
+              style={{ width: "100%", height: "20rem", objectFit: "cover" }}
+            />
+          </Card>
+        </div>
+        <div style={{ margin: "0 10px" }}>
+          <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
+            <img
+              src="https://picsum.photos/2000/3000?random=4"
+              alt="News 4"
+              style={{ width: "100%", height: "20rem", objectFit: "cover" }}
+            />
+          </Card>
+        </div>
       </Carousel>
     </Card>
   );

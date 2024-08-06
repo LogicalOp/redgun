@@ -15,7 +15,6 @@ const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [postValue, setPostValue] = useState("");
   const [titleValue, setTitleValue] = useState("");
-  const [heartToggles, setHeartToggles] = useState({});
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -64,11 +63,29 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  const toggleHeart = (postId) => {
-    setHeartToggles((currentToggles) => ({
-      ...currentToggles,
-      [postId]: !currentToggles[postId],
-    }));
+  const toggleHeart = async (postId) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/feed/like`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ postId }),
+        }
+      );
+
+      if (!response.ok) throw new Error("Network response was not ok.");
+
+      const data = await response.json();
+      console.log(data);
+
+
+      fetchPosts(); // Fetch the updated list of posts
+    } catch (error) {
+      console.error("Failed to like post:", error);
+    }
   };
 
   // Modified handlePost function
