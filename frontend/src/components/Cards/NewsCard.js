@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardHeader } from "@ui5/webcomponents-react";
 import Carousel from "react-multi-carousel";
 
 const NewsCard = () => {
+  const [news, setNews] = useState([]);
+
+  const fetchNews = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/news`);
+      if (!response.ok) throw new Error("Network response was not ok.");
+      const data = await response.json();
+      setNews(data);
+    } catch (err) {
+      console.error("Failed to fetch news:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchNews();
+  }, []);
+  console.log(news);
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
