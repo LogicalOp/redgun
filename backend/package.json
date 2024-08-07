@@ -2,8 +2,11 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.1.0",
-    "pg": "^8.11.5"
+    "node-cron": "^3.0.3",
+    "pg": "^8.11.5",
+    "puppeteer": "^22.15.0"
   }
 }
