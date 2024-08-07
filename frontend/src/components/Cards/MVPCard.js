@@ -5,7 +5,6 @@ import Carousel from "react-multi-carousel";
 const MVPCard = () => {
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 5,
     },
@@ -30,7 +29,7 @@ const MVPCard = () => {
         draggable={true}
         showDots={false}
         responsive={responsive}
-        ssr={true} // means to render carousel on server-side.
+        ssr={true}
         infinite={true}
         keyBoardControl={true}
         customTransition="transform 300ms ease-in-out"
@@ -41,8 +40,6 @@ const MVPCard = () => {
         itemClass="carousel-item-padding-40-px"
       >
         <div style={{ margin: "0 10px" }}>
-          {" "}
-          {/* Add this div wrapper with inline style */}
           <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
             <img
               src="https://picsum.photos/2000/3000?random=3"
@@ -52,8 +49,6 @@ const MVPCard = () => {
           </Card>
         </div>
         <div style={{ margin: "0 10px" }}>
-          {" "}
-          {/* Repeat for each Card */}
           <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
             <img
               src="https://picsum.photos/2000/3000?random=4"
@@ -63,8 +58,6 @@ const MVPCard = () => {
           </Card>
         </div>
         <div style={{ margin: "0 10px" }}>
-          {" "}
-          {/* Add this div wrapper with inline style */}
           <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
             <img
               src="https://picsum.photos/2000/3000?random=5"
@@ -74,8 +67,6 @@ const MVPCard = () => {
           </Card>
         </div>
         <div style={{ margin: "0 10px" }}>
-          {" "}
-          {/* Repeat for each Card */}
           <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
             <img
               src="https://picsum.photos/2000/3000?random=6"
