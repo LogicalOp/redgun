@@ -12,8 +12,6 @@ const User = () => {
     const userId = urlParams.get('inumber');
     const { user, team, manager } = useGetUserInfo(userId);
 
-  console.log(user);
-
   const learningData = {
     courses: ["ABAP Cloud Developer", "CAP for NodeJS"],
     progress: 50,

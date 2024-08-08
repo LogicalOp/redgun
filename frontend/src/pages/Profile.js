@@ -11,8 +11,6 @@ const Profile = () => {
   const userId = localStorage.getItem("inumber");
   const { user, team, manager } = useGetUserInfo(userId);
 
-  console.log(user);
-
   const learningData = {
     courses: ["ABAP Cloud Developer", "CAP for NodeJS"],
     progress: 50,
