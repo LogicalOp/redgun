@@ -42,7 +42,5 @@ export function useGetUserInfo(id) {
         fetchUserInfo();
     }, [apiUrl, id]);
 
-    console.log(user);
-
     return { user, team, manager };
 };
