@@ -1,20 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import {
   Card,
   CardHeader,
   Avatar,
   Button,
-  TextArea,
   Title,
 } from "@ui5/webcomponents-react";
-import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import DOMPurify from "dompurify";
+import parse from "html-react-parser";
 import "@ui5/webcomponents-fiori/dist/Assets.js";
 
-const Feed = () => {
+const MessageFeed = () => {
   const [posts, setPosts] = useState([]);
   const [postValue, setPostValue] = useState("");
   const [titleValue, setTitleValue] = useState("");
+  const [otherUser, setOtherUser] = useState("I123");
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -45,6 +48,17 @@ const Feed = () => {
     }
   };
 
+  const fetchMessages = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_MESSAGES_URL}/messages/I123`);
+      if (!response.ok) throw new Error("Network response was not ok.");
+      const data = await response.json();
+      console.log("Fetched messages:", data); // Print the fetched messages to the console
+    } catch (error) {
+      console.error("Failed to fetch messages:", error);
+    }
+  };
+
   useEffect(() => {
     if (scrollbarRef.current) {
       // Assuming PerfectScrollbar exposes a method to scroll to the bottom or you can directly manipulate its scroll position
@@ -61,6 +75,7 @@ const Feed = () => {
   // Fetch posts on component mount
   useEffect(() => {
     fetchPosts();
+    fetchMessages();
   }, []);
 
   const toggleHeart = async (postId) => {
@@ -80,7 +95,6 @@ const Feed = () => {
 
       const data = await response.json();
       console.log(data);
-
 
       fetchPosts(); // Fetch the updated list of posts
     } catch (error) {
@@ -125,10 +139,19 @@ const Feed = () => {
     }
   };
 
+  const getCardAlignment = (inumber) => {
+    if (inumber === "I123") {
+      return "flex-start"; // Align to the left
+    } else if (inumber === "I12345") {
+      return "flex-end"; // Align to the right
+    }
+    return "center"; // Default alignment
+  };
+
   return (
     <Card
-      header={<CardHeader titleText={"UserFirstName"} />}
-      style={{ marginLeft: "2vw" , height: "90%" }}
+      header={<CardHeader titleText={"Chat with " + otherUser} />}
+      style={{ marginLeft: "2vw" }}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>
         <PerfectScrollbar
@@ -139,54 +162,57 @@ const Feed = () => {
             alignItems: "start",
             justifyContent: "start",
             height: "60vh",
-            width: "40vw",
+            width: "50vw",
             padding: "1vw",
           }}
         >
           {posts.map((post, index) => (
-            <Card
+            <div
               key={index}
               style={{
-                wordWrap: "normal",
-                position: "relative",
-                paddingBottom: "1vh",
-                maxWidth: "100%",
+                display: "flex",
+                justifyContent: getCardAlignment(post.inumber),
+                width: "100%",
               }}
             >
-              <div
+              <Card
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+                  wordWrap: "normal",
+                  position: "relative",
+                  paddingBottom: "1vh",
+                  maxWidth: "60%",
                 }}
               >
-                <CardHeader
-                  titleText={post.inumber}
-                  subtitleText={formatDate(post.date)} // Use formatDate here
-                  avatar={<Avatar initials="DG" />}
-                />
-                <ui5-icon
-                  name={post.isliked ? "heart" : "heart-2"}
-                  onClick={() => toggleHeart(post.message_id)}
-                  style={{ cursor: "pointer", padding: "0.5rem" }} // Add padding for easier clicking and cursor pointer for visual feedback
-                ></ui5-icon>
-              </div>
-              <Title
-                level="H5"
-                style={{ textAlign: "left", marginLeft: "2rem" }}
-              >
-                {post.title}
-              </Title>
-              <p
-                style={{
-                  textAlign: "left",
-                  whiteSpace: "pre-wrap",
-                  margin: "1rem",
-                }}
-              >
-                {post.message}
-              </p>
-            </Card>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <CardHeader
+                    titleText={post.inumber}
+                    subtitleText={formatDate(post.date)} // Use formatDate here
+                    avatar={<Avatar initials="DG" />}
+                  />
+                  <ui5-icon
+                    name={post.isliked ? "heart" : "heart-2"}
+                    onClick={() => toggleHeart(post.message_id)}
+                    style={{ cursor: "pointer", padding: "0.5rem" }} // Add padding for easier clicking and cursor pointer for visual feedback
+                  ></ui5-icon>
+                </div>
+
+                <p
+                  style={{
+                    textAlign: "left",
+                    whiteSpace: "pre-wrap",
+                    margin: "1rem",
+                  }}
+                >
+                  {parse(DOMPurify.sanitize(post.message))}
+                </p>
+              </Card>
+            </div>
           ))}
         </PerfectScrollbar>
       </div>
@@ -215,24 +241,28 @@ const Feed = () => {
             height: "15vh",
           }}
         >
-          <TextArea
-            value={titleValue}
-            onInput={(e) => setTitleValue(e.target.value)}
-            style={{ width: "100%", flexGrow: 1, marginBottom: "4px" }} // Allow TextArea to grow, adjust marginBottom as needed
-            placeholder="Title"
-            maxlength={50}
-          />
-          <TextArea
+          <ReactQuill
             value={postValue}
-            onInput={(e) => setPostValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.ctrlKey && e.key === "Enter") {
-                handlePost();
-              }
-            }}
-            style={{ width: "100%", flexGrow: 2 }} // Allow TextArea to grow
+            onChange={setPostValue}
+            style={{ width: "100%" }} // Allow ReactQuill to grow
             placeholder="Description"
-            maxlength={200}
+            modules={{
+              toolbar: [
+                [{ header: [1, 2, false] }],
+                ["bold", "italic", "underline"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["link"],
+              ],
+            }}
+            formats={[
+              "header",
+              "bold",
+              "italic",
+              "underline",
+              "list",
+              "bullet",
+              "link",
+            ]}
           />
           <span style={{ position: "absolute", bottom: "15px", right: "10px" }}>
             {postValue.length}/200
@@ -247,4 +277,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default MessageFeed;

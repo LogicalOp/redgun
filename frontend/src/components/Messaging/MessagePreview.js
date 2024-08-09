@@ -48,7 +48,11 @@ const handleItemClick = (userId) => {
     >
       <List>
         {data.map((item) => (
-          <StandardListItem key={item.id} onClick={() => handleItemClick(item.id)} style={{ padding: "2rem", minHeight: "4rem" }}>
+          <StandardListItem 
+            key={item.id} 
+            onClick={() => handleItemClick(item.id)} 
+            style={{ padding: "2rem", minHeight: "4rem", marginBottom: "1rem" }} // Added marginBottom to increase gap
+          >
             <div style={{ display: "flex", alignItems: "center" }}>
               <Avatar image={item.avatar} />
               <div style={{ marginLeft: "1rem", display: "flex", flexDirection: "column" }}>
