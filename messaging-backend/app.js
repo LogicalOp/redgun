@@ -13,57 +13,51 @@ const knex = require('knex')({
         port: 5432,
     }
 });
-
+const { listMessages, listMessagesBetweenUsers, listMessagesByUserId, listRecentMessages } = require('./controllers/messagingController');
 const app = express();
+
 app.use(express.json());
 app.use(cors());
+
 const server = http.createServer(app);
 const io = socketIo(server);
 
 // Step 4: Define routes for message history
 app.get('/messages', async (req, res) => {
-  const { senderId, receiverId } = req.query;
-  console.log(`Fetching messages between ${senderId} and ${receiverId}`);
-  
-  // Error handling for undefined senderId or receiverId
-  if (!senderId || !receiverId) {
-      console.error('Error: senderId or receiverId is undefined');
-      return res.status(400).json({ error: 'senderId and receiverId are required' });
-  }
-  
   try {
-      const messages = await knex('messages')
-          .where({ sender: senderId, recipient: receiverId })
-          .orWhere({ sender: receiverId, recipient: senderId })
-          .orderBy('date', 'asc');
-      res.json(messages);
+      const messages = await listMessagesBetweenUsers(req, res);
+      res.status(200).json({ messages: messages });
   } catch (error) {
-      console.error('Error fetching messages:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: error.message });
   }
 });
 
 app.get('/messages/:userId', async (req, res) => {
-  const { userId } = req.params;
-  console.log(`Fetching messages sent by user ${userId}`);
-  
-  // Error handling for undefined userId
-  if (!userId) {
-      console.error('Error: userId is undefined');
-      return res.status(400).json({ error: 'userId is required' });
-  }
-  
   try {
-      const messages = await knex('messages')
-          .where({ sender: userId })
-          .orderBy('date', 'asc');
-      res.json(messages);
+      const messages = await listMessagesByUserId(req, res);
+      res.status(200).json({ messages: messages });
   } catch (error) {
-      console.error('Error fetching messages:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: error.message });
   }
 });
 
+app.get('/all-messages', async (req, res) => {
+  try {
+      const messages = await listMessages(req, res);
+      res.status(200).json({ messages: messages });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/messages/preview/:userId', async (req, res) => {
+  try {
+      const recentMessages = await listRecentMessages(req, res);
+      res.status(200).json({ messages: recentMessages });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
 
 app.post('/messages', async (req, res) => {
   console.log(req.body);
@@ -89,6 +83,18 @@ app.post('/messages', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Step 5: Set up Socket.IO for real-time messaging
 io.on('connection', (socket) => {
