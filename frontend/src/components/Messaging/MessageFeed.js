@@ -5,8 +5,7 @@ import {
   Card,
   CardHeader,
   Avatar,
-  Button,
-  Title,
+  Button
 } from "@ui5/webcomponents-react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import DOMPurify from "dompurify";
@@ -14,7 +13,7 @@ import parse from "html-react-parser";
 import "@ui5/webcomponents-fiori/dist/Assets.js";
 
 const MessageFeed = () => {
-  const [posts, setPosts] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [postValue, setPostValue] = useState("");
   const [titleValue, setTitleValue] = useState("");
   const [otherUser, setOtherUser] = useState("I123");
@@ -36,23 +35,12 @@ const MessageFeed = () => {
 
   const scrollbarRef = useRef(null);
 
-  // Function to fetch posts
-  const fetchPosts = async () => {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/feed`);
-      if (!response.ok) throw new Error("Network response was not ok.");
-      const data = await response.json();
-      setPosts(data.feed); // Assuming the response data is the array of posts
-    } catch (error) {
-      console.error("Failed to fetch posts:", error);
-    }
-  };
-
   const fetchMessages = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_MESSAGES_URL}/messages/I123`);
       if (!response.ok) throw new Error("Network response was not ok.");
       const data = await response.json();
+      setMessages(data.messages); // Set the fetched messages to the state
       console.log("Fetched messages:", data); // Print the fetched messages to the console
     } catch (error) {
       console.error("Failed to fetch messages:", error);
@@ -61,24 +49,21 @@ const MessageFeed = () => {
 
   useEffect(() => {
     if (scrollbarRef.current) {
-      // Assuming PerfectScrollbar exposes a method to scroll to the bottom or you can directly manipulate its scroll position
-      const scrollContainer = scrollbarRef.current._container; // Access the underlying container of the PerfectScrollbar
+      const scrollContainer = scrollbarRef.current._container;
       if (scrollContainer) {
         const scrollHeight = scrollContainer.scrollHeight;
         const clientHeight = scrollContainer.clientHeight;
         const scrollPosition = scrollHeight - clientHeight;
-        scrollContainer.scrollTop = scrollPosition; // Scroll to the bottom
+        scrollContainer.scrollTop = scrollPosition;
       }
     }
-  }, [posts]);
+  }, [messages]);
 
-  // Fetch posts on component mount
   useEffect(() => {
-    fetchPosts();
     fetchMessages();
   }, []);
 
-  const toggleHeart = async (postId) => {
+  const toggleHeart = async (messageId) => {
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/feed/like`,
@@ -87,7 +72,7 @@ const MessageFeed = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ postId }),
+          body: JSON.stringify({ messageId }),
         }
       );
 
@@ -96,13 +81,12 @@ const MessageFeed = () => {
       const data = await response.json();
       console.log(data);
 
-      fetchPosts(); // Fetch the updated list of posts
+      fetchMessages(); // Fetch the updated list of messages
     } catch (error) {
-      console.error("Failed to like post:", error);
+      console.error("Failed to like message:", error);
     }
   };
 
-  // Modified handlePost function
   const handlePost = async () => {
     if (postValue.trim() === "") {
       return; // Don't allow empty posts
@@ -110,9 +94,9 @@ const MessageFeed = () => {
 
     try {
       const newPost = {
-        title: titleValue, // Replace with dynamic data if needed
-        message: postValue, // Using postValue from the state
-        inumber: localStorage.getItem("inumber"), // Replace with dynamic data if needed
+        title: titleValue,
+        message: postValue,
+        inumber: localStorage.getItem("inumber"),
       };
 
       const response = await fetch(
@@ -131,9 +115,9 @@ const MessageFeed = () => {
       const data = await response.json();
       console.log(data);
 
-      setPostValue(""); // Clear the input field
+      setPostValue("");
       setTitleValue("");
-      fetchPosts(); // Fetch the updated list of posts
+      fetchMessages(); // Fetch the updated list of messages
     } catch (error) {
       console.error("Failed to post:", error);
     }
@@ -141,11 +125,11 @@ const MessageFeed = () => {
 
   const getCardAlignment = (inumber) => {
     if (inumber === "I123") {
-      return "flex-start"; // Align to the left
+      return "flex-start";
     } else if (inumber === "I12345") {
-      return "flex-end"; // Align to the right
+      return "flex-end";
     }
-    return "center"; // Default alignment
+    return "center";
   };
 
   return (
@@ -166,12 +150,12 @@ const MessageFeed = () => {
             padding: "1vw",
           }}
         >
-          {posts.map((post, index) => (
+          {messages.map((message, index) => (
             <div
               key={index}
               style={{
                 display: "flex",
-                justifyContent: getCardAlignment(post.inumber),
+                justifyContent: getCardAlignment(message.sender),
                 width: "100%",
               }}
             >
@@ -191,14 +175,14 @@ const MessageFeed = () => {
                   }}
                 >
                   <CardHeader
-                    titleText={post.inumber}
-                    subtitleText={formatDate(post.date)} // Use formatDate here
+                    titleText={message.sender}
+                    subtitleText={formatDate(message.date)}
                     avatar={<Avatar initials="DG" />}
                   />
                   <ui5-icon
-                    name={post.isliked ? "heart" : "heart-2"}
-                    onClick={() => toggleHeart(post.message_id)}
-                    style={{ cursor: "pointer", padding: "0.5rem" }} // Add padding for easier clicking and cursor pointer for visual feedback
+                    name={message.isliked ? "heart" : "heart-2"}
+                    onClick={() => toggleHeart(message.message_id)}
+                    style={{ cursor: "pointer", padding: "0.5rem" }}
                   ></ui5-icon>
                 </div>
 
@@ -209,7 +193,7 @@ const MessageFeed = () => {
                     margin: "1rem",
                   }}
                 >
-                  {parse(DOMPurify.sanitize(post.message))}
+                  {parse(DOMPurify.sanitize(message.message))}
                 </p>
               </Card>
             </div>
@@ -235,16 +219,16 @@ const MessageFeed = () => {
           style={{
             position: "relative",
             width: "30vw",
-            display: "flex", // Use flex layout
-            flexDirection: "column", // Stack children vertically
-            justifyContent: "space-between", // Distribute space evenly
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
             height: "15vh",
           }}
         >
           <ReactQuill
             value={postValue}
             onChange={setPostValue}
-            style={{ width: "100%" }} // Allow ReactQuill to grow
+            style={{ width: "100%" }}
             placeholder="Description"
             modules={{
               toolbar: [

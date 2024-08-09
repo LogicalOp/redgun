@@ -4,12 +4,16 @@ import {
   CardHeader,
   Avatar,
   Button,
-  TextArea,
   Title,
+  Input, // Replace TextArea with Input
 } from "@ui5/webcomponents-react";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "@ui5/webcomponents-fiori/dist/Assets.js";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import DOMPurify from "dompurify";
+import parse from "html-react-parser";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
@@ -81,11 +85,17 @@ const Feed = () => {
       const data = await response.json();
       console.log(data);
 
-
       fetchPosts(); // Fetch the updated list of posts
     } catch (error) {
       console.error("Failed to like post:", error);
     }
+  };
+
+  // Function to strip HTML tags
+  const stripHtmlTags = (html) => {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    return div.textContent || div.innerText || "";
   };
 
   // Modified handlePost function
@@ -138,7 +148,7 @@ const Feed = () => {
             flexDirection: "column",
             alignItems: "start",
             justifyContent: "start",
-            height: "60vh",
+            height: "50vh",
             width: "40vw",
             padding: "1vw",
           }}
@@ -184,7 +194,7 @@ const Feed = () => {
                   margin: "1rem",
                 }}
               >
-                {post.message}
+                {parse(DOMPurify.sanitize(post.message))}
               </p>
             </Card>
           ))}
@@ -212,30 +222,24 @@ const Feed = () => {
             display: "flex", // Use flex layout
             flexDirection: "column", // Stack children vertically
             justifyContent: "space-between", // Distribute space evenly
-            height: "15vh",
+            height: "25vh",
           }}
         >
-          <TextArea
+          <Input
             value={titleValue}
             onInput={(e) => setTitleValue(e.target.value)}
-            style={{ width: "100%", flexGrow: 1, marginBottom: "4px" }} // Allow TextArea to grow, adjust marginBottom as needed
+            style={{ width: "100%", marginBottom: "4px" }} // Reduce flexGrow to make Input smaller
             placeholder="Title"
             maxlength={50}
           />
-          <TextArea
+          <ReactQuill
             value={postValue}
-            onInput={(e) => setPostValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.ctrlKey && e.key === "Enter") {
-                handlePost();
-              }
-            }}
-            style={{ width: "100%", flexGrow: 2 }} // Allow TextArea to grow
+            onChange={setPostValue}
+            style={{ width: "100%", height: "6.5rem", marginBottom: "5rem"}} // Allow ReactQuill to grow
             placeholder="Description"
-            maxlength={200}
           />
           <span style={{ position: "absolute", bottom: "15px", right: "10px" }}>
-            {postValue.length}/200
+            {stripHtmlTags(postValue).length}/200
           </span>
         </div>
 

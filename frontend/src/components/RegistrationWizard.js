@@ -1,91 +1,102 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Wizard, WizardStep, Button,  Input, Title, ButtonDesign } from '@ui5/webcomponents-react';
+import { Input, Button, Label, Card, CardHeader } from '@ui5/webcomponents-react';
 
 const RegistrationWizard = () => {
-  const navigate = useNavigate();
-  const [selected, setSelected] = useState('1');
-  const [disabled, setDisabled] = useState({ '2': true });
-  const [hidden, setHidden] = useState({ finalizeBtn: true });
-  const [showPasswordStep, setShowPasswordStep] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    team: '',
+    manager: '',
+    email: '',
+    password: ''
+  });
 
-
-
-  const goToStep2 = () => {
-    setDisabled((prev) => {
-      const { '2': _omit, ...rest } = prev;
-      return rest;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
     });
-    setSelected('2');
-    setShowPasswordStep(true);
   };
 
-  const finalizeRegistration = () => {
-    alert('Registration is now completed!');
-    navigate('/');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log('Form data submitted:', formData);
   };
 
-    const handleStep1Completed = (e) => {
-      if (e.target.value) {
-        setDisabled((prev) => {
-          const { '2': _omit, ...rest } = prev;
-          return rest;
-        });
-      }
-    };
-
-    const handleStep2Completed = (e) => {
-      if (e.target.value) {
-        setHidden((prev) => {
-          const { finalizeBtn: _omit, ...rest } = prev;
-          return rest;
-        });
-      }
-    };
-
-    const handleStepChange = (e) => {
-      setSelected(e.detail.step.dataset.step);
-      if (e.detail.step.dataset.step === '1') {
-        setShowPasswordStep(false);
-      } else if (e.detail.step.dataset.step === '2') {
-        setShowPasswordStep(true);
-      }
-    };
-
-    return (
-      <div style={{ width: '90vw', paddingLeft: '7.5vw' }}>
-        <Wizard onStepChange={handleStepChange}>
-          <WizardStep titleText="Step 1: User Information" selected={selected === '1'} data-step={'1'}>
-            {!showPasswordStep && (
-              <>
-                <Title>1. User Information</Title>
-                <Input placeholder="Username" onInput={handleStep1Completed} />
-                <br />
-                <Input placeholder="Email" onInput={handleStep1Completed} />
-                <br />
-                <Button design={ButtonDesign.Emphasized} onClick={goToStep2} disabled={disabled['2']}>
-                  Next
-                </Button>
-              </>
-            )}
-          </WizardStep>
-          {showPasswordStep && (
-            <WizardStep titleText="Step 2: Password" disabled={disabled['2']} selected={selected === '2'} data-step={'2'}>
-              <Title>2. Password</Title>
-              <Input placeholder="Password" type="password" onInput={handleStep2Completed} />
-              <br />
-              <Input placeholder="Confirm Password" type="password" onInput={handleStep2Completed} />
-              <br />
-              {!hidden['finalizeBtn'] && (
-                <Button design={ButtonDesign.Emphasized} onClick={finalizeRegistration}>
-                  Register
-                </Button>
-              )}
-            </WizardStep>
-          )}
-        </Wizard>
+  return (
+    <Card style={{ padding: '20px', maxWidth: '400px', margin: 'auto' }} header={<CardHeader titleText="Registration" />}>
+      
+      <div>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div>
+            <Label for="firstName">First Name:</Label>
+            <Input
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onInput={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <Label for="lastName">Last Name:</Label>
+            <Input
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onInput={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <Label for="team">Team:</Label>
+            <Input
+              id="team"
+              name="team"
+              value={formData.team}
+              onInput={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <Label for="manager">Manager:</Label>
+            <Input
+              id="manager"
+              name="manager"
+              value={formData.manager}
+              onInput={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <Label for="email">Email:</Label>
+            <Input
+              id="email"
+              name="email"
+              type="Email"
+              value={formData.email}
+              onInput={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <Label for="password">Password:</Label>
+            <Input
+              id="password"
+              name="password"
+              type="Password"
+              value={formData.password}
+              onInput={handleChange}
+              required
+            />
+          </div>
+          <Button type="Submit">Register</Button>
+        </form>
       </div>
-    );
+    </Card>
+  );
 };
 
 export default RegistrationWizard;

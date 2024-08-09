@@ -1,27 +1,26 @@
 import { SideNavigation, SideNavigationItem } from "@ui5/webcomponents-react";
-import { useLocation, useNavigate } from 'react-router-dom';
-import React, {useEffect} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const routes = {
-  "Home": { path: "/", icon: "home" },
-  "Learning": { path: "/learning", icon: "course-book" },
-  "CustomCode": { path: "/customcode", icon: "source-code" },
-  "Profile": { path: "/profile", icon: "person-placeholder" },
-  "User": { path: "/user", icon: "employee" },
-  "Login": { path: "/login", icon: "log" },
-  "Messages": { path: "/messages", icon: "message-popup" },
-  // ? "Register": { path: "/register", icon: "add" },
-  // Add more routes as needed
+  Home: { path: "/", icon: "home" },
+  Learning: { path: "/learning", icon: "course-book" },
+  CustomCode: { path: "/customcode", icon: "source-code" },
+  Profile: { path: "/profile", icon: "person-placeholder" },
+  User: { path: "/user", icon: "employee" },
+  Messages: { path: "/messages", icon: "message-popup" },
+  Login: { path: "/login", icon: "log" },
+  Register: { path: "/register", icon: "add" }
 };
 
 const Sidebar = () => {
   useEffect(() => {
     const applyCustomStyles = () => {
-      const sideNavs = document.querySelectorAll('ui5-side-navigation');
+      const sideNavs = document.querySelectorAll("ui5-side-navigation");
       sideNavs.forEach((nav) => {
         if (nav.shadowRoot) {
-          const style = document.createElement('style');
+          const style = document.createElement("style");
           style.textContent = `
             :host {
               --sapContent_Shadow0: none;
@@ -32,17 +31,17 @@ const Sidebar = () => {
         }
       });
     };
-  
+
     // Apply styles initially
     applyCustomStyles();
-  
+
     // Set up a mutation observer to reapply the styles when necessary
     const observer = new MutationObserver(applyCustomStyles);
     observer.observe(document.body, {
       childList: true,
       subtree: true,
     });
-  
+
     // Clean up the observer to prevent memory leaks
     return () => observer.disconnect();
   }, []);
@@ -51,7 +50,16 @@ const Sidebar = () => {
 
   return (
     <>
-      <SideNavigation style={{ position: 'relative', left: 0, top: '50px', bottom: 0, width: '100px' }} collapsed={true}>
+      <SideNavigation
+        style={{
+          position: "relative",
+          left: 0,
+          top: "50px",
+          bottom: 0,
+          width: "100px",
+        }}
+        collapsed={true}
+      >
         {Object.keys(routes).map((route) => (
           <SideNavigationItem
             key={route}

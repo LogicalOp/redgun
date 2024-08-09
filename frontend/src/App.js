@@ -65,6 +65,7 @@ function App() {
               <Route path="/issue/:id" element={<ObjectPage />} />
               <Route path="/journey/:id" element={<LearningJourneyDetail />} />
               <Route path="/messages" element={<Messages />}/>
+              <Route path="/register" element={<Register />} />
             </Routes>
           </div>
         </div>
