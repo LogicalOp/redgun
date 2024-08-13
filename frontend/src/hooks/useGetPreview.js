@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 export function useGetPreview() {
     const [preview, setPreview] = useState([]);
