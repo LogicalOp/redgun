@@ -8,13 +8,13 @@ const Shellbar = () => {
 
   if (currentPath === "/") {
     currentPath = "Home";
-  } else if(currentPath==="/customcode"){
-    currentPath = "CustomCode";
-  } else if(currentPath==="/user/I123"){
-    currentPath = "User: I123"
-  }
-  else {
-    currentPath = currentPath.charAt(1).toUpperCase() + currentPath.slice(2);
+  } else {
+    currentPath = currentPath.split('/')[1]; // Take the first part after the initial '/'
+    if (currentPath.toLowerCase() === "customcode") {
+      currentPath = "Custom Code";
+    } else {
+      currentPath = currentPath.charAt(0).toUpperCase() + currentPath.slice(1);
+    }
   }
 
   return (

@@ -52,7 +52,6 @@ const MessagePreview = ({ onChatSelect }) => {
     navigate(`/messages/${userId}`);
   };
 
-  console.log(mergedData);
   return (
     <Card
       style={{ width: "100%", height: "90%" }}

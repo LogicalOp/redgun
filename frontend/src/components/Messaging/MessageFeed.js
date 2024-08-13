@@ -46,7 +46,7 @@ const MessageFeed = () => {
       if (!response.ok) throw new Error("Network response was not ok.");
       const data = await response.json();
       setMessages(data.messages); // Set the fetched messages to the state
-      console.log("Fetched messages:", data); // Print the fetched messages to the console
+      //console.log("Fetched messages:", data); // Print the fetched messages to the console
     } catch (error) {
       console.error("Failed to fetch messages:", error);
     }
@@ -89,7 +89,7 @@ const MessageFeed = () => {
       if (!response.ok) throw new Error("Network response was not ok.");
 
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
 
       fetchMessages(); // Fetch the updated list of messages
     } catch (error) {
