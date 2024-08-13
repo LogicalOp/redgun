@@ -21,9 +21,6 @@ export function useGetPreview() {
                 }
                 const data = await response.json();
 
-                // Log the response data to debug the format
-                console.log("Response data:", data);
-
                 // Ensure data.messages is an array
                 if (!Array.isArray(data.messages)) {
                     throw new Error("Unexpected response format");

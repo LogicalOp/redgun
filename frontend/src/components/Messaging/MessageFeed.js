@@ -127,7 +127,6 @@ const MessageFeed = () => {
       } else {
         data = await response.text();
       }
-      console.log("Response data:", data);
   
       if (!response.ok) throw new Error("Network response was not ok.");
   

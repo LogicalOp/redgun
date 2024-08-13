@@ -6,7 +6,6 @@ const Messages = () => {
   const [selectedUserID, setSelectedUserID] = useState(null);
 
   const handleChatSelect = (userID) => {
-    console.log("Selected chat:", userID);
     localStorage.setItem("selectedChat", userID);
     setSelectedUserID(userID);
   };

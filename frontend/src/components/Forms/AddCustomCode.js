@@ -52,7 +52,6 @@ const AddCustomCode = forwardRef((props, ref) => {
 
       const responseData = await response.json();
       console.log('Response status:', response.status);
-      console.log('Response data:', responseData);
 
       if (response.ok) {
         console.log('Submission successful:', responseData);

@@ -18,7 +18,6 @@ const CustomCodeForum = () => {
 
                 if (response.ok) {
                     const result = await response.json();
-                    console.log('API Response:', result);
                     if (Array.isArray(result.customCode)) {
                         setData(result.customCode);
                     } else {
