@@ -8,6 +8,8 @@ import {
 } from "@ui5/webcomponents-react";
 import { useGetPreview } from "../../hooks/useGetPreview";
 import { useNavigate } from "react-router-dom";
+import parse from "html-react-parser";
+import DOMPurify from "dompurify";
 
 const MessagePreview = ({ onChatSelect }) => {
   const { preview } = useGetPreview();
@@ -54,7 +56,7 @@ const MessagePreview = ({ onChatSelect }) => {
 
   return (
     <Card
-      style={{ width: "100%", height: "90%" }}
+      style={{ width: "100%", height: "80vh" }}
       header={
         <CardHeader
           titleText="Chats"
@@ -78,12 +80,12 @@ const MessagePreview = ({ onChatSelect }) => {
             }}
             style={{ padding: "2rem", minHeight: "4rem", marginBottom: "1rem" }} // Added marginBottom to increase gap
           >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div style={{ marginLeft: "1rem", display: "flex", flexDirection: "column" }}>
-                <Title level="H5">{item.name}</Title>
-                <p style={{ fontWeight: item.recipient === 'I123' && item.sender !== 'I123' ? 'bold' : 'normal' }}>
-                  {item.message}
-                </p>
+            <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
+              <div style={{ marginLeft: "1rem", display: "flex", flexDirection: "column", width: "100%", textAlign: "left" }}>
+                <Title level="H5" style={{ textAlign: "left" }}>{item.name}</Title>
+                <div style={{ fontWeight: item.recipient === 'I123' && item.sender !== 'I123' ? 'bold' : 'normal', textAlign: "left" }}>
+                  {parse(DOMPurify.sanitize(item.message))}
+                </div>
               </div>
             </div>
           </StandardListItem>

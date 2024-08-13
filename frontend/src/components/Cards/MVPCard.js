@@ -14,6 +14,28 @@ const MVPCard = () => {
     },
   };
 
+  const cardStyle = {
+    minHeight: "10rem",
+    overflow: "hidden",
+    position: "relative",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    borderRadius: "15px",
+  };
+
+  const overlayStyle = {
+    position: "absolute",
+    bottom: "0",
+    width: "100%",
+    height: "3rem",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    color: "white",
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
   return (
     <Card
       header={
@@ -39,40 +61,24 @@ const MVPCard = () => {
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
       >
-        <div style={{ margin: "0 10px" }}>
-          <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
-            <img
-              src="https://picsum.photos/2000/3000?random=3"
-              alt="News 1"
-              style={{ width: "100%", height: "10rem", objectFit: "cover" }}
-            />
+        <div style={{ margin: ".5rem" }}>
+          <Card style={{ ...cardStyle, backgroundImage: "url('https://picsum.photos/2000/3000?random=3')" }}>
+            <div style={overlayStyle}>Vikash Sharma</div>
           </Card>
         </div>
-        <div style={{ margin: "0 10px" }}>
-          <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
-            <img
-              src="https://picsum.photos/2000/3000?random=4"
-              alt="News 2"
-              style={{ width: "100%", height: "10rem", objectFit: "cover" }}
-            />
+        <div style={{ margin: ".5rem" }}>
+          <Card style={{ ...cardStyle, backgroundImage: "url('https://picsum.photos/2000/3000?random=4')" }}>
+            <div style={overlayStyle}>Susanne Speicher</div>
           </Card>
         </div>
-        <div style={{ margin: "0 10px" }}>
-          <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
-            <img
-              src="https://picsum.photos/2000/3000?random=5"
-              alt="News 1"
-              style={{ width: "100%", height: "10rem", objectFit: "cover" }}
-            />
+        <div style={{ margin: ".5rem" }}>
+          <Card style={{ ...cardStyle, backgroundImage: "url('https://picsum.photos/2000/3000?random=5')" }}>
+            <div style={overlayStyle}>Steffen Thibaut</div>
           </Card>
         </div>
-        <div style={{ margin: "0 10px" }}>
-          <Card style={{ minHeight: "10rem", overflow: "hidden" }}>
-            <img
-              src="https://picsum.photos/2000/3000?random=6"
-              alt="News 2"
-              style={{ width: "100%", height: "10rem", objectFit: "cover" }}
-            />
+        <div style={{ margin: ".5rem" }}>
+          <Card style={{ ...cardStyle, backgroundImage: "url('https://picsum.photos/2000/3000?random=6')" }}>
+            <div style={overlayStyle}>Sunday Okeke</div>
           </Card>
         </div>
       </Carousel>

@@ -2,17 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import {
-  Card,
-  CardHeader,
-  Avatar,
-  Button
-} from "@ui5/webcomponents-react";
+import { Card, CardHeader, Avatar, Button } from "@ui5/webcomponents-react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 import "@ui5/webcomponents-fiori/dist/Assets.js";
-import { useGetConversation } from "../../hooks/useGetConversation";
 
 const MessageFeed = () => {
   const { userId } = useParams();
@@ -21,7 +15,7 @@ const MessageFeed = () => {
 
   const [messages, setMessages] = useState([]);
   const [postValue, setPostValue] = useState("");
-  const currentUser = localStorage.getItem("inumber")
+  const currentUser = localStorage.getItem("inumber");
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -42,7 +36,13 @@ const MessageFeed = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_MESSAGES_URL}/messages?senderId=${localStorage.getItem("inumber")}&receiverId=${effectiveUserId}`);
+      const response = await fetch(
+        `${
+          process.env.REACT_APP_MESSAGES_URL
+        }/messages?senderId=${localStorage.getItem(
+          "inumber"
+        )}&receiverId=${effectiveUserId}`
+      );
       if (!response.ok) throw new Error("Network response was not ok.");
       const data = await response.json();
       setMessages(data.messages); // Set the fetched messages to the state
@@ -55,7 +55,6 @@ const MessageFeed = () => {
   useEffect(() => {
     fetchMessages();
   }, [effectiveUserId]);
-
 
   useEffect(() => {
     if (scrollbarRef.current) {
@@ -101,14 +100,14 @@ const MessageFeed = () => {
     if (postValue.trim() === "") {
       return; // Don't allow empty posts
     }
-  
+
     try {
       const newPost = {
         sender: currentUser,
         recipient: effectiveUserId,
-        message: postValue
+        message: postValue,
       };
-  
+
       const response = await fetch(
         `${process.env.REACT_APP_MESSAGES_URL}/messages`,
         {
@@ -119,7 +118,7 @@ const MessageFeed = () => {
           body: JSON.stringify(newPost),
         }
       );
-  
+
       const contentType = response.headers.get("content-type");
       let data;
       if (contentType && contentType.includes("application/json")) {
@@ -127,9 +126,9 @@ const MessageFeed = () => {
       } else {
         data = await response.text();
       }
-  
+
       if (!response.ok) throw new Error("Network response was not ok.");
-  
+
       setPostValue("");
       fetchMessages(); // Fetch the updated list of messages
     } catch (error) {
@@ -138,18 +137,17 @@ const MessageFeed = () => {
   };
 
   const getCardAlignment = (inumber) => {
-    if (inumber === "I123") {
-      return "flex-start";
-    } else if (inumber === "I12345") {
+    if (inumber === currentUser) {
       return "flex-end";
+    } else {
+      return "flex-start";
     }
-    return "center";
   };
 
   return (
     <Card
       header={<CardHeader titleText={"Chat with " + effectiveUserId} />}
-      style={{ marginLeft: "2vw" }}
+      style={{ marginLeft: "2vw", height:"80vh"}}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>
         <PerfectScrollbar
@@ -159,7 +157,7 @@ const MessageFeed = () => {
             flexDirection: "column",
             alignItems: "start",
             justifyContent: "start",
-            height: "60vh",
+            height: "50vh",
             width: "50vw",
             padding: "1vw",
           }}
@@ -262,11 +260,7 @@ const MessageFeed = () => {
               "link",
             ]}
           />
-          <span style={{ position: "absolute", bottom: "15px", right: "10px" }}>
-            {postValue.length}/200
-          </span>
         </div>
-
         <Button onClick={handlePost} style={{ margin: "2rem" }}>
           Post
         </Button>
