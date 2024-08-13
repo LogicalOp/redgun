@@ -7,10 +7,12 @@ import {
   StandardListItem,
 } from "@ui5/webcomponents-react";
 import { useGetPreview } from "../../hooks/useGetPreview";
+import { useNavigate } from "react-router-dom";
 
 const MessagePreview = ({ onChatSelect }) => {
   const { preview } = useGetPreview();
   const [mergedData, setMergedData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchNames = async () => {
@@ -46,7 +48,11 @@ const MessagePreview = ({ onChatSelect }) => {
     if (onChatSelect) {
       onChatSelect(userId);
     }
+    localStorage.setItem("selectedChat", userId);
+    navigate(`/messages/${userId}`);
   };
+
+  console.log(mergedData);
   return (
     <Card
       style={{ width: "100%", height: "90%" }}

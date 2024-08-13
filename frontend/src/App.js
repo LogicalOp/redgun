@@ -34,7 +34,6 @@ function App() {
     height: `calc(100vh - ${shellbarHeight})`,
     width:"90%" // Adjust height to account for shellbar
   };
-
   
   const sidebarStyles = {
     display: 'flex',
@@ -42,9 +41,6 @@ function App() {
     flexShrink: 0, // Prevent sidebar from shrinking
     flexBasis: sidebarWidth, // Set sidebar width
   };
-
-
-  
 
   return (
     <Router>
@@ -65,6 +61,7 @@ function App() {
               <Route path="/issue/:id" element={<ObjectPage />} />
               <Route path="/journey/:id" element={<LearningJourneyDetail />} />
               <Route path="/messages" element={<Messages />}/>
+              <Route path="/messages/:userId" element={<Messages />} />
               <Route path="/register" element={<Register />} />
             </Routes>
           </div>

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import {
@@ -14,12 +15,14 @@ import "@ui5/webcomponents-fiori/dist/Assets.js";
 import { useGetConversation } from "../../hooks/useGetConversation";
 
 const MessageFeed = () => {
+  const { userId } = useParams();
+  const selectedChat = localStorage.getItem("selectedChat") || "defaultChatId";
+  const effectiveUserId = userId || selectedChat;
+
   const [messages, setMessages] = useState([]);
   const [postValue, setPostValue] = useState("");
-  const [titleValue, setTitleValue] = useState("");
-  const [otherUser, setOtherUser] = useState("I123");
-  const { conversation, loading, error } = useGetConversation("I12345");
-  console.log(conversation.messages);
+  const currentUser = localStorage.getItem("inumber")
+  const { conversation, loading, error } = useGetConversation(effectiveUserId);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -40,7 +43,7 @@ const MessageFeed = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_MESSAGES_URL}/messages/I123`);
+      const response = await fetch(`${process.env.REACT_APP_MESSAGES_URL}/messages?senderId=${localStorage.getItem("inumber")}&receiverId=${effectiveUserId}`);
       if (!response.ok) throw new Error("Network response was not ok.");
       const data = await response.json();
       setMessages(data.messages); // Set the fetched messages to the state
@@ -49,6 +52,11 @@ const MessageFeed = () => {
       console.error("Failed to fetch messages:", error);
     }
   };
+
+  useEffect(() => {
+    fetchMessages();
+  }, [effectiveUserId]);
+
 
   useEffect(() => {
     if (scrollbarRef.current) {
@@ -94,16 +102,16 @@ const MessageFeed = () => {
     if (postValue.trim() === "") {
       return; // Don't allow empty posts
     }
-
+  
     try {
       const newPost = {
-        title: titleValue,
-        message: postValue,
-        inumber: localStorage.getItem("inumber"),
+        sender: currentUser,
+        recipient: effectiveUserId,
+        message: postValue
       };
-
+  
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/feed`,
+        `${process.env.REACT_APP_MESSAGES_URL}/messages`,
         {
           method: "POST",
           headers: {
@@ -112,14 +120,19 @@ const MessageFeed = () => {
           body: JSON.stringify(newPost),
         }
       );
-
+  
+      const contentType = response.headers.get("content-type");
+      let data;
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        data = await response.text();
+      }
+      console.log("Response data:", data);
+  
       if (!response.ok) throw new Error("Network response was not ok.");
-
-      const data = await response.json();
-      console.log(data);
-
+  
       setPostValue("");
-      setTitleValue("");
       fetchMessages(); // Fetch the updated list of messages
     } catch (error) {
       console.error("Failed to post:", error);
@@ -137,7 +150,7 @@ const MessageFeed = () => {
 
   return (
     <Card
-      header={<CardHeader titleText={"Chat with " + otherUser} />}
+      header={<CardHeader titleText={"Chat with " + userId} />}
       style={{ marginLeft: "2vw" }}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>
