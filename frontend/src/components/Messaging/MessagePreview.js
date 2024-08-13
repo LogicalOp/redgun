@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
-  Avatar,
   Title,
   List,
   StandardListItem,
@@ -10,7 +9,7 @@ import {
 import { useGetPreview } from "../../hooks/useGetPreview";
 
 const MessagePreview = ({ onChatSelect }) => {
-  const { preview, loading, error } = useGetPreview();
+  const { preview } = useGetPreview();
   const [mergedData, setMergedData] = useState([]);
 
   useEffect(() => {
@@ -48,7 +47,6 @@ const MessagePreview = ({ onChatSelect }) => {
       onChatSelect(userId);
     }
   };
-
   return (
     <Card
       style={{ width: "100%", height: "90%" }}
@@ -62,7 +60,17 @@ const MessagePreview = ({ onChatSelect }) => {
         {mergedData.map((item) => (
           <StandardListItem
             key={item.id}
-            onClick={() => handleItemClick(item.id)}
+            onClick={() => {
+              const inumber = localStorage.getItem('inumber');
+      
+              if (item.sender !== inumber) {
+                handleItemClick(item.sender);
+              } else if (item.recipient !== inumber) {
+                handleItemClick(item.recipient);
+              } else {
+                console.log('No match found for sender or recipient');
+              }
+            }}
             style={{ padding: "2rem", minHeight: "4rem", marginBottom: "1rem" }} // Added marginBottom to increase gap
           >
             <div style={{ display: "flex", alignItems: "center" }}>

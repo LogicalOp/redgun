@@ -12,7 +12,6 @@ import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 import "@ui5/webcomponents-fiori/dist/Assets.js";
 import { useGetConversation } from "../../hooks/useGetConversation";
-import { useGetPreview } from "../../hooks/useGetPreview";
 
 const MessageFeed = () => {
   const [messages, setMessages] = useState([]);
