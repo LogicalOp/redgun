@@ -9,24 +9,6 @@ import {
 } from "@ui5/webcomponents-react";
 import { useGetPreview } from "../../hooks/useGetPreview";
 
-const sampleData = [
-  {
-    id: 1,
-    sender: "John Doe",
-    message: "Hello, how are you?",
-  },
-  {
-    id: 2,
-    sender: "Jane Smith",
-    message: "Meeting at 3 PM",
-  },
-  {
-    id: 3,
-    sender: "Alice Johnson",
-    message: "Can you review my code?",
-  },
-];
-
 const MessagePreview = ({ onChatSelect }) => {
   const { preview, loading, error } = useGetPreview();
   const [mergedData, setMergedData] = useState([]);
