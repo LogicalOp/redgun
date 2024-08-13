@@ -71,9 +71,10 @@ const listRecentMessages = async (req, res) => {
             .select('sender', 'recipient', 'message', 'date')
             .where('sender', userId)
             .orWhere('recipient', userId)
-            .orderBy(['sender', 'recipient', 'date'], 'desc')
+            .orderBy(['sender', 'recipient', { column: 'date', order: 'desc' }])
             .distinctOn(['sender', 'recipient']);
 
+        console.log('Recent messages:', recentMessages); // Debugging log
         return recentMessages;
     } catch (error) {
         console.error('Error fetching recent messages:', error);

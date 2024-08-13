@@ -22,7 +22,6 @@ const MessageFeed = () => {
   const [messages, setMessages] = useState([]);
   const [postValue, setPostValue] = useState("");
   const currentUser = localStorage.getItem("inumber")
-  const { conversation, loading, error } = useGetConversation(effectiveUserId);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
