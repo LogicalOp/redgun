@@ -19,6 +19,8 @@ const MessageFeed = () => {
   const [postValue, setPostValue] = useState("");
   const [titleValue, setTitleValue] = useState("");
   const [otherUser, setOtherUser] = useState("I123");
+  const { conversation, loading, error } = useGetConversation("I12345");
+  console.log(conversation.messages);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -36,8 +38,6 @@ const MessageFeed = () => {
   };
 
   const scrollbarRef = useRef(null);
-
-  console.log(useGetPreview());
 
   const fetchMessages = async () => {
     try {
