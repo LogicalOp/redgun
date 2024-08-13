@@ -25,8 +25,7 @@ const Shellbar = () => {
           src={`${process.env.PUBLIC_URL}/SAPChat.jpg`}
         />
       }
-      //notificationsCount="0"
-      onLogoClick={function _a() {}}
+      onLogoClick={() => navigate("/")}
       onMenuItemClick={function _a() {}}
       onNotificationsClick={function _a() {}}
       onProductSwitchClick={function _a() {}}
