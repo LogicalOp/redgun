@@ -148,7 +148,7 @@ const MessageFeed = () => {
 
   return (
     <Card
-      header={<CardHeader titleText={"Chat with " + userId} />}
+      header={<CardHeader titleText={"Chat with " + effectiveUserId} />}
       style={{ marginLeft: "2vw" }}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>
