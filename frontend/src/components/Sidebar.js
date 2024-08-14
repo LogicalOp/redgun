@@ -7,7 +7,6 @@ const routes = {
   Home: { path: "/", icon: "home" },
   Learning: { path: "/learning", icon: "course-book" },
   CustomCode: { path: "/customcode", icon: "source-code" },
-  Profile: { path: "/profile", icon: "person-placeholder" },
   User: { path: "/user", icon: "employee" },
   Messages: { path: "/messages", icon: "message-popup" },
   Login: { path: "/login", icon: "log" },

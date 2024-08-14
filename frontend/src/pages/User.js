@@ -6,10 +6,11 @@ import LearningCard from "../components/Cards/Profile/LearningCard";
 import DonutChart from "../components/Charts/DonutChart";
 import { useGetUserInfo } from "../hooks/useGetUserInfo";
 import ExpCard from "../components/Cards/ExpCard.js";
+import { useParams } from "react-router-dom";
 
 const User = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('inumber');
+    const { id: userId } = useParams(); // Extract id from URL parameters
+    console.log(userId);
     const { user, team, manager } = useGetUserInfo(userId);
 
   const learningData = {

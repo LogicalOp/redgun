@@ -9,7 +9,7 @@ export function useGetUserInfo(id) {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const userId = localStorage.getItem("inumber") || id;
+                const userId = id || localStorage.getItem("inumber");
                 const userResponse = await fetch(`${apiUrl}/users/${userId}`);
                 const userData = await userResponse.json();
                 if (userData && userData.user && userData.user.length > 0) {

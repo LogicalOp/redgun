@@ -13,6 +13,7 @@ import Shellbar from './components/Shellbar';
 import ObjectPage from './pages/ObjectPage';
 import LearningJourneyDetail from './pages/LearningJourneyDetail';
 import Messages from './pages/Messages';
+import UserLookup from './pages/UserLookup';
 import 'react-multi-carousel/lib/styles.css';
 import './App.css';
 
@@ -57,7 +58,8 @@ function App() {
               <Route path="/learning" element={<Learning />} />
               <Route path="/course" element={<Course />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/user" element={<User />} />
+              <Route path="/user" element={<UserLookup />} />
+              <Route path="/user/:id" element={<User />} />
               <Route path="/issue/:id" element={<ObjectPage />} />
               <Route path="/journey/:id" element={<LearningJourneyDetail />} />
               <Route path="/messages" element={<Messages />}/>
