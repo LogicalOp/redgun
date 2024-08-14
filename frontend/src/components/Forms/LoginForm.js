@@ -51,14 +51,14 @@ const LoginForm = () => {
         
             navigate('/');
         } else {
-            setErrorMessage(data.message);
+            setErrorMessage("Invalid username or password.");
         }
     }
     
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
             <Card header={<CardHeader titleText="Login"/>}
-                style={{ height: '35vh', width: '25vw', padding: '16px' }}>
+                style={{ height: '37.5vh', width: '25vw', padding: '1vh' }}>
                 {errorMessage && (
                     <MessageStrip design="Negative" onClose={() => setErrorMessage('')}>
                         {errorMessage}
