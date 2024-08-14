@@ -8,6 +8,12 @@ import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 import "@ui5/webcomponents-fiori/dist/Assets.js";
 
+DOMPurify.addHook("uponSanitizeElement", (node, data) => {
+  if (data.tagName === "iframe") {
+    node.setAttribute("allowfullscreen", "true");
+  }
+});
+
 const MessageFeed = () => {
   const { userId } = useParams();
   const selectedChat = localStorage.getItem("selectedChat") || "defaultChatId";
@@ -147,7 +153,7 @@ const MessageFeed = () => {
   return (
     <Card
       header={<CardHeader titleText={"Chat with " + effectiveUserId} />}
-      style={{ marginLeft: "2vw", height:"80vh"}}
+      style={{ marginLeft: "2vw", height: "80vh" }}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>
         <PerfectScrollbar
@@ -205,7 +211,18 @@ const MessageFeed = () => {
                     margin: "1rem",
                   }}
                 >
-                  {parse(DOMPurify.sanitize(message.message))}
+                  {parse(
+                    DOMPurify.sanitize(message.message, {
+                      ADD_TAGS: ["iframe", "blockquote", "pre"],
+                      ADD_ATTR: [
+                        "allowfullscreen",
+                        "frameborder",
+                        "src",
+                        "class",
+                        "spellcheck",
+                      ],
+                    })
+                  )}
                 </p>
               </Card>
             </div>
@@ -244,20 +261,23 @@ const MessageFeed = () => {
             placeholder="Description"
             modules={{
               toolbar: [
-                [{ header: [1, 2, false] }],
                 ["bold", "italic", "underline"],
                 [{ list: "ordered" }, { list: "bullet" }],
-                ["link"],
+                ["blockquote", "code-block"],
+                ["link", "image", "video"],
               ],
             }}
             formats={[
-              "header",
               "bold",
               "italic",
               "underline",
               "list",
               "bullet",
+              "blockquote",
+              "code-block",
               "link",
+              "image",
+              "video",
             ]}
           />
         </div>
@@ -265,6 +285,31 @@ const MessageFeed = () => {
           Post
         </Button>
       </div>
+      <style>
+        {`
+        .ql-syntax {
+          background-color: #000000;
+          padding: 10px;
+          margin: 2em;
+          border-radius: 3px;
+          color: #ffffff; 
+          font-family: 'Courier New', Courier, monospace;
+          text-indent: 2em;
+        }
+        blockquote {
+          background-color: #f0f0f0;
+          padding: 10px;
+          border-left: 5px solid #ccc;
+          quotes: "\\201C""\\201D""\\2018""\\2019";
+        }
+        blockquote:before {
+          content: open-quote;
+        }
+        blockquote:after {
+          content: close-quote;
+        }
+      `}
+      </style>
     </Card>
   );
 };
