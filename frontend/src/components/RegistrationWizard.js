@@ -1,98 +1,70 @@
-import React, { useState } from 'react';
-import { Input, Button, Label, Card, CardHeader } from '@ui5/webcomponents-react';
+import React, { useRef } from 'react';
+import { Button, Label, Card, CardHeader, Form, FormItem, Input } from '@ui5/webcomponents-react';
 
 const RegistrationWizard = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    team: '',
-    manager: '',
-    email: '',
-    password: ''
-  });
+  const formRef = useRef(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form data submitted:', formData);
+    console.log('Form submitted'); // Debug log
+    const formData = new FormData(formRef.current);
+
+    const payload = {
+      inumber: "I45678",
+      password: formData.get('password'),
+      first_name: formData.get('firstName'),
+      last_name: formData.get('lastName'),
+      email: formData.get('email'),
+      phone: 12345670,
+      team_id: "T001",
+      exp: 5
+    };
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Form data submitted:', data);
+      } else {
+        console.error('Error submitting form:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
 
   return (
     <Card style={{ padding: '20px', maxWidth: '400px', margin: 'auto' }} header={<CardHeader titleText="Registration" />}>
-      
       <div>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <div>
-            <Label for="firstName">First Name:</Label>
-            <Input
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
-              onInput={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <Label for="lastName">Last Name:</Label>
-            <Input
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
-              onInput={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <Label for="team">Team:</Label>
-            <Input
-              id="team"
-              name="team"
-              value={formData.team}
-              onInput={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <Label for="manager">Manager:</Label>
-            <Input
-              id="manager"
-              name="manager"
-              value={formData.manager}
-              onInput={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <Label for="email">Email:</Label>
-            <Input
-              id="email"
-              name="email"
-              type="Email"
-              value={formData.email}
-              onInput={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <Label for="password">Password:</Label>
-            <Input
-              id="password"
-              name="password"
-              type="Password"
-              value={formData.password}
-              onInput={handleChange}
-              required
-            />
-          </div>
-          <Button type="Submit">Register</Button>
+        <form ref={formRef} onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <Form>
+            <FormItem label="First Name">
+              <Input id="firstName" name="firstName" required />
+            </FormItem>
+            <FormItem label="Last Name">
+              <Input id="lastName" name="lastName" required />
+            </FormItem>
+            <FormItem label="Team">
+              <Input id="team" name="team" required />
+            </FormItem>
+            <FormItem label="Manager">
+              <Input id="manager" name="manager" required />
+            </FormItem>
+            <FormItem label="Email">
+              <Input id="email" name="email" type="email" required />
+            </FormItem>
+            <FormItem label="Password">
+              <Input id="password" name="password" type="password" required />
+            </FormItem>
+            <Button type="submit">Register</Button>
+          </Form>
         </form>
       </div>
     </Card>
