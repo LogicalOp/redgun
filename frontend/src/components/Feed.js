@@ -15,6 +15,12 @@ import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 
+DOMPurify.addHook("uponSanitizeElement", (node, data) => {
+  if (data.tagName === "iframe") {
+    node.setAttribute("allowfullscreen", "true");
+  }
+});
+
 const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [postValue, setPostValue] = useState("");
@@ -194,7 +200,18 @@ const Feed = () => {
                   margin: "1rem",
                 }}
               >
-                {parse(DOMPurify.sanitize(post.message))}
+                {parse(
+                  DOMPurify.sanitize(post.message, {
+                    ADD_TAGS: ["iframe", "blockquote", "pre"],
+                    ADD_ATTR: [
+                      "allowfullscreen",
+                      "frameborder",
+                      "src",
+                      "class",
+                      "spellcheck",
+                    ],
+                  })
+                )}
               </p>
             </Card>
           ))}
@@ -235,8 +252,31 @@ const Feed = () => {
           <ReactQuill
             value={postValue}
             onChange={setPostValue}
-            style={{ width: "100%", height: "6.5rem", marginBottom: "5rem"}} // Allow ReactQuill to grow
+            style={{ width: "100%", height: "6.5rem", marginBottom: "5rem" }} // Allow ReactQuill to grow
             placeholder="Description"
+            modules={{
+              toolbar: [
+                
+                [{ header: [1, 2, false] }],
+                ["bold", "italic", "underline"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["blockquote", "code-block"],
+                ["link", "image", "video"],
+              ],
+            }}
+            formats={[
+              "header",
+              "bold",
+              "italic",
+              "underline",
+              "list",
+              "bullet",
+              "blockquote",
+              "code-block",
+              "link",
+              "image",
+              "video",
+            ]}
           />
           <span style={{ position: "absolute", bottom: "15px", right: "10px" }}>
             {stripHtmlTags(postValue).length}/200
@@ -247,6 +287,31 @@ const Feed = () => {
           Post
         </Button>
       </div>
+      <style>
+        {`
+        .ql-syntax {
+          background-color: #000000;
+          padding: 10px;
+          margin: 2em;
+          border-radius: 3px;
+          color: #ffffff; 
+          font-family: 'Courier New', Courier, monospace;
+          text-indent: 2em;
+        }
+        blockquote {
+          background-color: #f0f0f0;
+          padding: 10px;
+          border-left: 5px solid #ccc;
+          quotes: "\\201C""\\201D""\\2018""\\2019";
+        }
+        blockquote:before {
+          content: open-quote;
+        }
+        blockquote:after {
+          content: close-quote;
+        }
+      `}
+      </style>
     </Card>
   );
 };
