@@ -83,7 +83,7 @@ const MVPCard = () => {
         </div>
         <div style={{ margin: ".5rem" }}>
           <Card
-            style={{ ...cardStyle, backgroundImage: "url('https://picsum.photos/2000/3000?random=4')" }}
+            style={{ ...cardStyle, backgroundImage: "url('https://picsum.photos/2000/3000?random=6')" }}
             onClick={() => window.open(redirectUrl, "_blank", "noopener noreferrer")}
           >
             <div style={overlayStyle}>Steffen Thibaut</div>
