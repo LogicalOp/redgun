@@ -79,8 +79,9 @@ const AddCustomCode = forwardRef((props, ref) => {
           right: "10px",
           cursor: "pointer",
           paddingRight: '2.5vw',
-          height: "5%",
-          width: "5%"
+          paddingBottom:'2.5vw',
+          height: "7%",
+          width: "7%"
         }}
         onClick={onButtonClick}
       />

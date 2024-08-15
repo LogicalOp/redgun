@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Title, Panel, Badge, Button } from "@ui5/webcomponents-react";
+import { Card, Title, Badge, Button } from "@ui5/webcomponents-react";
 import { useNavigate } from 'react-router-dom';
 
 const CustomCodeForum = () => {
@@ -39,13 +39,7 @@ const CustomCodeForum = () => {
     };
 
     return (
-        <Panel
-            accessibleRole="Form"
-            headerLevel="H1"
-            headerText="Custom Code"
-            onToggle={() => {}}
-            style={{ padding: '2rem', width: '100%' }}
-        >
+      
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', padding: '0 2rem', width: '100%' }}>
                 {data.map((item) => (
                     <Card key={item.project_id} style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '1rem' }}>
@@ -69,7 +63,7 @@ const CustomCodeForum = () => {
                     </Card>
                 ))}
             </div>
-        </Panel>
+      
     );
 };
 

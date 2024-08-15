@@ -19,7 +19,7 @@ const Issue = () => {
 
         if (response.ok) {
           const result = await response.json();
-       
+          console.log(result);
           const issue = result.customCode.find(item => item.project_id === numericProjectId);
 
           if (issue) {
@@ -79,6 +79,12 @@ const Issue = () => {
           </h2>
         </div>
       </Card>
+    
+      {issueData.img_url && (
+        <div style={{ width: "75%", height: "31vh", paddingTop: "1rem", display: "flex", flexDirection: "column", justifyContent: "flex-start", paddingLeft: '8rem' }}>
+          <img src={issueData.img_url} alt="Issue related visual" style={{ maxWidth: '75%', height: 'auto', borderRadius: '8px' ,paddingBottom:'2rem',}} />
+        </div>
+      )}
     </div>
   );
 };
