@@ -7,6 +7,7 @@ const tokenRoutes = require('./routes/tokens');
 const userJourneyRoutes = require('./routes/userJourney');
 const learningJourneyRoutes = require('./routes/learningJourneys');
 const news = require('./routes/news');
+const likes = require('./routes/likes');
 
 const router = express.Router();
 
@@ -21,6 +22,7 @@ router.use('/customcode', customCode);
 router.use('/user_journeys', userJourneyRoutes);
 router.use('/learning_journeys', learningJourneyRoutes);
 router.use('/news', news);
+router.use('/likes', likes);
 router.use('/', tokenRoutes);
 
 module.exports = router;
