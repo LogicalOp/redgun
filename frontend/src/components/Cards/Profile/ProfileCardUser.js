@@ -1,7 +1,31 @@
-import { Card, CardHeader, Icon, Title } from "@ui5/webcomponents-react";
+import { useState, useEffect } from "react";
+import { Card, CardHeader, Icon, Title, Dialog, Input} from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const ProfileCardUser = ({ data }) => {
+  const [message, setMessage] = useState("");
+  console.log(message);
+
+  useEffect(() => {
+    try {
+      const response = fetch(`${process.env.REACT_APP_BACKEND_URL}/messages`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sender_id: localStorage.getItem("inumber"),
+          receiver_id: data.inumber,
+          message: message,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Error during sending message:", error);
+    }
+  }, [message]);
 
     return (
       <Card
@@ -21,6 +45,11 @@ const ProfileCardUser = ({ data }) => {
             <p>{data.phone}</p>
             <Title level="H5">Email</Title>
             <p>{data.email}</p>
+            <Input
+              icon={<Icon name="paper-plane" />}
+              placeholder="Type message..."
+              onChange={(e) => setMessage(e.target.value)}
+              value={message} />
           </div>
         </div>
       </Card>

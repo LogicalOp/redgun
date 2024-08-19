@@ -24,7 +24,9 @@ DOMPurify.addHook("uponSanitizeElement", (node, data) => {
 const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [postValue, setPostValue] = useState("");
+  const [likedMessages, setLikedMessages] = useState(new Set());
   const [titleValue, setTitleValue] = useState("");
+  const currentUser = localStorage.getItem("inumber");
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -55,6 +57,12 @@ const Feed = () => {
     }
   };
 
+  const reloadFeed = () => {
+    // Logic to reload the feed
+    // For example, fetch the posts from the server and update the state
+    fetchPosts();
+  };
+
   useEffect(() => {
     if (scrollbarRef.current) {
       // Assuming PerfectScrollbar exposes a method to scroll to the bottom or you can directly manipulate its scroll position
@@ -73,27 +81,31 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  const toggleHeart = async (postId) => {
+  const likeMessage = async (messageId) => {
     try {
+      if(likedMessages.has(messageId)) {
+        return; // Don't allow liking the same message multiple times
+      }
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/feed/like`,
+        `${process.env.REACT_APP_BACKEND_URL}/likes`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ postId }),
+          body: JSON.stringify({
+            message_id: messageId,
+            inumber: currentUser,
+            isLiked: true,
+          }),
         }
       );
-
-      if (!response.ok) throw new Error("Network response was not ok.");
-
-      const data = await response.json();
-      console.log(data);
-
-      fetchPosts(); // Fetch the updated list of posts
+      if (response.ok) {
+        setLikedMessages((prevLikedMessages) => new Set(prevLikedMessages).add(messageId));
+        reloadFeed();
+      }
     } catch (error) {
-      console.error("Failed to like post:", error);
+      console.error("Failed to like message:", error);
     }
   };
 
@@ -135,7 +147,7 @@ const Feed = () => {
 
       setPostValue(""); // Clear the input field
       setTitleValue("");
-      fetchPosts(); // Fetch the updated list of posts
+      reloadFeed();
     } catch (error) {
       console.error("Failed to post:", error);
     }
@@ -183,7 +195,7 @@ const Feed = () => {
                 />
                 <ui5-icon
                   name={post.isliked ? "heart" : "heart-2"}
-                  onClick={() => toggleHeart(post.message_id)}
+                  onClick={() => likeMessage(post.message_id)}
                   style={{ cursor: "pointer", padding: "0.5rem" }} // Add padding for easier clicking and cursor pointer for visual feedback
                 ></ui5-icon>
               </div>

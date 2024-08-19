@@ -43,23 +43,22 @@ const MessageFeed = () => {
   const fetchMessages = async () => {
     try {
       const response = await fetch(
-        `${
-          process.env.REACT_APP_MESSAGES_URL
+        `${process.env.REACT_APP_MESSAGES_URL
         }/messages?senderId=${localStorage.getItem(
           "inumber"
         )}&receiverId=${effectiveUserId}`
       );
       if (!response.ok) throw new Error("Network response was not ok.");
       const data = await response.json();
-      setMessages(data.messages); // Set the fetched messages to the state
-      //console.log("Fetched messages:", data); // Print the fetched messages to the console
+      setMessages(data.messages);
     } catch (error) {
       console.error("Failed to fetch messages:", error);
     }
   };
 
   useEffect(() => {
-    fetchMessages();
+    const intervalId = setInterval(fetchMessages, 1000);
+    return () => clearInterval(intervalId); // Cleanup on unmount
   }, [effectiveUserId]);
 
   useEffect(() => {
@@ -78,25 +77,22 @@ const MessageFeed = () => {
     fetchMessages();
   }, []);
 
-  const toggleHeart = async (messageId) => {
+  const likeMessage = async (messageId) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/feed/like`,
+        `${process.env.REACT_APP_MESSAGES_URL}/likes`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ messageId }),
+          body: JSON.stringify({
+            message_id: messageId,
+            inumber: currentUser,
+            isLiked: true,
+          }),
         }
       );
-
-      if (!response.ok) throw new Error("Network response was not ok.");
-
-      const data = await response.json();
-      //console.log(data);
-
-      fetchMessages(); // Fetch the updated list of messages
     } catch (error) {
       console.error("Failed to like message:", error);
     }
@@ -199,7 +195,7 @@ const MessageFeed = () => {
                   />
                   <ui5-icon
                     name={message.isliked ? "heart" : "heart-2"}
-                    onClick={() => toggleHeart(message.message_id)}
+                    onClick={() => likeMessage(message.message_id)}
                     style={{ cursor: "pointer", padding: "0.5rem" }}
                   ></ui5-icon>
                 </div>

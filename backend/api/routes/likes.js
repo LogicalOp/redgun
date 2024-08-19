@@ -36,9 +36,9 @@ router.get('/messages/:messageId', async(req, res) => {
 });
 
 router.post('/', async(req, res) => {
-    const { messageId, inumber, isLiked } = req.body;
+    const { message_id, inumber, isLiked } = req.body;
     try {
-        await likeMessage(messageId, inumber, isLiked);
+        await likeMessage(message_id, inumber, isLiked);
         res.status(200).json({ message: 'Message liked' });
     } catch (error) {
         console.error(error);

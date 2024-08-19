@@ -35,7 +35,7 @@ const getLikesByMessageId = (messageId) => {
 
 const likeMessage = (messageId, inumber, isLiked) => {
     try {
-        return database.knex('likes').insert({ message_id: messageId, inumber: inumber, is_liked: isLiked });
+        return database.knex('likes').insert({ message_id: messageId, inumber: inumber, isliked: isLiked });
     } catch (error) {
         console.error(`Error liking message: ${error.message}`);
         throw error;

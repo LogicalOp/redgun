@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Input, Icon, Card, CardHeader } from "@ui5/webcomponents-react";
+import { Input, Icon, Card, CardHeader, CheckBox } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +7,7 @@ const UserLookup = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [isTicked, setIsTicked] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +25,17 @@ const UserLookup = () => {
 
     fetchUsers();
   }, []);
+
+  useEffect(() => {
+    const userFilter = () => {
+      if (isTicked) {
+        const filtered = users.filter(user => user.first_name === "Bob");
+        console.log(filtered);
+      }
+    };
+
+    userFilter();
+  }, [isTicked, users]);
 
   useEffect(() => {
     const results = users.filter((user) => {
@@ -57,6 +69,11 @@ const UserLookup = () => {
         onInput={handleInputChange}
         placeholder="Search by first name, last name, inumber, or phone number"
         style={{ width: "30%", margin: "1rem" }}
+      />
+      <CheckBox
+        onChange={(e) => setIsTicked(e.target.checked)}
+        text="CheckBox"
+        valueState="None"
       />
       <div style={{ maxHeight: "80vh", overflowY: "auto", marginTop: "1rem" }}>
         {sortedUsers.map((user) => (
