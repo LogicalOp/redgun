@@ -81,6 +81,11 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
+  useEffect(() => {
+    const intervalId = setInterval(fetchPosts, 1000);
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, []);
+
   const likeMessage = async (messageId) => {
     try {
       if(likedMessages.has(messageId)) {
