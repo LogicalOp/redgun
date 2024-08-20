@@ -1,104 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Panel, Card, CardHeader, Icon, Badge, Button, CheckBox } from '@ui5/webcomponents-react';
+import { Card, CardHeader, Badge, Button, Icon } from '@ui5/webcomponents-react';
 
 const Results = () => {
+    const [journeys, setJourneys] = useState([]);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const fetchJourneys = async () => {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/learning_journeys`);
+            const data = await response.json();
+            setJourneys(data.learningJourneys);
+        }
+        fetchJourneys();
+    }, []);
+    
     const handlePreviewClick = (id) => {
         navigate(`/journey/${id}`);
     };
 
     return (
-        <Panel
-            accessibleRole="Form"
-            headerLevel="H1"
-            headerText="Learning Journeys"
-            onToggle={function _a(){}}
-            style={{ width: '55vw', paddingLeft: '150px' }}
-        >
-            <div style={{ display: 'flex', gap: '2.5vw', paddingLeft: '2.5vw' }}>
-                <Card style={{ width: "12vw", height: "31vh", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(4, 1fr)', 
+            gap: '2vw', 
+            paddingLeft: '2.5vw', 
+            marginTop: '8vh', 
+            width: '65vw'
+        }}>
+            {journeys.map((journey, index) => (
+                <Card key={index} style={{ width: '12vw', height: "31vh", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <div>
                         <CardHeader
                             avatar={<Icon name="person-placeholder" />}
-                            titleText="Title"
-                            subtitleText="subtitle"
+                            titleText={journey.title}
+                            subtitleText={journey.experience}
                         />
-                        <Badge
-                            colorScheme=""
-                            design="Information"
-                            icon={<Icon name="employee" />}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            Not Started
-                        </Badge>
                     </div>
                     <Button 
                         design="Transparent"
                         style={{ backgroundColor: 'silver', color: 'black', margin: '10px' }}
-                        onClick={() => handlePreviewClick(1)}
+                        onClick={() => handlePreviewClick(journey.journey_id)}
                     >
                         Preview
                     </Button>
                 </Card>
-                <Card style={{ width: "12vw", height: "31vh", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <div>
-                        <CardHeader
-                            avatar={<Icon name="person-placeholder" />}
-                            titleText="Title"
-                            subtitleText="subtitle"
-                        />
-                        <Badge
-                            colorScheme=""
-                            design="Positive"
-                            icon={<Icon name="employee" />}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            Complete
-                        </Badge>
-                    </div>
-                    <Button 
-                        design="Transparent"
-                        style={{ backgroundColor: 'silver', color: 'black', margin: '10px' }}
-                        onClick={() => handlePreviewClick(2)}
-                    >
-                        Preview
-                    </Button>
-                </Card>
-                <Card style={{ width: "12vw", height: "31vh", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <div>
-                        <CardHeader
-                            avatar={<Icon name="person-placeholder" />}
-                            titleText="Title"
-                            subtitleText="subtitle"
-                        />
-                        <Badge
-                            colorScheme=""
-                            design="Negative"
-                            icon={<Icon name="employee" />}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            Not available
-                        </Badge>
-                    </div>
-                    <Button 
-                        design="Transparent"
-                        style={{ backgroundColor: 'silver', color: 'black', margin: '10px' }}
-                        onClick={() => handlePreviewClick(3)}
-                    >
-                        Preview
-                    </Button>
-                </Card>
-                <br />
-                <CheckBox
-                    onChange={function _a(){}}
-                    text="Completed"
-                    valueState="None"
-                />
-            </div>
-        </Panel>
+            ))}
+        </div>
     );
-};
-
-export default Results;
+}
+    export default Results;

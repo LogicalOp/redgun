@@ -4,55 +4,16 @@ import { Card, CardHeader, Button } from '@ui5/webcomponents-react';
 
 const LearningJourneyDetail = () => {
     const { id } = useParams();
-    const [journey, setJourney] = useState(null);
-
-    // Hardcoded data for demonstration
-    const journeyDetails = {
-        1: {
-            title: "Discovering the Value of SAP S/4HANA for Central Finance",
-            overview: "As a business user in a large company with a heterogeneous system landscape, you will understand how the SAP S/4HANA for central finance deployment option aligns with the vision of your organization when building up a single source of truth for all financial information. Real use cases and participation in project experience will help you make the right decision and lay a solid foundation for future transitions to S/4HANA.",
-            objectives: "After completing this learning journey, you will be familiar with the concept and business benefits of the SAP S/4HANA for central finance deployment option. You will achieve a basic understanding of the implementation strategy and the necessary organizational changes that need to be managed.",
-            experience: "Beginner",
-            roles: "Consultant, Business User",
-            prerequisites: "None",
-            units: 1,
-            duration: "2 hrs 20 mins",
-            cost: "Free",
-            imageUrl: 'https://via.placeholder.com/800x450', // Example image URL
-            progress: 30 // Example progress percentage
-        },
-        2: {
-            title: "Learning Journey 2",
-            overview: "Overview of learning journey 2...",
-            objectives: "Objectives of learning journey 2...",
-            experience: "Intermediate",
-            roles: "Role 2",
-            prerequisites: "Prerequisite 2",
-            units: 2,
-            duration: "3 hrs 15 mins",
-            cost: "Free",
-            imageUrl: 'https://via.placeholder.com/800x450',
-            progress: 60
-        },
-        3: {
-            title: "Learning Journey 3",
-            overview: "Overview of learning journey 3...",
-            objectives: "Objectives of learning journey 3...",
-            experience: "Advanced",
-            roles: "Role 3",
-            prerequisites: "Prerequisite 3",
-            units: 3,
-            duration: "4 hrs 45 mins",
-            cost: "Free",
-            imageUrl: 'https://via.placeholder.com/800x450',
-            progress: 90
-        }
-    };
+    const [journey, setJourney] = useState([]);
 
     useEffect(() => {
-        // Simulate fetching data from an API
-        setJourney(journeyDetails[id]);
-    }, [id]);
+        const fetchJourney = async () => {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/learning_journeys/${id}`);
+            const data = await response.json();
+            setJourney(data.learningJourney);
+        }
+        fetchJourney();
+    }, []);
 
     if (!journey) {
         return <div>Loading...</div>;
