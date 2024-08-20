@@ -77,6 +77,19 @@ const MessageFeed = () => {
     fetchMessages();
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.ctrlKey && event.key === "Enter") {
+        handlePost();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [postValue]);
+
   const likeMessage = async (messageId) => {
     try {
       const response = await fetch(

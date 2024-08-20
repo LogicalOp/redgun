@@ -88,7 +88,7 @@ const Feed = () => {
 
   const likeMessage = async (messageId) => {
     try {
-      if(likedMessages.has(messageId)) {
+      if (likedMessages.has(messageId)) {
         return; // Don't allow liking the same message multiple times
       }
       const response = await fetch(
@@ -106,7 +106,9 @@ const Feed = () => {
         }
       );
       if (response.ok) {
-        setLikedMessages((prevLikedMessages) => new Set(prevLikedMessages).add(messageId));
+        setLikedMessages((prevLikedMessages) =>
+          new Set(prevLikedMessages).add(messageId)
+        );
         reloadFeed();
       }
     } catch (error) {
@@ -157,6 +159,20 @@ const Feed = () => {
       console.error("Failed to post:", error);
     }
   };
+
+  // Add event listener for Ctrl + Enter
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.ctrlKey && event.key === "Enter") {
+        handlePost();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [postValue, titleValue]);
 
   return (
     <Card
@@ -273,7 +289,6 @@ const Feed = () => {
             placeholder="Description"
             modules={{
               toolbar: [
-                
                 [{ header: [1, 2, false] }],
                 ["bold", "italic", "underline"],
                 [{ list: "ordered" }, { list: "bullet" }],
