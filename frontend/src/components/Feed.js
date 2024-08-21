@@ -212,6 +212,11 @@ const Feed = () => {
                 <CardHeader
                   titleText={post.inumber}
                   subtitleText={formatDate(post.date)} // Use formatDate here
+                  style={{ cursor: "pointer" }}
+                  interactive={true }
+                  onClick={() => {
+                    window.location.href = `/user/${post.inumber}`;
+                  }}
                   avatar={<Avatar initials="DG" />}
                 />
                 <ui5-icon
