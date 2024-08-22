@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { Card, CardHeader, Icon, Title, Dialog, Input} from "@ui5/webcomponents-react";
+import { useNavigate } from "react-router-dom";
+import { Card, CardHeader, Icon, Title, Input, Button} from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const ProfileCardUser = ({ data }) => {
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
   console.log(message);
 
   useEffect(() => {
@@ -45,11 +47,7 @@ const ProfileCardUser = ({ data }) => {
             <p>{data.phone}</p>
             <Title level="H5">Email</Title>
             <p>{data.email}</p>
-            <Input
-              icon={<Icon name="paper-plane" />}
-              placeholder="Type message..."
-              onChange={(e) => setMessage(e.target.value)}
-              value={message} />
+              <Button onClick={() => navigate(`/messages/${data.inumber}`)}>Message</Button>
           </div>
         </div>
       </Card>
