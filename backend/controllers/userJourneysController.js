@@ -39,7 +39,11 @@ const getUserJourneyByID = (journey_id) => {
  */
 const getUserJourneyByINumber = (inumber) => {
     try {
-        return database.knex.select('*').from('user_journey').where('inumber', inumber);
+        return database.knex
+            .select('user_journey.*', 'learning_journeys.title as learning_journey_title')
+            .from('user_journey')
+            .join('learning_journeys', 'user_journey.journey_id', 'learning_journeys.journey_id')
+            .where('user_journey.inumber', inumber);
     } catch (error) {
         console.error(`Error getting user journey: ${error.message}`);
         throw error;
