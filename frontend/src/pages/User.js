@@ -9,14 +9,41 @@ import ExpCard from "../components/Cards/ExpCard.js";
 import { useParams } from "react-router-dom";
 
 const User = () => {
-    const { id: userId } = useParams(); // Extract id from URL parameters
-    console.log(userId);
-    const { user, team, manager } = useGetUserInfo(userId);
+  const { id: userId } = useParams(); // Extract id from URL parameters
+  console.log(userId);
+  const { user, team, manager } = useGetUserInfo(userId);
 
-  const learningData = {
-    courses: ["ABAP Cloud Developer", "CAP for NodeJS"],
-    progress: 50,
-  };
+  const [learningData, setLearningData] = useState({
+    courses: []
+  });
+
+  async function getLearningJourney() {
+    const url = `${process.env.REACT_APP_BACKEND_URL}/user_journeys/user/${userId}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data.userJourney);
+      const courses = data.userJourney.map(
+        (item) => item.learning_journey_title
+      );
+      console.log("courses: " + courses);
+
+      setLearningData((prevData) => ({
+        ...prevData,
+        courses: courses,
+      }));
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  useEffect(() => {
+    getLearningJourney();
+  }, []);
 
   return (
     <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem" }}>
@@ -32,8 +59,8 @@ const User = () => {
         >
           {/* New div wrapper for user and manager cards */}
           <div style={{ display: "flex", width: "100%" }}>
-            <div style={{marginRight : "2rem", width: "100%"}}>
-            <ProfileCardUser data={user} style={{ flex: 1 }} />
+            <div style={{ marginRight: "2rem", width: "100%" }}>
+              <ProfileCardUser data={user} style={{ flex: 1 }} />
             </div>
             <ProfileCardManager data={manager} style={{ flex: 1 }} />
           </div>
