@@ -38,8 +38,7 @@ const Results = () => {
                         />
                     </div>
                     <Button 
-                        design="Transparent"
-                        style={{ backgroundColor: 'silver', color: 'black', margin: '10px' }}
+                        design="Emphasized"
                         onClick={() => handlePreviewClick(journey.journey_id)}
                     >
                         Preview
