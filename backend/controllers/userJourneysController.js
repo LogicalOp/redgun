@@ -40,7 +40,13 @@ const getUserJourneyByID = (journey_id) => {
 const getUserJourneyByINumber = (inumber) => {
     try {
         return database.knex
-            .select('user_journey.*', 'learning_journeys.title as learning_journey_title')
+            .select(
+                'user_journey.*', 
+                'learning_journeys.title as learning_journey_title',
+                'learning_journeys.roles',
+                'learning_journeys.experience',
+                'learning_journeys.duration' // Add duration to the selection
+            )
             .from('user_journey')
             .join('learning_journeys', 'user_journey.journey_id', 'learning_journeys.journey_id')
             .where('user_journey.inumber', inumber);
