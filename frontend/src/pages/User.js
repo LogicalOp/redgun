@@ -81,15 +81,8 @@ const User = () => {
   }, [userId]);
 
   useEffect(() => {
-    console.log("Labels updated:", labelsData);
-    console.log("Series updated:", seriesData);
-  }, [labelsData, seriesData]);
-
-  useEffect(() => {
     getLearningJourney();
   }, []);
-
-  console.log("Labels", labelsData);
 
   return (
     <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem" }}>

@@ -11,11 +11,36 @@ const Profile = () => {
   const userId = localStorage.getItem("inumber");
   const [seriesData, setSeriesData] = useState([]);
   const [labelsData, setLabelsData] = useState([]);
+  const [fetchData, setFetchData] = useState([]);
   const { user, team, manager } = useGetUserInfo(userId);
 
-  const learningData = {
-    courses: ["ABAP Cloud Developer", "CAP for NodeJS"],
-    progress: 50,
+  const [learningData, setLearningData] = useState({
+    courses: []
+  });
+
+  async function getLearningJourney() {
+    const url = `${process.env.REACT_APP_BACKEND_URL}/user_journeys/user/${userId}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setFetchData(data.userJourney);
+      console.log(data.userJourney);
+      const courses = data.userJourney.map(
+        (item) => item.learning_journey_title
+      );
+      console.log("courses: " + courses);
+
+      setLearningData((prevData) => ({
+        ...prevData,
+        courses: courses,
+      }));
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   async function getChartData() {
@@ -50,6 +75,7 @@ const Profile = () => {
   }
 
   useEffect(() => {
+    getLearningJourney();
     getChartData();
   }, [userId]);
 
@@ -73,7 +99,7 @@ const Profile = () => {
             </div>
             <ProfileCardManager data={manager} style={{ flex: 1 }} />
           </div>
-          <ExpCard />
+          <ExpCard data={fetchData} />
         </div>
 
         <div
