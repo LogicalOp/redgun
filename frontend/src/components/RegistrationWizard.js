@@ -71,7 +71,7 @@ const RegistrationWizard = () => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
-      <Card style={{ padding: '1.5vh', height: '55vh', width: '30vw', margin: 'auto' }} header={<CardHeader titleText="Registration" />}>
+      <Card style={{ padding: '1.5vh', height: '60vh', width: '25vw', margin: 'auto' }} header={<CardHeader titleText="Registration" />}>
         <Input
           placeholder="inumber"
           onChange={(e) => setINumber(e.target.value)}
