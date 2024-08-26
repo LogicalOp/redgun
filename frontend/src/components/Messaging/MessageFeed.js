@@ -71,7 +71,19 @@ const MessageFeed = () => {
         scrollContainer.scrollTop = scrollPosition;
       }
     }
-  }, [messages]);
+  }, [postValue]);
+
+  useEffect(() => {
+    if (scrollbarRef.current) {
+      const scrollContainer = scrollbarRef.current._container;
+      if (scrollContainer) {
+        const scrollHeight = scrollContainer.scrollHeight;
+        const clientHeight = scrollContainer.clientHeight;
+        const scrollPosition = scrollHeight - clientHeight;
+        scrollContainer.scrollTop = scrollPosition;
+      }
+    }
+  }, []);
 
   useEffect(() => {
     fetchMessages();

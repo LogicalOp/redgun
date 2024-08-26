@@ -45,21 +45,18 @@ const Feed = () => {
 
   const scrollbarRef = useRef(null);
 
-  // Function to fetch posts
   const fetchPosts = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/feed`);
       if (!response.ok) throw new Error("Network response was not ok.");
       const data = await response.json();
-      setPosts(data.feed); // Assuming the response data is the array of posts
+      setPosts(data.feed);
     } catch (error) {
       console.error("Failed to fetch posts:", error);
     }
   };
 
   const reloadFeed = () => {
-    // Logic to reload the feed
-    // For example, fetch the posts from the server and update the state
     fetchPosts();
   };
 
@@ -74,7 +71,7 @@ const Feed = () => {
         scrollContainer.scrollTop = scrollPosition; // Scroll to the bottom
       }
     }
-  }, [posts]);
+  }, [postValue]);
 
   // Fetch posts on component mount
   useEffect(() => {
@@ -116,24 +113,22 @@ const Feed = () => {
     }
   };
 
-  // Function to strip HTML tags
   const stripHtmlTags = (html) => {
     const div = document.createElement("div");
     div.innerHTML = html;
     return div.textContent || div.innerText || "";
   };
 
-  // Modified handlePost function
   const handlePost = async () => {
     if (postValue.trim() === "") {
-      return; // Don't allow empty posts
+      return;
     }
 
     try {
       const newPost = {
-        title: titleValue, // Replace with dynamic data if needed
-        message: postValue, // Using postValue from the state
-        inumber: localStorage.getItem("inumber"), // Replace with dynamic data if needed
+        title: titleValue, 
+        message: postValue, 
+        inumber: localStorage.getItem("inumber"), 
       };
 
       const response = await fetch(
@@ -152,7 +147,7 @@ const Feed = () => {
       const data = await response.json();
       console.log(data);
 
-      setPostValue(""); // Clear the input field
+      setPostValue(""); 
       setTitleValue("");
       reloadFeed();
     } catch (error) {
@@ -160,7 +155,7 @@ const Feed = () => {
     }
   };
 
-  // Add event listener for Ctrl + Enter
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.ctrlKey && event.key === "Enter") {
