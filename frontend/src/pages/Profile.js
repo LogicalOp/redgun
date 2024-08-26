@@ -9,12 +9,50 @@ import ExpCard from "../components/Cards/ExpCard.js";
 
 const Profile = () => {
   const userId = localStorage.getItem("inumber");
+  const [seriesData, setSeriesData] = useState([]);
+  const [labelsData, setLabelsData] = useState([]);
   const { user, team, manager } = useGetUserInfo(userId);
 
   const learningData = {
     courses: ["ABAP Cloud Developer", "CAP for NodeJS"],
     progress: 50,
   };
+
+  async function getChartData() {
+    const url = `${process.env.REACT_APP_BACKEND_URL}/user_journeys/user/${userId}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Response data:", data.userJourney);
+
+      // Extract roles and count occurrences
+      const roleCounts = data.userJourney.reduce((acc, journey) => {
+        (journey.roles || []).forEach(role => {
+          acc[role] = (acc[role] || 0) + 1;
+        });
+        return acc;
+      }, {});
+
+      // Convert the map to arrays for seriesData and labelsData
+      const labels = Object.keys(roleCounts);
+      const series = Object.values(roleCounts);
+
+      setLabelsData(labels);
+      setSeriesData(series);
+      console.log("Labels data:", labels);
+      console.log("Series data:", series);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  useEffect(() => {
+    getChartData();
+  }, [userId]);
+
 
   return (
     <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem" }}>
@@ -30,8 +68,8 @@ const Profile = () => {
         >
           {/* New div wrapper for user and manager cards */}
           <div style={{ display: "flex", width: "100%" }}>
-            <div style={{marginRight : "2rem", width: "100%"}}>
-            <ProfileCardUser data={user} style={{ flex: 1 }} />
+            <div style={{ marginRight: "2rem", width: "100%" }}>
+              <ProfileCardUser data={user} style={{ flex: 1 }} />
             </div>
             <ProfileCardManager data={manager} style={{ flex: 1 }} />
           </div>
@@ -47,7 +85,9 @@ const Profile = () => {
           }}
         >
           <LearningCard data={learningData} />
-          <DonutChart />
+          {seriesData.length > 0 && labelsData.length > 0 && (
+            <DonutChart series={seriesData} labels={labelsData} width={300} height={300} />
+          )}
         </div>
       </div>
     </Grid>

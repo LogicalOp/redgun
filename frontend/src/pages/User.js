@@ -11,6 +11,8 @@ import { useParams } from "react-router-dom";
 const User = () => {
   const { id: userId } = useParams(); // Extract id from URL parameters
   console.log(userId);
+  const [seriesData, setSeriesData] = useState([]);
+  const [labelsData, setLabelsData] = useState([]);
   const { user, team, manager } = useGetUserInfo(userId);
 
   const [learningData, setLearningData] = useState({
@@ -43,9 +45,51 @@ const User = () => {
     }
   }
 
+  async function getChartData() {
+    const url = `${process.env.REACT_APP_BACKEND_URL}/user_journeys/user/${userId}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Response data:", data.userJourney);
+
+      // Extract roles and count occurrences
+      const roleCounts = data.userJourney.reduce((acc, journey) => {
+        (journey.roles || []).forEach(role => {
+          acc[role] = (acc[role] || 0) + 1;
+        });
+        return acc;
+      }, {});
+
+      // Convert the map to arrays for seriesData and labelsData
+      const labels = Object.keys(roleCounts);
+      const series = Object.values(roleCounts);
+
+      setLabelsData(labels);
+      setSeriesData(series);
+      console.log("Labels data:", labels);
+      console.log("Series data:", series);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  useEffect(() => {
+    getChartData();
+  }, [userId]);
+
+  useEffect(() => {
+    console.log("Labels updated:", labelsData);
+    console.log("Series updated:", seriesData);
+  }, [labelsData, seriesData]);
+
   useEffect(() => {
     getLearningJourney();
   }, []);
+
+  console.log("Labels", labelsData);
 
   return (
     <Grid defaultSpan="XL12 L12 M12 S12" style={{ margin: "2rem" }}>
@@ -66,7 +110,7 @@ const User = () => {
             </div>
             <ProfileCardManager data={manager} style={{ flex: 1 }} />
           </div>
-          <ExpCard data = {fetchData} />
+          <ExpCard data={fetchData} />
         </div>
 
         <div
@@ -78,7 +122,9 @@ const User = () => {
           }}
         >
           <LearningCard data={learningData} />
-          <DonutChart />
+          {seriesData.length > 0 && labelsData.length > 0 && (
+            <DonutChart series={seriesData} labels={labelsData} width={300} height={300} />
+          )}
         </div>
       </div>
     </Grid>

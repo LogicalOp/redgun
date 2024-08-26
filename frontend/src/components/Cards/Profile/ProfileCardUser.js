@@ -1,34 +1,11 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardHeader, Icon, Title, Input, Button} from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const ProfileCardUser = ({ data }) => {
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  console.log(message);
-
-  useEffect(() => {
-    try {
-      const response = fetch(`${process.env.REACT_APP_BACKEND_URL}/messages`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          sender_id: localStorage.getItem("inumber"),
-          receiver_id: data.inumber,
-          message: message,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error("Error during sending message:", error);
-    }
-  }, [message]);
-
+  
     return (
       <Card
         header={
