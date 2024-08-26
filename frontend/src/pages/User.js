@@ -16,6 +16,7 @@ const User = () => {
   const [learningData, setLearningData] = useState({
     courses: []
   });
+  const [fetchData, setFetchData] = useState([]);
 
   async function getLearningJourney() {
     const url = `${process.env.REACT_APP_BACKEND_URL}/user_journeys/user/${userId}`;
@@ -26,6 +27,7 @@ const User = () => {
       }
 
       const data = await response.json();
+      setFetchData(data.userJourney);
       console.log(data.userJourney);
       const courses = data.userJourney.map(
         (item) => item.learning_journey_title
@@ -64,7 +66,7 @@ const User = () => {
             </div>
             <ProfileCardManager data={manager} style={{ flex: 1 }} />
           </div>
-          <ExpCard />
+          <ExpCard data = {fetchData} />
         </div>
 
         <div
