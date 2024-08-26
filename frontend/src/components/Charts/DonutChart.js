@@ -10,8 +10,10 @@ class DonutChart extends React.Component {
       options: {
         chart: {
           type: "donut",
+          width: props.width || '50%', // Use props.width or default to 100%
+          height: props.height || '50%' // Use props.height or default to 100%
         },
-        labels: ['A','B', 'C', 'D', 'E'],
+        labels: props.labels || ['A', 'B', 'C', 'D', 'E'], // Use props.labels or default labels
         responsive: [
           {
             breakpoint: 480,
@@ -26,8 +28,7 @@ class DonutChart extends React.Component {
           },
         ],
       },
-      series: [69, 55, 41, 17, 15]
-      
+      series: props.series || [69, 55, 41, 17, 15] // Use props.series or default series
     };
   }
 
