@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, CardHeader, Badge, Button, Icon } from '@ui5/webcomponents-react';
+import { Card, CardHeader, Button, Icon } from '@ui5/webcomponents-react';
 
 const Results = () => {
     const [journeys, setJourneys] = useState([]);

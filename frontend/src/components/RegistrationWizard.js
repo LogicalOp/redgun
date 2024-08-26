@@ -1,9 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Button, Label, Card, CardHeader, Form, FormItem, Input } from '@ui5/webcomponents-react';
+import { Button, Card, CardHeader,  Input } from '@ui5/webcomponents-react';
 import { useNavigate } from 'react-router-dom';
 
 const RegistrationWizard = () => {
-  const [errorMessage, setErrorMessage] = useState('');
   const [inumber, setINumber] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');

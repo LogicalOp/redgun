@@ -7,7 +7,6 @@ const UserLookup = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [isTicked, setIsTicked] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
