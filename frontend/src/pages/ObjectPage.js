@@ -1,12 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Card, CardHeader } from '@ui5/webcomponents-react';
 import Issue from '../components/Issue';
 
 const ObjectPage = () => {
     return (
-        <div>
-         < Issue/>
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <Issue style={{ width: '100%' }} />
         </div>
     );
 };
