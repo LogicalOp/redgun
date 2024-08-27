@@ -79,9 +79,8 @@ const Issue = () => {
             paddingRight: "2rem",
             textAlign: "left",
           }}
-        >
-          <h2>{issueData.description || "Issue description goes here."}</h2>
-        </div>
+          dangerouslySetInnerHTML={{ __html: issueData.description || "Issue description goes here." }}
+        />
       </Card>
       <Card
         style={{
@@ -103,9 +102,8 @@ const Issue = () => {
             paddingRight: "2rem",
             textAlign: "left",
           }}
-        >
-          <h2>{issueData.solution || "Resolution details go here."}</h2>
-        </div>
+          dangerouslySetInnerHTML={{ __html: issueData.solution || "Resolution details go here." }}
+        />
       </Card>
 
       {issueData.img_url ? (

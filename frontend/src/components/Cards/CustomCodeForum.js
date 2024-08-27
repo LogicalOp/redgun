@@ -108,7 +108,8 @@ const CustomCodeForum = () => {
                 ))}
             </div>
             <div
-              style={{ paddingBottom: "2rem" }}>
+              style={{ paddingBottom: "2rem" }}
+            >
               <div
                 style={{
                   paddingLeft: "1rem",
@@ -119,9 +120,8 @@ const CustomCodeForum = () => {
                   WebkitLineClamp: 4, // Adjust the number of lines to show before truncating
                   textOverflow: "ellipsis",
                 }}
-              >
-                <h2>{item.description}</h2>
-              </div>
+                dangerouslySetInnerHTML={{ __html: item.description }}
+              />
             </div>
 
             <div
