@@ -1,89 +1,123 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Card, CardHeader, Button } from '@ui5/webcomponents-react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Card, CardHeader, Button, Badge, Icon } from '@ui5/webcomponents-react';
+import "@ui5/webcomponents-icons/dist/AllIcons.js";
+import '../App.css';
 
 const LearningJourneyDetail = () => {
-    const { id } = useParams();
-    const [journey, setJourney] = useState([]);
+    const { id: id } = useParams();
+    console.log(id);
+    const [journey, setJourney] = useState(null);
+    const navigate = useNavigate();
+
+    const roles = [
+        { name: 'Administrator', color: '1', icon: 'employee' },
+        { name: 'Architect', color: '2', icon: 'employee' },
+        { name: 'Business User', color: '3', icon: 'employee' },
+        { name: 'CEE', color: '4', icon: 'employee' },
+        { name: 'Consultant', color: '5', icon: 'employee' },
+        { name: 'Data Analyst', color: '6', icon: 'employee' },
+        { name: 'Developer', color: '7', icon: 'employee' },
+        { name: 'IT Lead', color: '7', icon: 'employee' },
+        { name: 'Marketing', color: '8', icon: 'employee' },
+        { name: 'Presales', color: '9', icon: 'employee' },
+        { name: 'Project Manager', color: '10', icon: 'employee' },
+        { name: 'Sales', color: '1', icon: 'employee' },
+        { name: 'Support Consultant', color: '2', icon: 'employee' }
+    ];
 
     useEffect(() => {
-        const fetchJourney = async () => {
+        const fetchJourneys = async () => {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/learning_journeys/${id}`);
             const data = await response.json();
-            setJourney(data.learningJourney);
+            setJourney(data.learningJourney[0]);
         }
-        fetchJourney();
+
+        fetchJourneys();
     }, []);
 
     if (!journey) {
-        return <div>Loading...</div>;
-    }
+        return <p>Loading...</p>;
+    };
+
+    const journeyRoles = roles.filter(role => journey.roles.includes(role.name));
 
     return (
-        <div style={{ padding: '2rem', color: '#333', marginLeft: '3rem', marginRight: '3rem', maxWidth: '100%' }}>
-            <div style={{ marginBottom: '1rem' }}>
-                <a href="/" style={{ color: '#0070d2', textDecoration: 'none', marginRight: '0.5rem' }}>Home</a>
-                / <a href="/learning" style={{ color: '#0070d2', textDecoration: 'none', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Learning Journeys</a>
-                / {journey.title}
-            </div>
-            <h1 style={{ marginBottom: '1rem' }}>{journey.title}</h1>
-            <div style={{ display: 'flex', gap: '2rem', marginBottom: '1rem' }}>
-                <div style={{ flex: 1 }}>
-                    <img src={journey.imageUrl} alt={journey.title} style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
+        <div className="learning-journey-page">
+            <Button
+                design="Emphasized"
+                icon="nav-back"
+                onClick={() => navigate('/learning')}
+                className="back-button"
+            >
+                Back
+            </Button>
+            <h1 className="title">{journey.title}</h1>
+
+            <div className="journey-content">
+                <div className="left-section">
+                    
+                    <div className="journey-info">
+                        <Card className="info-card">
+                            <div className="journey-stats">
+                                <Icon name="course-book" /> {journey.units} units &nbsp; | &nbsp;
+                                <Icon name="currency" /> {journey.cost} &nbsp; | &nbsp;
+                                <Icon name="fob-watch" /> {journey.duration / 60} hours
+                            </div>
+                        </Card>
+                    </div>
+
+                    <div className="media-section">
+                        {journey.videourl ? (
+                            <video width="66vw" height="86vh" controls>
+                                <source src={journey.videourl} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        ) : journey.imageurl ? (
+                            <img src={journey.imageurl} alt="Learning Journey" width="818.33" height="638.07" />
+                        ) : (
+                            <p>No media available</p>
+                        )}
+                    </div>
                 </div>
-                <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
-                        <Card>
-                            <CardHeader titleText={`${journey.units} Unit`} />
-                        </Card>
-                        <Card>
-                            <CardHeader titleText={journey.duration} />
-                        </Card>
-                        <div style={{ display: 'flex', gap: '1rem' }}>
-                            <Card>
-                                <CardHeader titleText={journey.cost} />
-                            </Card>
-                            <Button design="Emphasized" style={{ marginLeft: '1rem' }}>Start learning</Button>
+
+                {/* Right section: Cards */}
+                <div className="right-section">
+                    <Card className="info-card">
+                        <CardHeader titleText="Overview" />
+                        <p>{journey.overview}</p>
+                    </Card>
+
+                    <Card className="info-card">
+                        <CardHeader titleText="Objectives" />
+                        <p>{journey.objectives}</p>
+                    </Card>
+                    <Card className="info-card">
+                        <CardHeader titleText="Roles" />
+                        <div className="roles-section">
+                            {journeyRoles.map((role, index) => (
+                                <Badge
+                                    key={index}
+                                    icon={<Icon name={role.icon} />}
+                                    onClick={() => console.log(`${role.name} clicked`)}
+                                    colorScheme={role.color}
+                                    className="role-badge"
+                                >
+                                    {role.name}
+                                </Badge>
+                            ))}
                         </div>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
-                        <Card>
-                            <CardHeader titleText="Overview" />
-                            <div style={{ padding: '1rem' }}>
-                                <p>{journey.overview}</p>
-                            </div>
-                        </Card>
-                        <Card>
-                            <CardHeader titleText="Learning objectives" />
-                            <div style={{ padding: '1rem' }}>
-                                <p>{journey.objectives}</p>
-                            </div>
-                        </Card>
-                        <Card>
-                            <CardHeader titleText="Level of Experience" />
-                            <div style={{ padding: '1rem' }}>
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <div style={{ flex: 1, backgroundColor: '#e0e0e0', borderRadius: '8px', overflow: 'hidden', border: '1px solid #0070d2' }}>
-                                        <div style={{ width: `${journey.progress}%`, backgroundColor: '#0070d2', padding: '0.5rem 0', textAlign: 'center', color: 'white' }}>
-                                            {journey.experience}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Card>
-                        <Card>
-                            <CardHeader titleText="Roles" />
-                            <div style={{ padding: '1rem' }}>
-                                <p>{journey.roles}</p>
-                            </div>
-                        </Card>
-                        <Card style={{ gridColumn: 'span 2' }}>
-                            <CardHeader titleText="Prerequisites" />
-                            <div style={{ padding: '1rem' }}>
-                                <p>{journey.prerequisites}</p>
-                            </div>
-                        </Card>
-                    </div>
+                    </Card>
+                    <Card className="info-card">
+                        <CardHeader titleText="Pre-requisites" />
+                        <p>{journey.prerequisites}</p>
+                    </Card>
+                    <Button
+                        design="Default"
+                        className="start-button"
+                    >
+                        Start Learning
+                    </Button>
                 </div>
             </div>
         </div>

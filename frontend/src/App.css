@@ -28,6 +28,62 @@
   color: #61dafb;
 }
 
+.learning-journey-page {
+  margin: 20px;
+}
+
+.back-button {
+  position: absolute;
+  left: 5vw; /* Adjust the value as needed */
+  top: 10vh;  /* Adjust the value as needed */
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Flex container for positioning the content side by side */
+.journey-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-section {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.right-section {
+  flex: 1;
+}
+
+.info-card {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.media-section {
+  margin-bottom: 20px;
+}
+
+.roles-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.role-badge {
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.start-button {
+  margin-top: 20px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

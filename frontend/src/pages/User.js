@@ -9,7 +9,7 @@ import ExpCard from "../components/Cards/ExpCard.js";
 import { useParams } from "react-router-dom";
 
 const User = () => {
-  const { id: userId } = useParams(); // Extract id from URL parameters
+  const { id: userId } = useParams();
   console.log(userId);
   const [seriesData, setSeriesData] = useState([]);
   const [labelsData, setLabelsData] = useState([]);
