@@ -1,4 +1,4 @@
-import { Input, ShellBar, Icon, Avatar } from "@ui5/webcomponents-react";
+import { ShellBar, Avatar } from "@ui5/webcomponents-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import React from "react";
 
@@ -26,11 +26,11 @@ const Shellbar = () => {
         />
       }
       onLogoClick={() => navigate("/")}
-      onMenuItemClick={function _a() {}}
-      onNotificationsClick={function _a() {}}
-      onProductSwitchClick={function _a() {}}
+      onMenuItemClick={function _a() { }}
+      onNotificationsClick={function _a() { }}
+      onProductSwitchClick={function _a() { }}
       onProfileClick={() => navigate("/profile")}
-      onSearchButtonClick={function _a() {}}
+      onSearchButtonClick={function _a() { }}
       primaryTitle={currentPath}
       profile={
         <Avatar>

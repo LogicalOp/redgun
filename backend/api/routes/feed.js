@@ -8,7 +8,7 @@ const { getFeed, getMessage, getFeedByDate, getFeedByUser, createMessage, update
  * 
  * 
  */
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
     try {
         const feed = await getFeed();
         res.status(200).json({ feed: feed });
@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
     }
 });
 
-router.get('/:id', async(req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const message = await getMessage(req.params.id);
         res.status(200).json({ message: message });
@@ -26,7 +26,7 @@ router.get('/:id', async(req, res) => {
     }
 });
 
-router.get('/date/:date', async(req, res) => {
+router.get('/date/:date', async (req, res) => {
     try {
         const feed = await getFeedByDate(req.params.date);
         res.status(200).json({ feed: feed });
@@ -35,7 +35,7 @@ router.get('/date/:date', async(req, res) => {
     }
 });
 
-router.get('/user/:inumber', async(req, res) => {
+router.get('/user/:inumber', async (req, res) => {
     try {
         const feed = await getFeedByUser(req.params.inumber);
         res.status(200).json({ feed: feed });
@@ -49,7 +49,7 @@ router.get('/user/:inumber', async(req, res) => {
  * 
  * 
  */
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     try {
         const message = await createMessage(req.body);
         res.status(200).json({ message: message });
@@ -62,8 +62,8 @@ router.post('/', async(req, res) => {
  * PUT Methods for Feed
  * 
  * 
- */ 
-router.post('/:id', async(req, res) => {
+ */
+router.post('/:id', async (req, res) => {
     try {
         const message = await updateMessage(req.params.id, req.body);
         res.status(200).json({ message: message });
@@ -77,7 +77,7 @@ router.post('/:id', async(req, res) => {
  * 
  * 
  */
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const message = await deleteMessage(req.params.id);
         res.status(200).json({ message: message });

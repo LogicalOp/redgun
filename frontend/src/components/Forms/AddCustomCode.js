@@ -40,8 +40,6 @@ const AddCustomCode = forwardRef((props, ref) => {
       inumber: localStorage.getItem("inumber"), // Retrieve from localStorage
     };
 
-    console.log('Payload being sent:', payload);
-
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/customcode`, {
         method: 'POST',
@@ -52,12 +50,9 @@ const AddCustomCode = forwardRef((props, ref) => {
       });
 
       const responseData = await response.json();
-      console.log('Response status:', response.status);
 
       if (response.ok) {
-        console.log('Submission successful:', responseData);
-        onDialogClose();  // Close dialog on successful submission
-        // Optionally clear form fields
+        onDialogClose();
         setTitle('');
         setTags('');
         setDescription('');

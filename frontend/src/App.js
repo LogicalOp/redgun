@@ -32,9 +32,9 @@ function App() {
     display: 'flex', // Use Flexbox for the content area
     marginLeft: 0, // Shift content to the right to make space for the sidebar
     height: `calc(100vh - ${shellbarHeight})`,
-    width:"90%" // Adjust height to account for shellbar
+    width: "90%" // Adjust height to account for shellbar
   };
-  
+
   const sidebarStyles = {
     display: 'flex',
     flexGrow: 0, // Prevent sidebar from growing
@@ -47,7 +47,7 @@ function App() {
       <div className="App" style={layoutStyles}>
         <Shellbar />
         <div style={{ display: 'flex', height: '100%' }}>
-          <Sidebar style={sidebarStyles}/>
+          <Sidebar style={sidebarStyles} />
           <div style={contentStyles}>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -60,7 +60,7 @@ function App() {
               <Route path="/user/:id" element={<User />} />
               <Route path="/issue/:id" element={<ObjectPage />} />
               <Route path="/journey/:id" element={<LearningJourneyDetail />} />
-              <Route path="/messages" element={<Messages />}/>
+              <Route path="/messages" element={<Messages />} />
               <Route path="/messages/:userId" element={<Messages />} />
               <Route path="/register" element={<Register />} />
             </Routes>

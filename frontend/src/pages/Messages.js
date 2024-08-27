@@ -11,7 +11,7 @@ const Messages = () => {
   };
 
   return (
-    <div style={{ display: "flex", width: "100%", height: "100vh" , margin:"2rem"}}>
+    <div style={{ display: "flex", width: "100%", height: "100vh", margin: "2rem" }}>
       <div style={{ flex: "0 0 30%", height: "100%" }}>
         <MessagePreview onChatSelect={handleChatSelect} />
       </div>

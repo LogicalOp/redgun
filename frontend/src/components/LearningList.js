@@ -4,8 +4,8 @@ import { List, StandardListItem, Input } from '@ui5/webcomponents-react';
 const LearningList = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const teams = [
-        'Administrator', 'Architect', 'Business User', 'CEE', 'Consultant', 
-        'Data Analyst', 'Developer', 'IT Lead', 'Marketing', 'Presales', 
+        'Administrator', 'Architect', 'Business User', 'CEE', 'Consultant',
+        'Data Analyst', 'Developer', 'IT Lead', 'Marketing', 'Presales',
         'Project Manager', 'Sales', 'Support Consultant'
     ];
 
@@ -23,12 +23,12 @@ const LearningList = () => {
             <List
                 growing="Scroll"
                 mode="MultiSelect"
-                onItemClick={function _a(){}}
-                onItemClose={function _a(){}}
-                onItemDelete={function _a(){}}
-                onItemToggle={function _a(){}}
-                onLoadMore={function _a(){}}
-                onSelectionChange={function _a(){}}
+                onItemClick={function _a() { }}
+                onItemClose={function _a() { }}
+                onItemDelete={function _a() { }}
+                onItemToggle={function _a() { }}
+                onLoadMore={function _a() { }}
+                onSelectionChange={function _a() { }}
                 separators="Inner"
                 style={{ width: '30vw' }}
             >

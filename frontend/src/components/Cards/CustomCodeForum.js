@@ -108,7 +108,7 @@ const CustomCodeForum = () => {
                 ))}
             </div>
             <div
-            style={{paddingBottom:"2rem"}}>
+              style={{ paddingBottom: "2rem" }}>
               <div
                 style={{
                   paddingLeft: "1rem",

@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Button, Card, CardHeader,  Input } from '@ui5/webcomponents-react';
+import React, { useState, useEffect } from 'react';
+import { Button, Card, CardHeader, Input } from '@ui5/webcomponents-react';
 import { useNavigate } from 'react-router-dom';
 
 const RegistrationWizard = () => {
@@ -21,19 +21,17 @@ const RegistrationWizard = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
       } catch (error) {
         console.error('Error during test fetch:', error);
       }
     };
-  
+
     testFetch();
   }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Form submitted'); // Debug log
-  
+
     const payload = {
       inumber: inumber,
       password: password,
@@ -44,9 +42,7 @@ const RegistrationWizard = () => {
       team_id: teamId,
       exp: 0
     };
-  
-    console.log(payload);
-  
+
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/register`, {
         method: 'POST',
@@ -55,17 +51,15 @@ const RegistrationWizard = () => {
         },
         body: JSON.stringify(payload)
       });
-  
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
+
       const data = await response.json();
-      console.log(data);
-      // Handle successful registration (e.g., navigate to another page)
+      navigate('/login');
     } catch (error) {
       console.error('Error during fetch:', error);
-      // Handle error (e.g., show error message to the user)
     }
   };
 
@@ -78,7 +72,7 @@ const RegistrationWizard = () => {
           value={inumber}
           style={{ marginTop: '4vh', marginBottom: '2vh' }}
         />
-        <br/>
+        <br />
         <Input
           placeholder="password"
           type="password"
@@ -86,42 +80,42 @@ const RegistrationWizard = () => {
           value={password}
           style={{ marginBottom: '2vh' }}
         />
-        <br/>
+        <br />
         <Input
           placeholder="First name"
           onChange={(e) => setFirstName(e.target.value)}
           value={firstName}
           style={{ marginBottom: '2vh' }}
         />
-        <br/>
+        <br />
         <Input
           placeholder="Last name"
           onChange={(e) => setLastName(e.target.value)}
           value={lastName}
           style={{ marginBottom: '2vh' }}
         />
-        <br/>
+        <br />
         <Input
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           style={{ marginBottom: '2vh' }}
         />
-        <br/>
+        <br />
         <Input
           placeholder="Phone"
           onChange={(e) => setPhone(e.target.value)}
           value={phone}
           style={{ marginBottom: '2vh' }}
         />
-        <br/>
+        <br />
         <Input
           placeholder="Team ID"
           onChange={(e) => setTeamId(e.target.value)}
           value={teamId}
           style={{ marginBottom: '2vh' }}
         />
-        <br/>
+        <br />
         <Button design="Positive" onClick={handleSubmit}>Register</Button>
       </Card>
     </div>

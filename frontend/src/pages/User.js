@@ -10,10 +10,9 @@ import { useParams } from "react-router-dom";
 
 const User = () => {
   const { id: userId } = useParams();
-  console.log(userId);
   const [seriesData, setSeriesData] = useState([]);
   const [labelsData, setLabelsData] = useState([]);
-  const { user, team, manager } = useGetUserInfo(userId);
+  const { user, manager } = useGetUserInfo(userId);
 
   const [learningData, setLearningData] = useState({
     courses: []
@@ -30,11 +29,9 @@ const User = () => {
 
       const data = await response.json();
       setFetchData(data.userJourney);
-      console.log(data.userJourney);
       const courses = data.userJourney.map(
         (item) => item.learning_journey_title
       );
-      console.log("courses: " + courses);
 
       setLearningData((prevData) => ({
         ...prevData,
@@ -53,7 +50,6 @@ const User = () => {
         throw new Error(`Response status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Response data:", data.userJourney);
 
       // Extract roles and count occurrences
       const roleCounts = data.userJourney.reduce((acc, journey) => {
@@ -69,8 +65,6 @@ const User = () => {
 
       setLabelsData(labels);
       setSeriesData(series);
-      console.log("Labels data:", labels);
-      console.log("Series data:", series);
     } catch (error) {
       console.error(error.message);
     }

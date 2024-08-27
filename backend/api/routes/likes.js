@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { listLikes, getLikesByInumber, getLikesByMessageId, likeMessage, unlikeMessage } = require('../../controllers/likeController');
 
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
     try {
         const likes = await listLikes();
         res.status(200).json({ likes });
@@ -13,7 +13,7 @@ router.get('/', async(req, res) => {
     }
 });
 
-router.get('/user/:inumber', async(req, res) => {
+router.get('/user/:inumber', async (req, res) => {
     const { inumber } = req.params;
     try {
         const likes = await getLikesByInumber(inumber);
@@ -24,7 +24,7 @@ router.get('/user/:inumber', async(req, res) => {
     }
 });
 
-router.get('/messages/:messageId', async(req, res) => {
+router.get('/messages/:messageId', async (req, res) => {
     const { messageId } = req.params;
     try {
         const likes = await getLikesByMessageId(messageId);
@@ -35,7 +35,7 @@ router.get('/messages/:messageId', async(req, res) => {
     }
 });
 
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     const { message_id, inumber, isLiked } = req.body;
     try {
         await likeMessage(message_id, inumber, isLiked);
@@ -46,7 +46,7 @@ router.post('/', async(req, res) => {
     }
 });
 
-router.delete('/', async(req, res) => {
+router.delete('/', async (req, res) => {
     const { messageId, inumber } = req.body;
     try {
         await unlikeMessage(messageId, inumber);

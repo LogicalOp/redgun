@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -27,6 +28,7 @@ const Feed = () => {
   const [likedMessages, setLikedMessages] = useState(new Set());
   const [titleValue, setTitleValue] = useState("");
   const currentUser = localStorage.getItem("inumber");
+  const navigate = useNavigate();
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -126,9 +128,9 @@ const Feed = () => {
 
     try {
       const newPost = {
-        title: titleValue, 
-        message: postValue, 
-        inumber: localStorage.getItem("inumber"), 
+        title: titleValue,
+        message: postValue,
+        inumber: localStorage.getItem("inumber"),
       };
 
       const response = await fetch(
@@ -145,9 +147,8 @@ const Feed = () => {
       if (!response.ok) throw new Error("Network response was not ok.");
 
       const data = await response.json();
-      console.log(data);
 
-      setPostValue(""); 
+      setPostValue("");
       setTitleValue("");
       reloadFeed();
     } catch (error) {
@@ -208,9 +209,9 @@ const Feed = () => {
                   titleText={post.inumber}
                   subtitleText={formatDate(post.date)} // Use formatDate here
                   style={{ cursor: "pointer" }}
-                  interactive={true }
+                  interactive={true}
                   onClick={() => {
-                    window.location.href = `/user/${post.inumber}`;
+                    navigate(`/user/${post.inumber}`);
                   }}
                   avatar={<Avatar initials="DG" />}
                 />

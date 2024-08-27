@@ -1,11 +1,74 @@
 {
   "Articles": [
     {
+      "title": "SAP Integration Suite Delivered 345% ROI, Boosting Efficiency by 30%, and Granted Economic Gains for Customers",
+      "link": "https://news.sap.com/2024/08/sap-integration-suite-delivers-roi-boosts-efficiency-economic-gains/",
+      "author": "Bharat Sandhu",
+      "date": "August 27, 2024",
+      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/08/27/292558_GettyImages-167240131_medium_uncropped_F-1920x600.jpg"
+    },
+    {
+      "title": "Equinor Boosts Asset Performance with Condition-Based Maintenance Enabled by SAP Asset Performance Management",
+      "link": "https://news.sap.com/2024/08/equinor-condition-based-maintenance-sap-asset-performance-management/",
+      "author": "Karin Fent",
+      "date": "August 26, 2024",
+      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/08/26/Equinor_SAP-Asset-Performance-Management_NC-story_DSCF9890-540x310.jpg"
+    },
+    {
+      "title": "Modernizing Supply Chains: The Autonomous AI-Driven Future",
+      "link": "https://news.sap.com/2024/08/modern-autonomous-ai-supply-chain/",
+      "author": "Dominik Metzger",
+      "date": "August 22, 2024",
+      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/03/04/291305_GettyImages-1278753800_uncropped_F-540x310-1709909676.jpg"
+    },
+    {
+      "title": "NTT DATA Business Solutions Aligns HR and Finance on Single Cloud Platform for Peak Business Performance",
+      "link": "https://news.sap.com/2024/08/ntt-data-business-solutions-aligns-hr-and-finance-on-single-cloud-platform-for-peak-business-performance/",
+      "author": "Jacqueline Prause",
+      "date": "August 21, 2024",
+      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/08/21/274488_274488_l_srgb_s_gl-uncropped_F-540x310.jpg"
+    },
+    {
+      "title": "Elevating Procurement’s Role in Risk Management and Sustainability",
+      "link": "https://news.sap.com/2024/08/elevating-procurement-role-risk-management-sustainability/",
+      "author": "Gordon Donovan",
+      "date": "August 19, 2024",
+      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/05/02/299402_GettyImages-1435661969_uncropped_F-540x310.jpg"
+    },
+    {
+      "title": "How SAP Business AI Will Bring Significant Value to Utility Organizations",
+      "link": "https://news.sap.com/2024/08/sap-business-ai-value-utility-organizations/",
+      "author": "Matthew London",
+      "date": "August 14, 2024",
+      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/08/14/300912_AdobeStock_125131299_uncropped_F-540x310.jpg"
+    },
+    {
+      "title": "SAP Is a Leader in the 2024 Gartner® Magic Quadrant™ for Recurring Billing Applications",
+      "link": "https://news.sap.com/2024/08/sap-a-leader-gartner-magic-quadrant-recurring-billing-applications/",
+      "author": "Martin Barkman",
+      "date": "August 13, 2024",
+      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/08/13/296886_GettyImages-1385483200_medium_uncropped_F-540x310.jpg"
+    },
+    {
+      "title": "New Process AI Capabilities for SAP Signavio Offer Instant, Tailored Recommendations",
+      "link": "https://news.sap.com/2024/08/new-sap-signavio-process-ai-capabilities-instant-tailored-recommendations/",
+      "author": "Lucas de Boer",
+      "date": "August 13, 2024",
+      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/08/13/283844_SAP_GettyImages-815186572_Lo-Res_RGB_uncropped_F-540x310.jpg"
+    },
+    {
+      "title": "Three Reasons to Include the Next Generation on Big Decisions",
+      "link": "https://news.sap.com/2024/08/international-youth-day-2024-big-decisions-include-next-generation/",
+      "author": "Selina Henn",
+      "date": "August 12, 2024",
+      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/08/12/300787_GettyImages-910934060_medium_uncropped_F-540x310.jpg"
+    },
+    {
       "title": "SAP TechEd in 2024: Registration Now Live",
       "link": "https://news.sap.com/2024/08/sap-teched-in-2024-registration-now-live/",
       "author": "JG Chirapurath",
       "date": "August 8, 2024",
-      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/08/08/287796_GettyImages-490772140_medium_uncropped_F-1920x600.jpg"
+      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/08/08/287796_GettyImages-490772140_medium_uncropped_F-540x310.jpg"
     },
     {
       "title": "Customer Support at SAP: Partnering with Customers to Maximize Value for Their Businesses",
@@ -27,69 +90,6 @@
       "author": "Marcel Bitter",
       "date": "August 5, 2024",
       "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/06/21/301453_GettyImages-1043627262_uncropped_F-540x310-1721922977.jpg"
-    },
-    {
-      "title": "Swiss Transportation Company BLS AG Moves HR Processes to the Cloud with SAP SuccessFactors HCM",
-      "link": "https://news.sap.com/2024/07/bls-ag-hr-cloud-sap-successfactors/",
-      "author": "Jeanette Rohr",
-      "date": "July 30, 2024",
-      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/07/30/280439_GettyImages-157671924_uncropped_F-540x310.jpg"
-    },
-    {
-      "title": "Fratelli Branca Distillerie in Argentina Modernizes for Greater Efficiency with SAP Sales Cloud",
-      "link": "https://news.sap.com/2024/07/fratelli-branca-modernizes-sap-sales-cloud/",
-      "author": "Jacqueline Prause",
-      "date": "July 29, 2024",
-      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/07/29/295499_GettyImages-902810140_uncropped_F-540x310-1722001209.jpg"
-    },
-    {
-      "title": "SAP Recognized as a Leader in IDC MarketScape: Worldwide SaaS and Cloud-Enabled Medium-Sized Business ERP Applications 2024",
-      "link": "https://news.sap.com/2024/07/sap-a-leader-idc-marketscape-worldwide-saas-and-cloud-enabled-medium-sized-business-erp-applications/",
-      "author": "Justin Raudys",
-      "date": "July 29, 2024",
-      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/07/29/300781_GettyImages-691573717_medium_uncropped_F-540x310.jpg"
-    },
-    {
-      "title": "From IT Outage to IT Control: The Power of an Effective Software Testing Environment",
-      "link": "https://news.sap.com/2024/07/it-outage-effective-software-testing-environment/",
-      "author": "Bil Khan",
-      "date": "July 26, 2024",
-      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/07/26/298313_GettyImages-1338106337_medium_uncropped-f-540x310.jpg"
-    },
-    {
-      "title": "SAP Recognized as One of the World’s Most Sustainable Companies in 2024",
-      "link": "https://news.sap.com/2024/07/sap-one-of-worlds-most-sustainable-companies/",
-      "author": "Monica Molesag",
-      "date": "July 25, 2024",
-      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/07/25/289552_GettyImages-183848746_uncropped_F-e1721738336514-540x310-1721738685.jpg"
-    },
-    {
-      "title": "Unlocking the Potential of Intelligent ERP: SAP S/4HANA Cloud Public Edition 2408 Update",
-      "link": "https://news.sap.com/2024/07/sap-s-4hana-cloud-public-edition-2408-update/",
-      "author": "Arpan Shah",
-      "date": "July 24, 2024",
-      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/07/24/296267_GettyImages-507896609_medium_uncropped_F-540x310.jpg"
-    },
-    {
-      "title": "Serving Customers Better with Lean Selective Data Transition",
-      "link": "https://news.sap.com/2024/07/serving-customers-better-lean-selective-data-transition/",
-      "author": "Karin Baeumler",
-      "date": "July 22, 2024",
-      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/07/22/287639_GettyImages-932631926_uncropped_F-540x310.jpg"
-    },
-    {
-      "title": "Revolutionizing Proactive Risk Management to Accelerate Business Process Transformation",
-      "link": "https://news.sap.com/2024/07/revolutionizing-proactive-risk-management-datricks-sap-signavio/",
-      "author": "Mani Pirouz",
-      "date": "July 22, 2024",
-      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/07/17/291697_GettyImages-831909044_uncropped_F-540x310.jpg"
-    },
-    {
-      "title": "SAP Is Leading the AI Revolution in Spend Management and Business Network Software",
-      "link": "https://news.sap.com/2024/07/sap-ai-spend-management-business-network/",
-      "author": "Jeff Collier",
-      "date": "July 19, 2024",
-      "image": "https://news.sap.com/wp-content/blogs.dir/1/files/2024/07/19/302074_GettyImages-679772514_uncropped_F-540x310-1721307554.jpg"
     }
   ]
 }

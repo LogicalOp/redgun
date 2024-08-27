@@ -9,15 +9,15 @@ const Home = () => {
   return (
     <FlexBox style={{ width: "100%", direction: "row" }}>
       <Grid defaultSpan="XL6 L6 M6 S12" position="Center">
-        <div style={{paddingTop:"3rem"}}>
+        <div style={{ paddingTop: "3rem" }}>
           <Feed />
         </div>
-        <div style={{ paddingLeft:"4rem", paddingTop:"3rem", width: "80%", height:"100%" }}>
-          <MVPCard/>
-          <div style={{marginTop:"2rem"}}>
-          <NewsCard/>
+        <div style={{ paddingLeft: "4rem", paddingTop: "3rem", width: "80%", height: "100%" }}>
+          <MVPCard />
+          <div style={{ marginTop: "2rem" }}>
+            <NewsCard />
           </div>
-          
+
         </div>
       </Grid>
     </FlexBox>

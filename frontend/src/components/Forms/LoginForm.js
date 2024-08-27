@@ -42,10 +42,6 @@ const LoginForm = () => {
         const data = await response.json();
 
         if (response.ok) {
-            // Log the token and inumber
-            console.log("Login successful. Token:", data.token, "Inumber:", inumber);
-        
-            // Store the token and inumber in local storage
             localStorage.setItem('jwtToken', data.token);
             localStorage.setItem('inumber', inumber);
         

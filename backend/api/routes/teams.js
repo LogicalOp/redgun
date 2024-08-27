@@ -8,7 +8,7 @@ const { listTeams, getTeam, deleteTeam } = require('../../controllers/teamsContr
  * 
  * 
  */
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
     try {
         const teams = await listTeams();
         res.status(200).json({ teams: teams });
@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
     }
 });
 
-router.get('/:id', async(req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const team = await getTeam(req.params.id);
         res.status(200).json({ team: team });
@@ -31,7 +31,7 @@ router.get('/:id', async(req, res) => {
  * 
  * 
  */
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     try {
         res.status(200).json({ message: 'Add team to backend' });
     } catch (error) {
@@ -44,7 +44,7 @@ router.post('/', async(req, res) => {
  * 
  * 
  */
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         res.status(200).json({ message: 'Update team by ID' });
     } catch (error) {
@@ -57,7 +57,7 @@ router.put('/:id', async(req, res) => {
  * 
  * 
  */
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const teams = await deleteTeam(req.params.id);
         res.status(200).json({ teams: teams });

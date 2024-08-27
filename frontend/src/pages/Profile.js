@@ -28,11 +28,9 @@ const Profile = () => {
 
       const data = await response.json();
       setFetchData(data.userJourney);
-      console.log(data.userJourney);
       const courses = data.userJourney.map(
         (item) => item.learning_journey_title
       );
-      console.log("courses: " + courses);
 
       setLearningData((prevData) => ({
         ...prevData,
@@ -51,7 +49,6 @@ const Profile = () => {
         throw new Error(`Response status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Response data:", data.userJourney);
 
       // Extract roles and count occurrences
       const roleCounts = data.userJourney.reduce((acc, journey) => {
@@ -67,8 +64,6 @@ const Profile = () => {
 
       setLabelsData(labels);
       setSeriesData(series);
-      console.log("Labels data:", labels);
-      console.log("Series data:", series);
     } catch (error) {
       console.error(error.message);
     }

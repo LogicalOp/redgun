@@ -8,7 +8,7 @@ const { listCustomCode, getCustomCode, getCustomCodeByDate, getCustomCodeByINumb
  * 
  * 
  */
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
     try {
         const customCode = await listCustomCode();
         res.status(200).json({ customCode: customCode });
@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
     }
 });
 
-router.get('/:id', async(req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const customCode = await getCustomCode(req.params.id);
         res.status(200).json({ customCode: customCode });
@@ -26,7 +26,7 @@ router.get('/:id', async(req, res) => {
     }
 });
 
-router.get('/date/:date', async(req, res) => {
+router.get('/date/:date', async (req, res) => {
     try {
         const customCode = await getCustomCodeByDate(req.params.date);
         res.status(200).json({ customCode: customCode });
@@ -35,7 +35,7 @@ router.get('/date/:date', async(req, res) => {
     }
 });
 
-router.get('/user/:inumber', async(req, res) => {
+router.get('/user/:inumber', async (req, res) => {
     try {
         const customCode = await getCustomCodeByINumber(req.params.inumber);
         res.status(200).json({ customCode: customCode });
@@ -49,7 +49,7 @@ router.get('/user/:inumber', async(req, res) => {
  * 
  * 
  */
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     try {
         const customCode = await createCustomCode(req.body);
         res.status(200).json({ customCode: customCode });
@@ -63,7 +63,7 @@ router.post('/', async(req, res) => {
  * 
  * 
  */
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         res.status(200).json({ message: 'Update code sample by ID' });
     } catch (error) {
@@ -76,7 +76,7 @@ router.put('/:id', async(req, res) => {
  * 
  * 
  */
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const customCode = await deleteCustomCode(req.params.id);
         res.status(200).json({ customCode: customCode });

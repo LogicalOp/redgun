@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardHeader, Icon, Title, Input, Button} from "@ui5/webcomponents-react";
+import { Card, CardHeader, Icon, Title, Button} from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const ProfileCardUser = ({ data }) => {

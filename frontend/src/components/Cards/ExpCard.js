@@ -24,7 +24,6 @@ const ExpCard = ({ data }) => {
     { level: 5, threshold: 2500 },
   ];
 
-  // Filter completed courses and calculate total experience
   const totalExperience = data
     .filter((item) => item.iscompleted)
     .reduce((acc, item) => {
@@ -35,9 +34,7 @@ const ExpCard = ({ data }) => {
         (isNaN(durationInHours) ? 0 : durationInHours * experienceMultiplier)
       );
     }, 0);
-  console.log(totalExperience);
 
-  // Determine current level and next level threshold
   let currentLevel = 0;
   let nextLevelThreshold = 0;
   for (let i = 0; i < experienceLevels.length; i++) {

@@ -8,7 +8,7 @@ const { listLearningJourneys, getLearningJourneys, deleteLearningJourney } = req
  * 
  * 
  */
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
     try {
         const learningJourneys = await listLearningJourneys();
         res.status(200).json({ learningJourneys });
@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
     }
 });
 
-router.get('/:id', async(req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const learningJourney = await getLearningJourneys(req.params.id);
         res.status(200).json({ learningJourney });
@@ -31,7 +31,7 @@ router.get('/:id', async(req, res) => {
  * 
  * 
  */
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     try {
         res.status(200).json({ message: 'Add learning journey to backend' });
     } catch (error) {
@@ -44,7 +44,7 @@ router.post('/', async(req, res) => {
  * 
  * 
  */
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         res.status(200).json({ message: 'Update learning journey by ID' });
     } catch (error) {
@@ -57,7 +57,7 @@ router.put('/:id', async(req, res) => {
  * 
  * 
  */
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const deleted = await deleteLearningJourney(req.params.id);
         res.status(200).json({ message: 'Learning journey deleted' });

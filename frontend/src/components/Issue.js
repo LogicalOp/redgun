@@ -22,7 +22,6 @@ const Issue = () => {
 
         if (response.ok) {
           const result = await response.json();
-          console.log(result);
           const issue = result.customCode.find(
             (item) => item.project_id === numericProjectId
           );
@@ -54,7 +53,7 @@ const Issue = () => {
           {issueData.title || "Issue Title"}
         </Title>
         <div>
-          <Badge style={{ marginBottom: "0.5rem" }} onClick={() => {}}>
+          <Badge style={{ marginBottom: "0.5rem" }} onClick={() => { }}>
             {issueData.inumber || "Issue Number"}
           </Badge>
         </div>

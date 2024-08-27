@@ -14,18 +14,18 @@ const Results = () => {
         }
         fetchJourneys();
     }, []);
-    
+
     const handlePreviewClick = (id) => {
         navigate(`/journey/${id}`);
     };
 
     return (
-        <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(4, 1fr)', 
-            gap: '2vw', 
-            paddingLeft: '2.5vw', 
-            marginTop: '8vh', 
+        <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '2vw',
+            paddingLeft: '2.5vw',
+            marginTop: '8vh',
             width: '65vw'
         }}>
             {journeys.map((journey, index) => (
@@ -37,7 +37,7 @@ const Results = () => {
                             subtitleText={journey.experience}
                         />
                     </div>
-                    <Button 
+                    <Button
                         design="Emphasized"
                         onClick={() => handlePreviewClick(journey.journey_id)}
                     >
@@ -48,4 +48,4 @@ const Results = () => {
         </div>
     );
 }
-    export default Results;
+export default Results;
