@@ -6,7 +6,6 @@ import '../App.css';
 
 const LearningJourneyDetail = () => {
     const { id: id } = useParams();
-    console.log(id);
     const [journey, setJourney] = useState(null);
     const navigate = useNavigate();
 
@@ -56,7 +55,7 @@ const LearningJourneyDetail = () => {
 
             <div className="journey-content">
                 <div className="left-section">
-                    
+
                     <div className="journey-info">
                         <Card className="info-card">
                             <div className="journey-stats">
