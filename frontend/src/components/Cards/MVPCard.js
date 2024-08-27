@@ -68,7 +68,7 @@ const MVPCard = () => {
         <div style={{ margin: ".5rem" }}>
           <Card
             style={{ ...cardStyle, backgroundImage: "url('https://picsum.photos/2000/3000?random=3')" }}
-            onClick={() => window.open(redirectUrl, "_blank", "noopener noreferrer")}
+            onClick={() => window.open("https://people.wdf.sap.corp/profiles/I058597", "_blank", "noopener noreferrer")}
           >
             <div style={overlayStyle}>Vikash Sharma</div>
           </Card>
@@ -76,7 +76,7 @@ const MVPCard = () => {
         <div style={{ margin: ".5rem" }}>
           <Card
             style={{ ...cardStyle, backgroundImage: "url('https://picsum.photos/2000/3000?random=4')" }}
-            onClick={() => window.open(redirectUrl, "_blank", "noopener noreferrer")}
+            onClick={() => window.open("https://people.wdf.sap.corp/profiles/D024189", "_blank", "noopener noreferrer")}
           >
             <div style={overlayStyle}>Susanne Speicher</div>
           </Card>
@@ -84,7 +84,7 @@ const MVPCard = () => {
         <div style={{ margin: ".5rem" }}>
           <Card
             style={{ ...cardStyle, backgroundImage: "url('https://picsum.photos/2000/3000?random=6')" }}
-            onClick={() => window.open(redirectUrl, "_blank", "noopener noreferrer")}
+            onClick={() => window.open("https://people.wdf.sap.corp/profiles/I576431", "_blank", "noopener noreferrer")}
           >
             <div style={overlayStyle}>Steffen Thibaut</div>
           </Card>
@@ -92,7 +92,7 @@ const MVPCard = () => {
         <div style={{ margin: ".5rem" }}>
           <Card
             style={{ ...cardStyle, backgroundImage: "url('https://picsum.photos/2000/3000?random=5')" }}
-            onClick={() => window.open(redirectUrl, "_blank", "noopener noreferrer")}
+            onClick={() => window.open("https://people.wdf.sap.corp/profiles/I562650", "_blank", "noopener noreferrer")}
           >
             <div style={overlayStyle}>Sunday Okeke</div>
           </Card>

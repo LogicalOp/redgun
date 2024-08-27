@@ -3,7 +3,6 @@ import {
   Form,
   Input,
   Label,
-  TextArea,
   FormGroup,
   FormItem,
   Button,
@@ -12,6 +11,8 @@ import {
   Bar,
   Icon
 } from '@ui5/webcomponents-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const AddCustomCode = forwardRef((props, ref) => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -122,19 +123,15 @@ const AddCustomCode = forwardRef((props, ref) => {
                 />
               </FormItem>
               <FormItem label={<Label>Description</Label>}>
-                <TextArea
-                  placeholder="Description"
-                  rows={5}
+                <ReactQuill
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={setDescription}
                 />
               </FormItem>
               <FormItem label={<Label>Solution</Label>}>
-                <TextArea
-                  placeholder="Solution"
-                  rows={5}
+                <ReactQuill
                   value={solution}
-                  onChange={(e) => setSolution(e.target.value)}
+                  onChange={setSolution}
                 />
               </FormItem>
               <FormItem label={<Label>Image URL</Label>}>
