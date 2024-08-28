@@ -43,6 +43,27 @@ const LearningJourneyDetail = () => {
     fetchJourneys();
   }, []);
 
+  const capitalizeWords = (str) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
+  const renderPrerequisites = (text) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+
+    return parts.map((part, index) => {
+      if (urlRegex.test(part)) {
+        const linkText = capitalizeWords(part.split('/').pop().replace(/-/g, ' ').replace(/\.html$/, ''));
+        return (
+          <a key={index} href={part} target="_blank" rel="noopener noreferrer">
+            {linkText}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
   if (!journey) {
     return <p>Loading...</p>;
   }
@@ -136,7 +157,7 @@ const LearningJourneyDetail = () => {
           </Card>
           <Card className="info-card">
             <CardHeader titleText="Pre-requisites" />
-            <p>{journey.prerequisites}</p>
+            <p>{renderPrerequisites(journey.prerequisites)}</p>
           </Card>
           <Button design="Default" className="start-button" onClick={() => {
             window.location.replace(journey.link);
