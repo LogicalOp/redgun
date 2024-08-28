@@ -13,10 +13,6 @@ const User = () => {
   const [seriesData, setSeriesData] = useState([]);
   const [labelsData, setLabelsData] = useState([]);
   const { user, manager } = useGetUserInfo(userId);
-
-  const [learningData, setLearningData] = useState({
-    courses: []
-  });
   const [fetchData, setFetchData] = useState([]);
 
   async function getLearningJourney() {
@@ -29,18 +25,10 @@ const User = () => {
 
       const data = await response.json();
       setFetchData(data.userJourney);
-      const courses = data.userJourney.map(
-        (item) => item.learning_journey_title
-      );
-
-      setLearningData((prevData) => ({
-        ...prevData,
-        courses: courses,
-      }));
     } catch (error) {
       console.error(error.message);
     }
-  }
+  };
 
   async function getChartData() {
     const url = `${process.env.REACT_APP_BACKEND_URL}/user_journeys/user/${userId}`;
@@ -108,7 +96,7 @@ const User = () => {
             gap: "2rem",
           }}
         >
-          <LearningCard data={learningData} />
+          <LearningCard journeyData={fetchData} />
           {seriesData.length > 0 && labelsData.length > 0 && (
             <DonutChart series={seriesData} labels={labelsData} width={300} height={300} />
           )}

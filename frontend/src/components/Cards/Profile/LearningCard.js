@@ -6,9 +6,12 @@ import {
   List,
   StandardListItem,
 } from "@ui5/webcomponents-react";
-import ExpCard from "../ExpCard";
+import { useNavigate } from "react-router-dom";
+import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
-const LearningCard = ({ data }) => {
+const LearningCard = ({journeyData}) => {
+  const navigate = useNavigate();
+
   return (
     <Card
       header={
@@ -19,10 +22,17 @@ const LearningCard = ({ data }) => {
       }
     >
       <div className="scrollable-list">
-        {data && data.courses && (
+      {journeyData && journeyData.length > 0 && (
           <List>
-            {data.courses.map((course, index) => (
-              <StandardListItem key={index}>{course}</StandardListItem>
+            {journeyData.map((journey, index) => (
+              <StandardListItem
+                key={index}
+                onClick={() => {
+                  navigate(`/journey/${journey.journey_id}`);
+                }}
+              >
+                {journey.learning_journey_title}
+              </StandardListItem>
             ))}
           </List>
         )}
