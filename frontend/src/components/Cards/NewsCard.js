@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card } from "@ui5/webcomponents-react";
+import { Card, CardHeader } from "@ui5/webcomponents-react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -42,6 +42,11 @@ const NewsCard = () => {
 
   return (
     <Card>
+      <CardHeader
+          level="H4"
+          titleText={"News"}
+          style={{ margin: "2rem" }}
+        />
       <Carousel responsive={responsive}>
         {news.map((article, index) => (
           <div
