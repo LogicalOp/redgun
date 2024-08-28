@@ -68,7 +68,7 @@ const UserLookup = () => {
             <CardHeader titleText={`${user.first_name} ${user.last_name}`} />
             <div style={{ padding: "10px" }}>
               <p>
-                <strong>Inumber:</strong> {user.inumber}
+                <strong>INumber:</strong> {user.inumber}
               </p>
               <p>
                 <strong>Phone:</strong> {user.phone}
