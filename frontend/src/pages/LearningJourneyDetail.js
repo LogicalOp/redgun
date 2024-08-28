@@ -138,7 +138,9 @@ const LearningJourneyDetail = () => {
             <CardHeader titleText="Pre-requisites" />
             <p>{journey.prerequisites}</p>
           </Card>
-          <Button design="Default" className="start-button">
+          <Button design="Default" className="start-button" onClick={() => {
+            window.location.replace(journey.link);
+          }}>
             Start Learning
           </Button>
         </div>
