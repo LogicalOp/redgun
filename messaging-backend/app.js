@@ -3,6 +3,7 @@ const express = require('express');
 const http = require('http');
 const cors = require('cors');
 const socketIo = require('socket.io');
+const bodyParser = require('body-parser');
 const knex = require('knex')({
   client: 'pg',
   connection: {
@@ -18,6 +19,8 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 const server = http.createServer(app);
 const io = socketIo(server);

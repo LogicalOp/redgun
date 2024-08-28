@@ -4,6 +4,7 @@
     "@ui5/webcomponents-fiori": "^1.24.0",
     "@ui5/webcomponents-react": "^1.28.1",
     "@ui5/webcomponents-react-charts": "^1.28.1",
+    "body-parser": "^1.20.2",
     "browser-image-compression": "^2.0.2",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
