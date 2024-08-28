@@ -53,34 +53,34 @@ const Results = () => {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-    <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '1.75vw',
-        paddingLeft: '2.5vw',
-        marginTop: '8vh',
-        width: '65vw',
-        maxHeight: '80vh', // Set a maximum height
-        overflowY: 'auto'  // Enable vertical scrolling
-    }}>
-        {filteredJourneys.map((journey, index) => (
-            <Card key={index} style={{ width: '12vw', height: "31vh", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div>
-                    <CardHeader
-                        avatar={<Icon name="person-placeholder" />}
-                        titleText={journey.title}
-                        subtitleText={journey.experience}
-                    />
-                </div>
-                <Button
-                    design="Emphasized"
-                    onClick={() => handlePreviewClick(journey.journey_id)}
-                >
-                    Preview
-                </Button>
-            </Card>
-        ))}
-    </div>
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: '1.75vw',
+                paddingLeft: '2.5vw',
+                marginTop: '8vh',
+                width: '65vw',
+                maxHeight: '80vh', // Set a maximum height
+                overflowY: 'auto'  // Enable vertical scrolling
+            }}>
+                {filteredJourneys.map((journey, index) => (
+                    <Card key={index} style={{ width: '12vw', height: "27vh", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                        <div>
+                            <CardHeader
+                                avatar={<Icon name="person-placeholder" />}
+                                titleText={journey.title}
+                                subtitleText={journey.experience}
+                            />
+                        </div>
+                        <Button
+                            design="Emphasized"
+                            onClick={() => handlePreviewClick(journey.journey_id)}
+                        >
+                            Preview
+                        </Button>
+                    </Card>
+                ))}
+            </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '8vh', width: '30vw' }}>
                 <Input
@@ -96,7 +96,7 @@ const Results = () => {
                     onItemDelete={function _a() { }}
                     onItemToggle={function _a() { }}
                     onLoadMore={function _a() { }}
-                    onSelectionChange={ handleTagClick }
+                    onSelectionChange={handleTagClick}
                     separators="Inner"
                     style={{ width: '100%' }}
                 >
