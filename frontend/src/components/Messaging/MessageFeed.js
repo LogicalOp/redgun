@@ -23,8 +23,6 @@ const MessageFeed = () => {
   const [postValue, setPostValue] = useState("");
   const currentUser = localStorage.getItem("inumber");
 
-  console.log(messages);
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.toLocaleDateString("default", {
