@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Title, Card, Badge } from "@ui5/webcomponents-react";
+import DOMPurify from "dompurify";
 
 const Issue = () => {
   const [issueData, setIssueData] = useState(null);
@@ -46,6 +47,13 @@ const Issue = () => {
     return <div>Loading or Issue Not Found...</div>;
   }
 
+  const sanitizedDescription = DOMPurify.sanitize(
+    issueData.description || "Issue description goes here."
+  );
+  const sanitizedSolution = DOMPurify.sanitize(
+    issueData.solution || "Resolution details go here."
+  );
+
   return (
     <div style={{ width: "80%" }}>
       <div>
@@ -53,7 +61,7 @@ const Issue = () => {
           {issueData.title || "Issue Title"}
         </Title>
         <div>
-          <Badge style={{ marginBottom: "0.5rem" }} onClick={() => { }}>
+          <Badge style={{ marginBottom: "0.5rem" }} onClick={() => {}}>
             {issueData.inumber || "Issue Number"}
           </Badge>
         </div>
@@ -78,8 +86,10 @@ const Issue = () => {
             paddingLeft: "2rem",
             paddingRight: "2rem",
             textAlign: "left",
+            overflowY: "auto",
+            maxHeight: "20vh", // Adjust the height as needed
           }}
-          dangerouslySetInnerHTML={{ __html: issueData.description || "Issue description goes here." }}
+          dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
         />
       </Card>
       <Card
@@ -101,11 +111,13 @@ const Issue = () => {
             paddingLeft: "2rem",
             paddingRight: "2rem",
             textAlign: "left",
+            overflowY: "auto",
+            maxHeight: "20vh", // Adjust the height as needed
           }}
-          dangerouslySetInnerHTML={{ __html: issueData.solution || "Resolution details go here." }}
+          dangerouslySetInnerHTML={{ __html: sanitizedSolution }}
         />
       </Card>
-
+  
       {issueData.img_url ? (
         <div
           style={{
@@ -127,7 +139,6 @@ const Issue = () => {
         </div>
       ) : null}
     </div>
-  );
-};
+  )}
 
 export default Issue;

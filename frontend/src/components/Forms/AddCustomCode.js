@@ -13,7 +13,6 @@ import {
 } from "@ui5/webcomponents-react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import imageCompression from 'browser-image-compression';
 
 const AddCustomCode = forwardRef((props, ref) => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -29,26 +28,6 @@ const AddCustomCode = forwardRef((props, ref) => {
 
   const onDialogClose = () => {
     setDialogOpen(false);
-  };
-
-  const handleImageUpload = async (event) => {
-    const imageFile = event.target.files[0];
-    const options = {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1920,
-      useWebWorker: true,
-    };
-
-    try {
-      const compressedFile = await imageCompression(imageFile, options);
-      const reader = new FileReader();
-      reader.readAsDataURL(compressedFile);
-      reader.onloadend = () => {
-        setImgUrl(reader.result);
-      };
-    } catch (error) {
-      console.error("Error compressing image:", error);
-    }
   };
 
   const handleSubmit = async () => {
@@ -115,7 +94,7 @@ const AddCustomCode = forwardRef((props, ref) => {
         }
         open={dialogOpen}
         onAfterClose={onDialogClose}
-        style={{ width: "50%", height: "80%" }}
+        style={{ width: "50%", height: "90%" }}
       >
         <Card style={{ width: "100%", height: "100%" }}>
           <Form
@@ -146,6 +125,7 @@ const AddCustomCode = forwardRef((props, ref) => {
                 />
               </FormItem>
               <FormItem label={<Label>Description</Label>} className="form-item">
+              <div style={{marginBottom:"3rem"}}>
                 <ReactQuill
                   value={description}
                   onChange={setDescription}
@@ -174,8 +154,10 @@ const AddCustomCode = forwardRef((props, ref) => {
                     "video",
                   ]}
                 />
+                </div>
               </FormItem>
               <FormItem label={<Label>Solution</Label>} className="form-item">
+              <div style={{ marginBottom:"3rem"}}>
                 <ReactQuill
                   value={solution}
                   onChange={setSolution}
@@ -204,9 +186,7 @@ const AddCustomCode = forwardRef((props, ref) => {
                     "video",
                   ]}
                 />
-              </FormItem>
-              <FormItem label={<Label>Image</Label>} className="form-item">
-                <Input type="file" accept="image/*" onChange={handleImageUpload} />
+                </div>
               </FormItem>
               <FormItem className="form-item submit-button">
                 <Button onClick={handleSubmit}>Submit</Button>
