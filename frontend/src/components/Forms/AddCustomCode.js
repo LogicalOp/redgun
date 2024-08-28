@@ -13,6 +13,7 @@ import {
 } from "@ui5/webcomponents-react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import imageCompression from 'browser-image-compression';
 
 const AddCustomCode = forwardRef((props, ref) => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -28,6 +29,26 @@ const AddCustomCode = forwardRef((props, ref) => {
 
   const onDialogClose = () => {
     setDialogOpen(false);
+  };
+
+  const handleImageUpload = async (event) => {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      const reader = new FileReader();
+      reader.readAsDataURL(compressedFile);
+      reader.onloadend = () => {
+        setImgUrl(reader.result);
+      };
+    } catch (error) {
+      console.error("Error compressing image:", error);
+    }
   };
 
   const handleSubmit = async () => {
@@ -183,6 +204,9 @@ const AddCustomCode = forwardRef((props, ref) => {
                     "video",
                   ]}
                 />
+              </FormItem>
+              <FormItem label={<Label>Image</Label>} className="form-item">
+                <Input type="file" accept="image/*" onChange={handleImageUpload} />
               </FormItem>
               <FormItem className="form-item submit-button">
                 <Button onClick={handleSubmit}>Submit</Button>

@@ -54,6 +54,11 @@ const MessagePreview = ({ onChatSelect }) => {
     navigate(`/messages/${userId}`);
   };
 
+  const truncateMessage = (message) => {
+    const sanitizedMessage = DOMPurify.sanitize(message).replace(/\n/g, ' ');
+    return sanitizedMessage.length > 20 ? sanitizedMessage.substring(0, 20) + '...' : sanitizedMessage;
+  };
+
   return (
     <Card
       style={{ width: "100%", height: "80vh" }}
@@ -84,7 +89,7 @@ const MessagePreview = ({ onChatSelect }) => {
               <div style={{ marginLeft: "1rem", display: "flex", flexDirection: "column", width: "100%", textAlign: "left" }}>
                 <Title level="H5" style={{ textAlign: "left" }}>{item.name}</Title>
                 <div style={{ fontWeight: item.recipient === 'I123' && item.sender !== 'I123' ? 'bold' : 'normal', textAlign: "left" }}>
-                  {parse(DOMPurify.sanitize(item.message))}
+                  {parse(truncateMessage(item.message))}
                 </div>
               </div>
             </div>
