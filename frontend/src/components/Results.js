@@ -64,7 +64,7 @@ const Results = () => {
                 overflowY: 'auto'  // Enable vertical scrolling
             }}>
                 {filteredJourneys.map((journey, index) => (
-                    <Card key={index} style={{ width: '12vw', height: "27vh", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <Card key={index} style={{ width: '12vw', height: "20vh", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                         <div>
                             <CardHeader
                                 avatar={<Icon name="person-placeholder" />}
