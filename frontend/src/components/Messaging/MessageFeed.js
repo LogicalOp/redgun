@@ -23,6 +23,8 @@ const MessageFeed = () => {
   const [postValue, setPostValue] = useState("");
   const currentUser = localStorage.getItem("inumber");
 
+  console.log(messages);
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.toLocaleDateString("default", {
@@ -216,8 +218,8 @@ const MessageFeed = () => {
                   <CardHeader
                     titleText={message.sender}
                     subtitleText={formatDate(message.date)}
-                    avatar={<Avatar initials="DG" />}
-                  />
+                    avatar={<Avatar initials={`${message.sender_first_name.charAt(0)}${message.sender_last_name.charAt(0)}`} />}
+                    />
                   <ui5-icon
                     name={message.isliked ? "heart" : "heart-2"}
                     onClick={() => likeMessage(message.message_id)}
