@@ -13,6 +13,7 @@ import ObjectPage from './pages/ObjectPage';
 import LearningJourneyDetail from './pages/LearningJourneyDetail';
 import Messages from './pages/Messages';
 import UserLookup from './pages/UserLookup';
+import PrivateRoute from './PrivateRoute';
 import 'react-multi-carousel/lib/styles.css';
 import './App.css';
 
@@ -32,9 +33,9 @@ function App() {
     display: 'flex', // Use Flexbox for the content area
     marginLeft: 0, // Shift content to the right to make space for the sidebar
     height: `calc(100vh - ${shellbarHeight})`,
-    width: "90%" // Adjust height to account for shellbar
+    width:"90%" // Adjust height to account for shellbar
   };
-
+  
   const sidebarStyles = {
     display: 'flex',
     flexGrow: 0, // Prevent sidebar from growing
@@ -50,19 +51,18 @@ function App() {
           <Sidebar style={sidebarStyles} />
           <div style={contentStyles}>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<PrivateRoute element={Home} />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/customcode" element={<CustomCode />} />
+              <Route path="/customcode" element={<PrivateRoute element={CustomCode} />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/learning" element={<Learning />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/user" element={<UserLookup />} />
-              <Route path="/user/:id" element={<User />} />
-              <Route path="/issue/:id" element={<ObjectPage />} />
-              <Route path="/journey/:id" element={<LearningJourneyDetail />} />
-              <Route path="/messages" element={<Messages />} />
-              <Route path="/messages/:userId" element={<Messages />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/learning" element={<PrivateRoute element={Learning} />} />
+              <Route path="/profile" element={<PrivateRoute element={Profile} />} />
+              <Route path="/user" element={<PrivateRoute element={UserLookup} />} />
+              <Route path="/user/:id" element={<PrivateRoute element={User} />} />
+              <Route path="/issue/:id" element={<PrivateRoute element={ObjectPage} />} />
+              <Route path="/journey/:id" element={<PrivateRoute element={LearningJourneyDetail} />} />
+              <Route path="/messages" element={<PrivateRoute element={Messages} />} />
+              <Route path="/messages/:userId" element={<PrivateRoute element={Messages} />} />
             </Routes>
           </div>
         </div>
