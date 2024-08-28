@@ -29,7 +29,6 @@ const Feed = () => {
   const [titleValue, setTitleValue] = useState("");
   const currentUser = localStorage.getItem("inumber");
   const navigate = useNavigate();
-  console.log(posts);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
