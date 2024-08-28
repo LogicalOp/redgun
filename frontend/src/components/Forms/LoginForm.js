@@ -81,8 +81,8 @@ const LoginForm = () => {
                     valueState="None"
                 />
                 <br/>
-                <Link to="/forgot-password" style={{ marginBottom: '2vh', display: 'block' }}>
-                    Forgot Password?
+                <Link to="/register" style={{ marginBottom: '2vh', display: 'block' }}>
+                    Register?
                 </Link>
                 <Button design="Positive" onClick={handleLogin}>Login</Button>
             </Card>

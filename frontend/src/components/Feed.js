@@ -29,6 +29,7 @@ const Feed = () => {
   const [titleValue, setTitleValue] = useState("");
   const currentUser = localStorage.getItem("inumber");
   const navigate = useNavigate();
+  console.log(posts);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -64,7 +65,6 @@ const Feed = () => {
 
   useEffect(() => {
     if (scrollbarRef.current) {
-      // Assuming PerfectScrollbar exposes a method to scroll to the bottom or you can directly manipulate its scroll position
       const scrollContainer = scrollbarRef.current._container; // Access the underlying container of the PerfectScrollbar
       if (scrollContainer) {
         const scrollHeight = scrollContainer.scrollHeight;
@@ -156,7 +156,6 @@ const Feed = () => {
     }
   };
 
-
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.ctrlKey && event.key === "Enter") {
@@ -213,8 +212,8 @@ const Feed = () => {
                   onClick={() => {
                     navigate(`/user/${post.inumber}`);
                   }}
-                  avatar={<Avatar initials="DG" />}
-                />
+                  avatar={<Avatar initials={`${post.first_name.charAt(0)}${post.last_name.charAt(0)}`} />}
+                  />
                 <ui5-icon
                   name={post.isliked ? "heart" : "heart-2"}
                   onClick={() => likeMessage(post.message_id)}
