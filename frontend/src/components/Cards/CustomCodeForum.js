@@ -53,7 +53,7 @@ const CustomCodeForum = () => {
   );
 
   return (
-    <div style={{ padding: "0 2rem", width: "100%" }}>
+    <div style={{ padding: "0 2rem", width: "90%" }}>
       <Input
         placeholder="Search by title or content"
         onInput={handleSearch}

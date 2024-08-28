@@ -4,9 +4,13 @@ import AddCustomCode from "../components/Forms/AddCustomCode";
 
 const CustomCode = () => {
   return (
-    <div>
-      <CustomCodeForum />
-      <AddCustomCode />
+    <div style={{ display: "flex", flexDirection: "column", height: "80vh"}}>
+      <div style={{ flex: "1", overflowY: "auto" }}>
+        <CustomCodeForum width= "80%" />
+      </div>
+      <div style={{ marginTop: "20px" }}>
+        <AddCustomCode />
+      </div>
     </div>
   );
 };
