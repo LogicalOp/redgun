@@ -37,13 +37,15 @@ const MessagePreview = ({ onChatSelect }) => {
 
         setMergedData(merged);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Failed to fetch users", error);
       }
     };
 
-    if (preview && preview.length > 0) {
-      fetchNames();
-    }
+    fetchNames(); // Initial fetch
+
+    const intervalId = setInterval(fetchNames, 60000); // Fetch every 60 seconds
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
   }, [preview]);
 
   const handleItemClick = (userId) => {
